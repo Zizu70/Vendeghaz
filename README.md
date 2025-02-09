@@ -1,1 +1,1 @@
-Szebeni Zita - Vendégház Menhely projekt
+Szebeni Zita - Vendégház Menedék projekt
