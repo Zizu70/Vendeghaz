@@ -13,19 +13,19 @@ app.use(cors());  // Ha szükséges, CORS engedélyezése
 
 // Alapértelmezett route, ha valaki nem talál semmit
 app.get('/', (req, res) => {
-    res.send('Webshop API működik!');
+    res.send('Vendeghaz API működik!');
 });
 
 // Webes végpontok használata (felhasználói végpontok)
-app.use('/api/web', WebRoutes);
+app.use('/web', WebRoutes);
 
 // Adminisztrátori (asztali) végpontok használata
-app.use('/api/desktop', DesktopRoutes);
+app.use('/desktop', DesktopRoutes);
 
 // Hiba kezelő middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ message: 'Valami hiba történt az alkalmazásban!' });
+    res.status(500).json({ message: 'Hiba történt az alkalmazásban!' });
 });
 
 // Szerver indítása
