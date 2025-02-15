@@ -1,6 +1,6 @@
-t:npm i express mysql2 dotenv body-parser cors
+t:npm i express mysql2 dotenv body-parser cors bcrypt jsonwebtoken
 
-t:node app.js
+t:node app.js INDITASKOR
 
 .env:
 DB_HOST = "127.0.0.1"
