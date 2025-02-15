@@ -27,29 +27,6 @@ function query(sql, params) {
     });
 }
 
-// Tranzakciók kezelése
-async function transaction(queries) {
-    const connection = await pool.promise().getConnection();
-    try {
-        await connection.beginTransaction();
-
-        for (const queryObj of queries) {
-            const { sql, params } = queryObj;
-            await connection.query(sql, params);
-        }
-
-        await connection.commit(); // Minden lekérdezés sikeresen lefutott, commit
-        connection.release();
-        return true; // Visszaadjuk, hogy sikeres volt a tranzakció
-
-    } catch (err) {
-        await connection.rollback(); // Hibás tranzakció esetén rollback
-        connection.release();
-        console.error("Hiba történt a tranzakció során: ", err);
-        throw err; // Hibát dobunk, hogy azt az alkalmazás kezelni tudja
-    }
-}
-
 // Csatlakozás tesztelése
 function testConnection() {
     pool.getConnection((err, connection) => {
@@ -64,6 +41,5 @@ function testConnection() {
 
 module.exports = {
     query,
-    transaction,
     testConnection
 };
