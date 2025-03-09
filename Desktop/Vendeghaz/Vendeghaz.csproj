@@ -161,5 +161,32 @@
   <ItemGroup>
     <None Include="Resources\Chip.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logoatlatszo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\webfarkasok.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rajzfarkas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rajzhattyu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rajzkacsak.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\webharmat.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\atlatszo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rajzmedve.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

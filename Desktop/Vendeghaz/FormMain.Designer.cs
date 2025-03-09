@@ -101,11 +101,11 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::Vendeghaz.Properties.Resources.Main;
+            this.pictureBox1.BackgroundImage = global::Vendeghaz.Properties.Resources.rajzkacsak;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(88, 351);
+            this.pictureBox1.Location = new System.Drawing.Point(144, 351);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(393, 171);
+            this.pictureBox1.Size = new System.Drawing.Size(286, 171);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -122,7 +122,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormMain";
-            this.Text = "Vendégház Menedék";
+            this.Text = "Vendégház Vadaspark";
             this.groupBox_Main.ResumeLayout(false);
             this.groupBox_Main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

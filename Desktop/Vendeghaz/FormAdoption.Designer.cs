@@ -34,7 +34,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -48,7 +47,6 @@
             this.comboBox_AdoptionUName = new System.Windows.Forms.ComboBox();
             this.textBox_AdoptionSpecies = new System.Windows.Forms.TextBox();
             this.textBox_AdoptionGender = new System.Windows.Forms.TextBox();
-            this.textBox_AdoptionChip = new System.Windows.Forms.TextBox();
             this.textBox_AdoptionAddress = new System.Windows.Forms.TextBox();
             this.textBox_AdoptionEmail = new System.Windows.Forms.TextBox();
             this.textBox_AdoptionPhone = new System.Windows.Forms.TextBox();
@@ -60,11 +58,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(213, 20);
+            this.label1.Location = new System.Drawing.Point(133, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 26);
+            this.label1.Size = new System.Drawing.Size(208, 26);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Örökbefogadás";
+            this.label1.Text = "Támogatói Örökbefogadás";
             // 
             // label2
             // 
@@ -102,15 +100,6 @@
             this.label5.Size = new System.Drawing.Size(48, 23);
             this.label5.TabIndex = 4;
             this.label5.Text = "Neme";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(171, 240);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 23);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Chip száma";
             // 
             // label7
             // 
@@ -225,13 +214,6 @@
             this.textBox_AdoptionGender.Size = new System.Drawing.Size(121, 30);
             this.textBox_AdoptionGender.TabIndex = 16;
             // 
-            // textBox_AdoptionChip
-            // 
-            this.textBox_AdoptionChip.Location = new System.Drawing.Point(275, 233);
-            this.textBox_AdoptionChip.Name = "textBox_AdoptionChip";
-            this.textBox_AdoptionChip.Size = new System.Drawing.Size(121, 30);
-            this.textBox_AdoptionChip.TabIndex = 17;
-            // 
             // textBox_AdoptionAddress
             // 
             this.textBox_AdoptionAddress.Location = new System.Drawing.Point(109, 344);
@@ -255,7 +237,7 @@
             // 
             // pictureBox_AdoptionImage
             // 
-            this.pictureBox_AdoptionImage.BackgroundImage = global::Vendeghaz.Properties.Resources.DefaultImage;
+            this.pictureBox_AdoptionImage.BackgroundImage = global::Vendeghaz.Properties.Resources._default;
             this.pictureBox_AdoptionImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_AdoptionImage.Location = new System.Drawing.Point(41, 91);
             this.pictureBox_AdoptionImage.Name = "pictureBox_AdoptionImage";
@@ -274,7 +256,6 @@
             this.Controls.Add(this.textBox_AdoptionPhone);
             this.Controls.Add(this.textBox_AdoptionEmail);
             this.Controls.Add(this.textBox_AdoptionAddress);
-            this.Controls.Add(this.textBox_AdoptionChip);
             this.Controls.Add(this.textBox_AdoptionGender);
             this.Controls.Add(this.textBox_AdoptionSpecies);
             this.Controls.Add(this.comboBox_AdoptionUName);
@@ -288,7 +269,6 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -298,7 +278,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormAdoption";
-            this.Text = "Vendégház Menedék";
+            this.Text = "Vendégház Vadaspark";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_AdoptionImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -312,7 +292,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
@@ -326,7 +305,6 @@
         private System.Windows.Forms.ComboBox comboBox_AdoptionUName;
         private System.Windows.Forms.TextBox textBox_AdoptionSpecies;
         private System.Windows.Forms.TextBox textBox_AdoptionGender;
-        private System.Windows.Forms.TextBox textBox_AdoptionChip;
         private System.Windows.Forms.TextBox textBox_AdoptionAddress;
         private System.Windows.Forms.TextBox textBox_AdoptionEmail;
         private System.Windows.Forms.TextBox textBox_AdoptionPhone;

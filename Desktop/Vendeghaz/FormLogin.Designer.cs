@@ -50,7 +50,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.BackgroundImage = global::Vendeghaz.Properties.Resources.logo;
+            this.pictureBox1.BackgroundImage = global::Vendeghaz.Properties.Resources.logoatlatszo;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(12, 14);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
@@ -228,7 +228,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormLogin";
-            this.Text = "Vendégház Menedék";
+            this.Text = "Vendégház Vadaspark";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

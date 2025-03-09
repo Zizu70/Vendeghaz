@@ -93,7 +93,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormExit";
-            this.Text = "Vendégház Menedék";
+            this.Text = "Vendégház Vadaspark";
             this.ResumeLayout(false);
             this.PerformLayout();
 
