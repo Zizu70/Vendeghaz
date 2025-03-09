@@ -64,11 +64,11 @@
     <Compile Include="FormAdoption.Designer.cs">
       <DependentUpon>FormAdoption.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormChip.cs">
+    <Compile Include="FormTickets.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormChip.Designer.cs">
-      <DependentUpon>FormChip.cs</DependentUpon>
+    <Compile Include="FormTickets.Designer.cs">
+      <DependentUpon>FormTickets.cs</DependentUpon>
     </Compile>
     <Compile Include="FormGuest.cs">
       <SubType>Form</SubType>
@@ -99,8 +99,8 @@
     <EmbeddedResource Include="FormAdoption.resx">
       <DependentUpon>FormAdoption.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormChip.resx">
-      <DependentUpon>FormChip.cs</DependentUpon>
+    <EmbeddedResource Include="FormTickets.resx">
+      <DependentUpon>FormTickets.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormChoice.resx">
       <DependentUpon>FormChoice.cs</DependentUpon>

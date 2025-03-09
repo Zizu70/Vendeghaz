@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Vendeghaz
 {
-    public partial class FormChip : Form
+    public partial class FormTickets : Form
     {
-        public FormChip()
+        public FormTickets()
         {
             InitializeComponent();
         }

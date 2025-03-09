@@ -1,6 +1,6 @@
 ﻿namespace Vendeghaz
 {
-    partial class FormChip
+    partial class FormTickets
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormChip));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTickets));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox_ChipNumber = new System.Windows.Forms.TextBox();
             this.textBoxChipName = new System.Windows.Forms.TextBox();
