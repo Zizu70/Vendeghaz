@@ -50,8 +50,19 @@ router.post('/admin/auth/logout', async (req, res) => {
 //*****Be és kijelentkezés*****//
 
 //*****workers*****//
-
-// worker felvitel  created_at
+router.get('/workers', async (req, res) => {
+    
+    try {
+        const workers = await db.query(
+            `SELECT * FROM workers `
+        );
+        res.status(200).json(workers);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a dolgozó lekérésekor!', error });
+    }
+});
+// worker felvitel  created_at 
+/*
 router.post('/workers', async (req, res) => {
     const { w_name, w_password, w_permission } = req.body;
     try {
@@ -59,12 +70,12 @@ router.post('/workers', async (req, res) => {
             `INSERT INTO workers (w_name, w_password, w_permission)
              VALUES (?, ?, ?)`, [w_name, w_password, w_permission]
         );
-        res.status(201).json({ message: 'Dolgozó hozzáadva!', eventId: result.insertId });
+        res.status(201).json({ message: 'Dolgozó hozzáadva!', w_id: result.insertId });
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a dolgozó hozzáadásakor!', error });
     }
 });
-
+*/
 // worker frissítése
 router.put('/workes/:w_id', async (req, res) => {
     const w_id = req.params.w_id;
@@ -84,9 +95,9 @@ router.put('/workes/:w_id', async (req, res) => {
 
 // worker törlés
 router.delete('/worker/:w_id', async (req, res) => {
-    const {w_id, delete_at} = req.params.w_id;
+    const {w_id, deleted_at} = req.params.w_id;
     try {
-        await db.query(`DELETE FROM workers WHERE w_id = ?`, [w_id]);
+        await db.query(`DELETE FROM workers WHERE w_id = ?`, [w_id, deleted_at]);
         res.status(200).json({ message: 'Dolgozó törölve lett!' });
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt dolgozó törlése közben!', error });

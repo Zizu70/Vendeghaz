@@ -13,7 +13,6 @@ const pool = mysql.createPool({
     queueLimit: 0  // Nincs korlátozva a várakozó kapcsolatok száma
 });
 
-// Lekérdezés végrehajtása
 function query(sql, params) {
     return new Promise((resolve, reject) => {
         pool.query(sql, params, (err, results) => {
