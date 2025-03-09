@@ -1,48 +1,91 @@
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";  /* npm install react - bootstrap@5 */
+import "bootstrap/dist/js/bootstrap.bundle";  /*npm install react-bootstrap */
+
+import { RouterProvider, createBrowserRouter } from "react-router-dom";   /*npm install react-router-dom */
+import { AuthProvider } from "./context/AuthContext";
+import Layout from "./components/Layout";
+import UserProfilePage from "./website/UserProfilePage";
+
+import HomeSite from "./website/HomeSite"; //
+import UserSite from "./website/UserSite";  //
+import GuestsSite from "./website/GuestsSite"; //
+import AdoptSite from "./website/AdoptSite"; //
+import ContactSite from "./website/ContactSite"; //
+import IndividualSite from "./website/IndividualSite"; //
+
+/*
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
-
-//import './App.css'
+*/
 
 function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-            </Routes>
-        </Router>
-    );
-}
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout/>,
+      children: [
+        {
+          path: "/",
+          element: <HomeSite/>, //
+        },
+        
+        {
+          path: "/user",
+          element: <UserSite/>, 
+        },
+      
+        {
+          path: "/adopt",
+          element: <AdoptSite/>,  
+        },
 
+        {
+          path: "/guests",
+          element: <GuestsSite/>, 
+        },
 
-/* function App() {
-  const [count, setCount] = useState(0)
+        {
+          path: "/individual",
+          element: <IndividualSite/>, 
+        },
+       
+        {
+          path: "/contact",
+          element: <ContactSite />,
+        },
 
+        {
+          path: "/contact",
+          element: <ContactSite />,
+        },
+
+        {
+          path: "/user-profile",
+          element: <UserProfilePage />,
+        },
+      ],
+    },
+  ]);
+
+ 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-} */
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
+ 
+  /*
+  return (
+    <Router>
+        <Routes>
+            <Route path="./components/Register.jsx" element={<Register />} />
+            <Route path="./components/Login.jsx" element={<Login />} />
+        </Routes>
+    </Router>
+  );
+  */
+}
 
 export default App

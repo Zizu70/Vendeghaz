@@ -1,0 +1,18 @@
+.contactSite {
+    text-align: center;
+}
+  
+.card {
+    margin: auto;
+    width: 60%;
+    border: 5px solid #3f42a1;
+    background-color: rgb(90, 143, 216);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 12px 12px 0 rgba(78, 90, 106, 0.4);
+        }
+
+.info {
+    list-style-type: none;
+    font-weight: bold;
+}

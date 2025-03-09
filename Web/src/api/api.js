@@ -1,3 +1,4 @@
+/*
 const API_URL = 'http://localhost:3000/api'; // Backend címe
 
 //*****Regisztráció API hívás*****
@@ -49,3 +50,5 @@ export const deleteUser = async (id) => {
     });
     return response.json();
 };
+
+*/
