@@ -147,28 +147,13 @@
     <None Include="Resources\Login - out.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Háttér.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Main.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\DefaultImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Chip.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logoatlatszo.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\default.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\webfarkasok.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\rajzfarkas.jpg" />
@@ -178,9 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\rajzkacsak.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\webharmat.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\atlatszo.png" />

@@ -17,7 +17,7 @@ namespace Vendeghaz
             InitializeComponent();
         }
 
-        private void label_ChipName_Click(object sender, EventArgs e)
+        private void FormTickets_Load(object sender, EventArgs e)
         {
 
         }
