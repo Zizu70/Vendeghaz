@@ -31,11 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox_LoginId = new System.Windows.Forms.TextBox();
             this.textBox_LoginName = new System.Windows.Forms.TextBox();
             this.textBox_LoginPass = new System.Windows.Forms.TextBox();
             this.comboBox_LoginRole = new System.Windows.Forms.ComboBox();
-            this.label_LoginId = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label_LoginPerm = new System.Windows.Forms.Label();
@@ -44,6 +42,8 @@
             this.button_LoginInsert = new System.Windows.Forms.Button();
             this.button_LoginUpdate = new System.Windows.Forms.Button();
             this.button_LoginDelete = new System.Windows.Forms.Button();
+            this.textBox_LoginId = new System.Windows.Forms.TextBox();
+            this.label_LoginId = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,16 +70,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Üdvözöljük!";
             // 
-            // textBox_LoginId
-            // 
-            this.textBox_LoginId.Location = new System.Drawing.Point(203, 115);
-            this.textBox_LoginId.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.textBox_LoginId.Name = "textBox_LoginId";
-            this.textBox_LoginId.ReadOnly = true;
-            this.textBox_LoginId.Size = new System.Drawing.Size(244, 30);
-            this.textBox_LoginId.TabIndex = 10;
-            this.textBox_LoginId.Visible = false;
-            // 
             // textBox_LoginName
             // 
             this.textBox_LoginName.Location = new System.Drawing.Point(203, 167);
@@ -104,17 +94,7 @@
             this.comboBox_LoginRole.Size = new System.Drawing.Size(244, 31);
             this.comboBox_LoginRole.TabIndex = 3;
             this.comboBox_LoginRole.Visible = false;
-            // 
-            // label_LoginId
-            // 
-            this.label_LoginId.AutoSize = true;
-            this.label_LoginId.BackColor = System.Drawing.Color.White;
-            this.label_LoginId.Location = new System.Drawing.Point(174, 118);
-            this.label_LoginId.Name = "label_LoginId";
-            this.label_LoginId.Size = new System.Drawing.Size(23, 23);
-            this.label_LoginId.TabIndex = 11;
-            this.label_LoginId.Text = "Id";
-            this.label_LoginId.Visible = false;
+            this.comboBox_LoginRole.SelectedIndexChanged += new System.EventHandler(this.comboBox_LoginRole_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -157,6 +137,7 @@
             this.button_Login.TabIndex = 4;
             this.button_Login.Text = "Belépés";
             this.button_Login.UseVisualStyleBackColor = false;
+            this.button_Login.Click += new System.EventHandler(this.button_Login_Click);
             // 
             // button_LoginService
             // 
@@ -168,6 +149,7 @@
             this.button_LoginService.TabIndex = 5;
             this.button_LoginService.Text = "Szervíz";
             this.button_LoginService.UseVisualStyleBackColor = false;
+            this.button_LoginService.Click += new System.EventHandler(this.button_LoginService_Click);
             // 
             // button_LoginInsert
             // 
@@ -179,6 +161,7 @@
             this.button_LoginInsert.Text = "Felvitel";
             this.button_LoginInsert.UseVisualStyleBackColor = false;
             this.button_LoginInsert.Visible = false;
+            this.button_LoginInsert.Click += new System.EventHandler(this.button_LoginInsert_Click);
             // 
             // button_LoginUpdate
             // 
@@ -190,6 +173,7 @@
             this.button_LoginUpdate.Text = "Módosítás";
             this.button_LoginUpdate.UseVisualStyleBackColor = false;
             this.button_LoginUpdate.Visible = false;
+            this.button_LoginUpdate.Click += new System.EventHandler(this.button_LoginUpdate_Click);
             // 
             // button_LoginDelete
             // 
@@ -201,6 +185,28 @@
             this.button_LoginDelete.Text = "Törlés";
             this.button_LoginDelete.UseVisualStyleBackColor = false;
             this.button_LoginDelete.Visible = false;
+            this.button_LoginDelete.Click += new System.EventHandler(this.button_LoginDelete_Click);
+            // 
+            // textBox_LoginId
+            // 
+            this.textBox_LoginId.Location = new System.Drawing.Point(203, 115);
+            this.textBox_LoginId.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.textBox_LoginId.Name = "textBox_LoginId";
+            this.textBox_LoginId.ReadOnly = true;
+            this.textBox_LoginId.Size = new System.Drawing.Size(244, 30);
+            this.textBox_LoginId.TabIndex = 10;
+            this.textBox_LoginId.Visible = false;
+            // 
+            // label_LoginId
+            // 
+            this.label_LoginId.AutoSize = true;
+            this.label_LoginId.BackColor = System.Drawing.Color.White;
+            this.label_LoginId.Location = new System.Drawing.Point(174, 118);
+            this.label_LoginId.Name = "label_LoginId";
+            this.label_LoginId.Size = new System.Drawing.Size(23, 23);
+            this.label_LoginId.TabIndex = 11;
+            this.label_LoginId.Text = "Id";
+            this.label_LoginId.Visible = false;
             // 
             // FormLogin
             // 
@@ -229,6 +235,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormLogin";
             this.Text = "Vendégház Vadaspark";
+            this.Load += new System.EventHandler(this.FormLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -239,11 +246,9 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox_LoginId;
         private System.Windows.Forms.TextBox textBox_LoginName;
         private System.Windows.Forms.TextBox textBox_LoginPass;
         private System.Windows.Forms.ComboBox comboBox_LoginRole;
-        private System.Windows.Forms.Label label_LoginId;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_LoginPerm;
@@ -252,6 +257,8 @@
         private System.Windows.Forms.Button button_LoginInsert;
         private System.Windows.Forms.Button button_LoginUpdate;
         private System.Windows.Forms.Button button_LoginDelete;
+        private System.Windows.Forms.TextBox textBox_LoginId;
+        private System.Windows.Forms.Label label_LoginId;
     }
 }
 

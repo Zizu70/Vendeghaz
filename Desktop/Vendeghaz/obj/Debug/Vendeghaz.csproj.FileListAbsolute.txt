@@ -15,11 +15,9 @@ C:\Users\Zita\Desktop\Vendeghaz_Menedek\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Ve
 C:\Users\Zita\Desktop\Vendeghaz_Menedek\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.csproj.CoreCompileInputs.cache
 C:\Users\Zita\Desktop\Vendeghaz_Menedek\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.exe
 C:\Users\Zita\Desktop\Vendeghaz_Menedek\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.pdb
-C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Vendeghaz.exe.config
-C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Vendeghaz.exe
-C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Vendeghaz.pdb
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.csproj.AssemblyReference.cache
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.FormAdoption.resources
+C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.FormServices.resources
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.FormTickets.resources
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.FormChoice.resources
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.FormContract.resources
@@ -30,5 +28,11 @@ C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.Properties.Resources.resources
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.csproj.GenerateResource.cache
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.csproj.CoreCompileInputs.cache
+C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Vendeghaz.exe.config
+C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Vendeghaz.exe
+C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Vendeghaz.pdb
+C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.csproj.Up2Date
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.exe
 C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Vendeghaz\obj\Debug\Vendeghaz.pdb
