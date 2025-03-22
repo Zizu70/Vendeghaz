@@ -31,7 +31,7 @@ namespace Vendeghaz
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            comboBox_LoginRole.DataSource = Enum.GetValues(typeof(W_role));
+            
         }
         //belépés gomb klikkje
         private async void button_Login_Click(object sender, EventArgs e)
@@ -45,8 +45,8 @@ namespace Vendeghaz
                 return;
             }
 
-            var loginData = new { name, password };
-            var json = JsonConvert.SerializeObject(loginData);
+            var serviceData = new { name, password };
+            var json = JsonConvert.SerializeObject(serviceData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             try
@@ -88,49 +88,10 @@ namespace Vendeghaz
         // szerviz gomb klikje
         private async void button_LoginService_Click(object sender, EventArgs e)
         {
-            string name = textBox_LoginName.Text;
-            string password = textBox_LoginPass.Text;
 
-
-            if (validateInputService())
-            {
-                // Ellenőrizzük, hogy a bejelentkezés sikeres volt-e és lekértük a role-t
-                bool isLoginSuccessful = await checkPermission(name, password);
-
-                if (isLoginSuccessful)
-                {
-                    // Ha admin jogosultsága van
-                    MessageBox.Show("Sikeres szervíz bejelentkezés!", "Siker", MessageBoxButtons.OK,  MessageBoxIcon.Information);
-
-                    // Admin funkciók engedélyezése
-                    label_LoginId.Visible = true;
-                    label_LoginPerm.Visible = true;
-                    textBox_LoginId.Visible = true;
-                    comboBox_LoginRole.Visible = true;
-                    button_LoginInsert.Visible = true;
-                    button_LoginUpdate.Visible = true;
-                    button_LoginDelete.Visible = true;
-
-                    emptyFields();
-                }
-                else
-                {
-                        // Ha nem admin jogosultságú, akkor nem engedjük be
-                    MessageBox.Show("Login service Nincs megfelelő jogosultságod!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBox_LoginName.Select();
-                    return;
-                }
-            }
-            else
-            {
-                    // Ha nem sikerült a bejelentkezés
-                 MessageBox.Show("Sikertelen szervíz bejelentkezés! Hibás felhasználónév, jelszó vagy jogosultság!", "Hiba", MessageBoxButtons.OK,MessageBoxIcon.Error);
-                 textBox_LoginName.Select();
-                 return;
-            }
         }
-    
-            private bool validateInputService() // RR inserthez + üres konstruktor worksben!
+
+        private bool validateInputService() // RR inserthez + üres konstruktor worksben!
         { //-- adatellenőrzés
             if (string.IsNullOrEmpty(textBox_LoginName.Text))
             {
@@ -150,16 +111,11 @@ namespace Vendeghaz
                     return false;
                 }
             }
-            if (string.IsNullOrEmpty(comboBox_LoginRole.Text))
-            {
-                MessageBox.Show("Válasszon jogosultságot!", "Hiányzó adatok", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                comboBox_LoginRole.Focus();
-                return false;
-            }
+            
             return true;
         }
 
-         private string userRole = ""; // Osztályszintű változó a szerepkör tárolására
+         
        
 
         private async Task<bool> checkPermission(string name, string password) // u 
@@ -215,21 +171,6 @@ namespace Vendeghaz
             // Kiürítjük a mezőket
             textBox_LoginName.Text = "";
             textBox_LoginPass.Text = "";
-            comboBox_LoginRole.Text = "";
-        }
-
-        private /*async*/ void button_LoginInsert_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button_LoginUpdate_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button_LoginDelete_Click(object sender, EventArgs e) // ide még checkWorkerEx !!!!!!!!!! 
-        {
-            
         }
         
     }

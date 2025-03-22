@@ -21,26 +21,25 @@ namespace Vendeghaz
     public partial class FormServices : Form
     {
         private readonly HttpClient client = new HttpClient();
-        private readonly string servicesUrl = "http://localhost:3000/desktop/servises";
+        private readonly string serviceUrl = "http://localhost:3000/desktop/service";
 
-        private string servicesBaseURL = "http://localhost:3000/desktop/workers";
-        public string endPoint;
+        private string workersBaseURL = "http://localhost:3000/desktop/workers";
+        //public string endPoint;
         public FormServices()
         {
             InitializeComponent();
         }
-
+      
         private void FormServices_Load(object sender, EventArgs e)
         {
-            comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role));
+            comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role)); //törlendő nem
         }
-
+        //szervíz gomb clickje     
         private async void button_ServicesEntry_Click(object sender, EventArgs e)
         {
             string name = textBox_ServicesName.Text.Trim();
             string password = textBox_ServicesPass.Text.Trim();
-            //string role = comboBox_ServicesRole.Text.Trim();
-
+          
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(password)) 
             {
                 MessageBox.Show("Kérlek, töltsd ki mindkét mezőt!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -53,34 +52,26 @@ namespace Vendeghaz
 
             try
             {
-                HttpResponseMessage response = await client.PostAsync(servicesUrl, content);
+                HttpResponseMessage response = await client.PostAsync(serviceUrl, content);
                 string responseString = await response.Content.ReadAsStringAsync();
                 dynamic result = JsonConvert.DeserializeObject(responseString);
 
                 if (response.IsSuccessStatusCode && result.success == true)
                 {
-                    string userRole = result.userRole.ToString(); // A válaszból kiolvassuk a szerepkört
-
-                    if (userRole == "admin")
-                    {
-                        MessageBox.Show("Sikeres bejelentkezés!", "Üdv", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                   MessageBox.Show("Sikeres bejelentkezés!", "Üdv a szervíz ágban!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         // Jelenlegi form elrejtése (nem zárjuk be azonnal)
-                        this.Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Nincs megfelelő jogosultságod!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                        this.Hide(); // Az aktuális form elrejtése
                 }
                 else
                 {
-                    MessageBox.Show(result.message.ToString(), "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Nincs megfelelő jogosultságod!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hálózati hiba: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("DSG - Hálózati hiba: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void emptyFields() // RR - Mezű ürítés
@@ -90,19 +81,19 @@ namespace Vendeghaz
             textBox_ServicesPass.Text = "";
             comboBox_ServicesRole.Text = "";
         }
-
+        /*
         public async Task<bool> isNameInDatabase(string name)
         {
             var response = await client.GetAsync($"{endPoint}/api/checkname?name={name}");
             return response.IsSuccessStatusCode && bool.Parse(await response.Content.ReadAsStringAsync());
         }
+        */
 
 
 
 
 
-
-
+        //***********************************************************// 
 
 
 
@@ -115,6 +106,7 @@ namespace Vendeghaz
 
         private async void button_ServicesInsert_Click(object sender, EventArgs e)
         {
+           /*
             string servicesInsert = textBox_ServicesName.Text;
             if (await isNameInDatabase(servicesInsert))
             {
@@ -144,7 +136,7 @@ namespace Vendeghaz
                     }
                 }
                 emptyFields();
-            }
+            }*/
         }
 
         private void button_ServicesUpdate_Click(object sender, EventArgs e)
@@ -159,7 +151,7 @@ namespace Vendeghaz
 
 
 
-
+    /*
         private void FormServices_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Ellenőrzöm, hogy az 'X' gombbal be akarták-e zárni az ablakot
@@ -174,6 +166,6 @@ namespace Vendeghaz
                 // vagy:
                 //this.Hide(); // Rejtse el az ablakot
             }
-        }
+        }*/
     }
 }

@@ -16,22 +16,22 @@ router.post('/login', async (req, res) => {
         const results = await db.query('SELECT * FROM workers WHERE name = ?', [name]);
         
         if (results.length === 0) {
-            return res.status(404).json({ message: 'User not found.' });
+            return res.status(404).json({ message: 'Felhasználó nem található.' });
         }
 
         const user = results[0];
 
         // Jelszó ellenőrzése bcrypt-tel
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.w_password);  //w_ nélkül volt
         
         if (isMatch) {
-            return res.status(200).json({ message: 'Login successful!' });
+            return res.status(200).json({ message: 'Sikeres bejelentkezés!' });
         } else {
-            return res.status(401).json({ message: 'Invalid credentials.' });
+            return res.status(401).json({ message: 'Hibás jelszó.' });
         }
     } catch (err) {
         console.error("Database query error:", err);
-        return res.status(500).json({ message: 'Internal server error.' });
+        return res.status(500).json({ message: 'Szerver hiba.' });
     }
 });
 
