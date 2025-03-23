@@ -18,43 +18,43 @@ namespace Vendeghaz
     public partial class Guests
     {
         [JsonProperty("g_id")]
-        public long GId { get; set; }
+        public long G_id { get; set; }
 
         [JsonProperty("g_name")]
-        public string GName { get; set; }
+        public string G_name { get; set; }
 
         [JsonProperty("g_species")]
-        public string GSpecies { get; set; }
+        public string G_species { get; set; }
 
         [JsonProperty("g_gender")]
-        public string GGender { get; set; }
+        public string G_gender { get; set; }
 
         [JsonProperty("g_birthdate")]
-        public DateTimeOffset GBirthdate { get; set; }
+        public DateTimeOffset G_birthdate { get; set; }
 
         [JsonProperty("g_in_date")]
-        public DateTimeOffset GInDate { get; set; }
+        public DateTimeOffset G_inDate { get; set; }
 
         [JsonProperty("g_in_place")]
-        public string GInPlace { get; set; }
+        public string G_inPlace { get; set; }
 
         [JsonProperty("g_other")]
-        public string GOther { get; set; }
+        public string G_other { get; set; }
 
         [JsonProperty("g_image")]
-        public GImage GImage { get; set; }
+        public string G_image { get; set; }
 
         [JsonProperty("created_at")]
-        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset Created_at { get; set; }
 
         [JsonProperty("updated_at")]
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? Updated_at { get; set; }
 
         [JsonProperty("deleted_at")]
-        public DateTimeOffset? DeletedAt { get; set; }
+        public DateTimeOffset? Deleted_at { get; set; }
     }
 
-    public partial class GImage
+    public partial class G_image
     {
         [JsonProperty("type")]
         public string Type { get; set; }

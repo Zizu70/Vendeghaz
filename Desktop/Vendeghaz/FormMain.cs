@@ -53,19 +53,6 @@ namespace Vendeghaz
                     }
                 }
             }
-            /*
-            var clickedCheckBox = (CheckBox)sender;
-
-            if (clickedCheckBox.Checked)
-            {
-                foreach (var checkBox in checkBoxes_Main)
-                {
-                    if (checkBox != clickedCheckBox)
-                    {
-                        checkBox.Checked = false;
-                    }
-                }
-            }*/
         }
 
         private void button_Main_Click(object sender, EventArgs e)
@@ -93,8 +80,6 @@ namespace Vendeghaz
             {
                 MessageBox.Show("Nincs kiválasztott CheckBox!", "Hiányzó bejelölés!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-
 
             switch (selectedCheckBox.Name)
             {

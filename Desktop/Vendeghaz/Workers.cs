@@ -50,13 +50,13 @@ namespace Vendeghaz
         public string W_role { get; set; }
 
         [JsonProperty("created_at")]
-        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset Created_at { get; set; }
 
         [JsonProperty("updated_at")]
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? Updated_at { get; set; }
 
         [JsonProperty("deleted_at")]
-        public DateTimeOffset? DeletedAt { get; set; }
+        public DateTimeOffset? Deleted_at { get; set; }
 
         public override string ToString()
         {

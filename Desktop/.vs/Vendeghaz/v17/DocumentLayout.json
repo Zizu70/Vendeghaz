@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\vendeghaz\\formadoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|solutionrelative:vendeghaz\\formadoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|c:\\users\\zita\\desktop\\vendeghaz\\vendeghaz\\desktop\\vendeghaz\\formchoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|solutionrelative:vendeghaz\\formchoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|c:\\users\\zita\\desktop\\vendeghaz\\vendeghaz\\desktop\\vendeghaz\\formadoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|solutionrelative:vendeghaz\\formadoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|c:\\users\\zita\\desktop\\vendeghaz\\vendeghaz\\desktop\\vendeghaz\\formchoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|solutionrelative:vendeghaz\\formchoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|c:\\users\\zita\\desktop\\vendeghaz\\vendeghaz\\desktop\\vendeghaz\\formcontract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|solutionrelative:vendeghaz\\formcontract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|c:\\users\\zita\\desktop\\vendeghaz\\vendeghaz\\desktop\\vendeghaz\\formguest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|solutionrelative:vendeghaz\\formguest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|c:\\users\\zita\\desktop\\vendeghaz\\vendeghaz\\desktop\\vendeghaz\\formcontract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|solutionrelative:vendeghaz\\formcontract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|c:\\users\\zita\\desktop\\vendeghaz\\vendeghaz\\desktop\\vendeghaz\\formguest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|solutionrelative:vendeghaz\\formguest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|c:\\users\\zita\\desktop\\vendeghaz\\vendeghaz\\desktop\\vendeghaz\\guests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB143022-646D-48F4-813E-A1205D6EDC37}|Vendeghaz\\Vendeghaz.csproj|solutionrelative:vendeghaz\\guests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,56 +30,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FormAdoption.cs",
-              "DocumentMoniker": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormAdoption.cs",
-              "RelativeDocumentMoniker": "Vendeghaz\\FormAdoption.cs",
-              "ToolTip": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormAdoption.cs",
-              "RelativeToolTip": "Vendeghaz\\FormAdoption.cs",
-              "ViewState": "AQIAAIkAAAAAAAAAAAAswJEAAABKAAAA",
+              "DocumentIndex": 4,
+              "Title": "Guests.cs",
+              "DocumentMoniker": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\Guests.cs",
+              "RelativeDocumentMoniker": "Vendeghaz\\Guests.cs",
+              "ToolTip": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\Guests.cs",
+              "RelativeToolTip": "Vendeghaz\\Guests.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAIwCwAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T20:28:42.329Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FormAdoption.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormAdoption.cs",
-              "RelativeDocumentMoniker": "Vendeghaz\\FormAdoption.cs",
-              "ToolTip": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormAdoption.cs [Design]",
-              "RelativeToolTip": "Vendeghaz\\FormAdoption.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-22T20:29:52.738Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FormContract.cs",
-              "DocumentMoniker": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormContract.cs",
-              "RelativeDocumentMoniker": "Vendeghaz\\FormContract.cs",
-              "ToolTip": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormContract.cs",
-              "RelativeToolTip": "Vendeghaz\\FormContract.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAABgAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-22T19:15:56.947Z",
+              "WhenOpened": "2025-03-23T20:32:47.964Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "FormContract.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormContract.cs",
-              "RelativeDocumentMoniker": "Vendeghaz\\FormContract.cs",
-              "ToolTip": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormContract.cs [Design]",
-              "RelativeToolTip": "Vendeghaz\\FormContract.cs [Design]",
+              "Title": "FormGuest.cs",
+              "DocumentMoniker": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormGuest.cs",
+              "RelativeDocumentMoniker": "Vendeghaz\\FormGuest.cs",
+              "ToolTip": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormGuest.cs",
+              "RelativeToolTip": "Vendeghaz\\FormGuest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADUAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-22T19:15:51.844Z",
+              "WhenOpened": "2025-03-23T20:22:11.636Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FormChoice.cs",
+              "DocumentMoniker": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormChoice.cs",
+              "RelativeDocumentMoniker": "Vendeghaz\\FormChoice.cs",
+              "ToolTip": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormChoice.cs",
+              "RelativeToolTip": "Vendeghaz\\FormChoice.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAlwC0AAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T16:09:27.541Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FormGuest.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormGuest.cs",
+              "RelativeDocumentMoniker": "Vendeghaz\\FormGuest.cs",
+              "ToolTip": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormGuest.cs [Design]",
+              "RelativeToolTip": "Vendeghaz\\FormGuest.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T20:22:09.779Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FormChoice.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormChoice.cs",
+              "RelativeDocumentMoniker": "Vendeghaz\\FormChoice.cs",
+              "ToolTip": "C:\\Users\\Zita\\Desktop\\VendegHaz\\Vendeghaz\\Desktop\\Vendeghaz\\FormChoice.cs [Design]",
+              "RelativeToolTip": "Vendeghaz\\FormChoice.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T17:21:44.783Z",
               "EditorCaption": " [Design]"
             }
           ]

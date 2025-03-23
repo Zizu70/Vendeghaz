@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGuest));
             this.textBox_GuestName = new System.Windows.Forms.TextBox();
-            this.textBox_GuestWhere = new System.Windows.Forms.TextBox();
+            this.textBox_GuestIn_place = new System.Windows.Forms.TextBox();
             this.richTextBox_GuestOther = new System.Windows.Forms.RichTextBox();
             this.pictureBox_GuestImage = new System.Windows.Forms.PictureBox();
             this.comboBox_GuestSpecies = new System.Windows.Forms.ComboBox();
             this.comboBox_GuestGender = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker_GuestIn = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker_GuestOut = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_GuestIn_date = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_GuestBirthdate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -58,12 +58,12 @@
             this.textBox_GuestName.Size = new System.Drawing.Size(125, 30);
             this.textBox_GuestName.TabIndex = 2;
             // 
-            // textBox_GuestWhere
+            // textBox_GuestIn_place
             // 
-            this.textBox_GuestWhere.Location = new System.Drawing.Point(212, 337);
-            this.textBox_GuestWhere.Name = "textBox_GuestWhere";
-            this.textBox_GuestWhere.Size = new System.Drawing.Size(316, 30);
-            this.textBox_GuestWhere.TabIndex = 21;
+            this.textBox_GuestIn_place.Location = new System.Drawing.Point(212, 337);
+            this.textBox_GuestIn_place.Name = "textBox_GuestIn_place";
+            this.textBox_GuestIn_place.Size = new System.Drawing.Size(316, 30);
+            this.textBox_GuestIn_place.TabIndex = 21;
             // 
             // richTextBox_GuestOther
             // 
@@ -110,22 +110,22 @@
             this.comboBox_GuestGender.Size = new System.Drawing.Size(150, 31);
             this.comboBox_GuestGender.TabIndex = 15;
             // 
-            // dateTimePicker_GuestIn
+            // dateTimePicker_GuestIn_date
             // 
-            this.dateTimePicker_GuestIn.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_GuestIn.Location = new System.Drawing.Point(35, 338);
-            this.dateTimePicker_GuestIn.Name = "dateTimePicker_GuestIn";
-            this.dateTimePicker_GuestIn.Size = new System.Drawing.Size(150, 30);
-            this.dateTimePicker_GuestIn.TabIndex = 19;
+            this.dateTimePicker_GuestIn_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_GuestIn_date.Location = new System.Drawing.Point(35, 338);
+            this.dateTimePicker_GuestIn_date.Name = "dateTimePicker_GuestIn_date";
+            this.dateTimePicker_GuestIn_date.Size = new System.Drawing.Size(150, 30);
+            this.dateTimePicker_GuestIn_date.TabIndex = 19;
             // 
-            // dateTimePicker_GuestOut
+            // dateTimePicker_GuestBirthdate
             // 
-            this.dateTimePicker_GuestOut.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_GuestOut.Location = new System.Drawing.Point(391, 248);
-            this.dateTimePicker_GuestOut.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dateTimePicker_GuestOut.Name = "dateTimePicker_GuestOut";
-            this.dateTimePicker_GuestOut.Size = new System.Drawing.Size(150, 30);
-            this.dateTimePicker_GuestOut.TabIndex = 13;
+            this.dateTimePicker_GuestBirthdate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_GuestBirthdate.Location = new System.Drawing.Point(391, 248);
+            this.dateTimePicker_GuestBirthdate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dateTimePicker_GuestBirthdate.Name = "dateTimePicker_GuestBirthdate";
+            this.dateTimePicker_GuestBirthdate.Size = new System.Drawing.Size(150, 30);
+            this.dateTimePicker_GuestBirthdate.TabIndex = 13;
             // 
             // label1
             // 
@@ -199,7 +199,7 @@
             // button_GuestInsert
             // 
             this.button_GuestInsert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(250)))), ((int)(((byte)(225)))));
-            this.button_GuestInsert.Location = new System.Drawing.Point(211, 591);
+            this.button_GuestInsert.Location = new System.Drawing.Point(93, 588);
             this.button_GuestInsert.Name = "button_GuestInsert";
             this.button_GuestInsert.Size = new System.Drawing.Size(129, 37);
             this.button_GuestInsert.TabIndex = 29;
@@ -209,7 +209,7 @@
             // button_GuestUpdate
             // 
             this.button_GuestUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(165)))), ((int)(((byte)(240)))));
-            this.button_GuestUpdate.Location = new System.Drawing.Point(239, 591);
+            this.button_GuestUpdate.Location = new System.Drawing.Point(228, 588);
             this.button_GuestUpdate.Name = "button_GuestUpdate";
             this.button_GuestUpdate.Size = new System.Drawing.Size(129, 37);
             this.button_GuestUpdate.TabIndex = 30;
@@ -219,7 +219,7 @@
             // button_GuestDelete
             // 
             this.button_GuestDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(110)))), ((int)(((byte)(150)))));
-            this.button_GuestDelete.Location = new System.Drawing.Point(265, 591);
+            this.button_GuestDelete.Location = new System.Drawing.Point(363, 588);
             this.button_GuestDelete.Name = "button_GuestDelete";
             this.button_GuestDelete.Size = new System.Drawing.Size(129, 37);
             this.button_GuestDelete.TabIndex = 31;
@@ -243,19 +243,20 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePicker_GuestOut);
-            this.Controls.Add(this.dateTimePicker_GuestIn);
+            this.Controls.Add(this.dateTimePicker_GuestBirthdate);
+            this.Controls.Add(this.dateTimePicker_GuestIn_date);
             this.Controls.Add(this.comboBox_GuestGender);
             this.Controls.Add(this.comboBox_GuestSpecies);
             this.Controls.Add(this.pictureBox_GuestImage);
             this.Controls.Add(this.richTextBox_GuestOther);
-            this.Controls.Add(this.textBox_GuestWhere);
+            this.Controls.Add(this.textBox_GuestIn_place);
             this.Controls.Add(this.textBox_GuestName);
             this.Font = new System.Drawing.Font("Segoe Print", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormGuest";
             this.Text = "Vendégház Vadaspark";
+            this.Load += new System.EventHandler(this.FormGuest_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_GuestImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -265,13 +266,13 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox_GuestName;
-        private System.Windows.Forms.TextBox textBox_GuestWhere;
+        private System.Windows.Forms.TextBox textBox_GuestIn_place;
         private System.Windows.Forms.RichTextBox richTextBox_GuestOther;
         private System.Windows.Forms.PictureBox pictureBox_GuestImage;
         private System.Windows.Forms.ComboBox comboBox_GuestSpecies;
         private System.Windows.Forms.ComboBox comboBox_GuestGender;
-        private System.Windows.Forms.DateTimePicker dateTimePicker_GuestIn;
-        private System.Windows.Forms.DateTimePicker dateTimePicker_GuestOut;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_GuestIn_date;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_GuestBirthdate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

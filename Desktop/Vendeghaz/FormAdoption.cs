@@ -131,10 +131,13 @@ namespace Vendeghaz
         /**  **/
         private async void comboBox_AdoptionGName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedAnimal = comboBox_AdoptionGName.SelectedItem?.ToString();
-            if (!string.IsNullOrEmpty(selectedAnimal))
+            if (comboBox_AdoptionGName.SelectedIndex == -1)
+                return; // Ha nincs kiválasztott elem, akkor kilép
+
+            string selectedGuest = comboBox_AdoptionGName.SelectedItem?.ToString();
+            if (/*comboBox_AdoptionGName.SelectedItem is Guest selectedGuest*/!string.IsNullOrEmpty(selectedGuest))
             {
-                await LoadUserData(selectedAnimal);
+                await LoadGuestData(selectedGuest);
             }
         }
 
@@ -142,7 +145,7 @@ namespace Vendeghaz
         {
             try
             {
-                string url = $"http://localhost:3000/desktop/allGuest/{Uri.EscapeDataString(guestName)}";
+                string url = $"http://localhost:3000/desktop/guests/{Uri.EscapeDataString(guestName)}";
                 HttpResponseMessage response = await client.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
@@ -154,11 +157,16 @@ namespace Vendeghaz
                     textBox_AdoptionSpecies.Text = guest.g_species;
                     textBox_AdoptionGender.Text = guest.g_gender;
 
-                    string imagePath = guest.g_image; //guest.image_path
+                  // Kép elérési útjának összeállítása
+                    string basePath = @"C:\Vendeghaz\Desktop\Guest_Image\";
+                    string fullPath = Path.Combine(basePath, (string)guest.g_image); 
+
+                    /* string imagePath = guest.g_image; //guest.image_path */
+
                     // Kép betöltése
-                    if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+                    if (!string.IsNullOrEmpty(fullPath) && File.Exists(fullPath))
                     {
-                        pictureBox_AdoptionImage.Image = Image.FromFile(imagePath);
+                        pictureBox_AdoptionImage.Image = Image.FromFile(fullPath);
                     }
                     else
                     {
@@ -182,11 +190,15 @@ namespace Vendeghaz
         /**  **/
         private async void comboBox_AdoptionUName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedUser = comboBox_AdoptionUName.SelectedItem?.ToString();
-
-            if (!string.IsNullOrEmpty(selectedUser))
+            if (comboBox_AdoptionUName.SelectedItem != null)
             {
-                await LoadUserData(selectedUser);
+                // A kiválasztott User objektumot lekéri
+                User selectedUser = comboBox_AdoptionUName.SelectedItem as User;
+                if (selectedUser != null)
+                {
+                    // Aszinkron módon betölti a User adatait
+                    await LoadUserData(selectedUser.u_name);
+                }
             }
         }
 
@@ -194,7 +206,7 @@ namespace Vendeghaz
         {
             try
             {
-                string url = $"http://localhost:3000/desktop/user/{Uri.EscapeDataString(userName)}";
+                string url = $"http://localhost:3000/desktop/users/{Uri.EscapeDataString(userName)}";
                 HttpResponseMessage response = await client.GetAsync(url); //(url)volt
 
                 if (response.IsSuccessStatusCode)
