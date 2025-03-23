@@ -10,6 +10,9 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Vendeghaz
 {
@@ -21,26 +24,90 @@ namespace Vendeghaz
         public string guestsBaseURL = "http://localhost:3000/desktop/allGuests";
         public string usersBaseURL = "http://localhost:3000/desktop/allUsers";
 
-       
+        // A listák deklarálása
+        private List<Guest> allGName = new List<Guest>();
+        private List<User> allUName = new List<User>();
 
         public FormAdoption()
         {
             InitializeComponent();
-            //InitializeAsync(); 
         }
-        /*
-        private async void InitializeAsync()
-        {
-            allAnimals = await allAdoptableAnimal();
-            allUsers = await allUser();
-            uploadingAnimalName();
-            uploadingUserName();
-        }
-        */
-        private void FormAdoption_Load(object sender, EventArgs e)
+        
+        private async void FormAdoption_Load(object sender, EventArgs e)
         {
             placeholderAdoption(); //  kelll Kérem válasszon!
+            await LoadGuests();
+            await LoadUsers();
         }
+
+        private async Task LoadGuests()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(guestsBaseURL);
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    var guestNames = JsonConvert.DeserializeObject<List<Guest>>(json);
+
+                    comboBox_AdoptionGName.DataSource = guestNames;
+                    comboBox_AdoptionGName.DisplayMember = "g_name";
+                }
+                else
+                {
+                    MessageBox.Show("Hiba a vendégek lekérésekor!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hálózati hiba: " + ex.Message);
+            }
+        }
+
+        private async Task LoadUsers()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(usersBaseURL);
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    var userNames = JsonConvert.DeserializeObject<List<User>>(json);
+
+                    comboBox_AdoptionUName.DataSource = userNames;
+                    comboBox_AdoptionUName.DisplayMember = "u_name";
+                }
+                else
+                {
+                    MessageBox.Show("Hiba a felhasználók lekérésekor!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hálózati hiba: " + ex.Message);
+            }
+        }
+
+        public class Guest
+        {
+            public string g_name { get; set; }
+        }
+
+        public class User
+        {
+            public string u_name { get; set; }
+        }
+
+
+
+
+
+
+
+
+
+
+
         /**jó**/
         private void placeholderAdoption()   //mező szöveg
         {
@@ -61,17 +128,96 @@ namespace Vendeghaz
             dateTimePicker_AdoptionDate.Value = DateTime.Now;
         }
 
-        /**jó**/
-        private void comboBox_AdoptionGName_SelectedIndexChanged(object sender, EventArgs e)
+        /**  **/
+        private async void comboBox_AdoptionGName_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-          
+            string selectedAnimal = comboBox_AdoptionGName.SelectedItem?.ToString();
+            if (!string.IsNullOrEmpty(selectedAnimal))
+            {
+                await LoadUserData(selectedAnimal);
+            }
         }
-        /**jó**/
-        private void comboBox_AdoptionUName_SelectedIndexChanged(object sender, EventArgs e)
+
+        private async Task LoadGuestData(string guestName)
         {
-            
+            try
+            {
+                string url = $"http://localhost:3000/desktop/allGuest/{Uri.EscapeDataString(guestName)}";
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    dynamic guest = JsonConvert.DeserializeObject(json);
+
+                    comboBox_AdoptionGName.Text = guest.g_name;
+                    textBox_AdoptionSpecies.Text = guest.g_species;
+                    textBox_AdoptionGender.Text = guest.g_gender;
+
+                    string imagePath = guest.g_image; //guest.image_path
+                    // Kép betöltése
+                    if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+                    {
+                        pictureBox_AdoptionImage.Image = Image.FromFile(imagePath);
+                    }
+                    else
+                    {
+                        pictureBox_AdoptionImage.Image = null; // Ha nincs kép, töröljük az előzőt
+                        MessageBox.Show("A kép nem található!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vendég adatai nem találhatóak!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hiba történt az adatok betöltésekor: {ex.Message}", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+
+        /**  **/
+        private async void comboBox_AdoptionUName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedUser = comboBox_AdoptionUName.SelectedItem?.ToString();
+
+            if (!string.IsNullOrEmpty(selectedUser))
+            {
+                await LoadUserData(selectedUser);
+            }
+        }
+
+        private async Task LoadUserData(string userName)
+        {
+            try
+            {
+                string url = $"http://localhost:3000/desktop/user/{Uri.EscapeDataString(userName)}";
+                HttpResponseMessage response = await client.GetAsync(url); //(url)volt
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    dynamic user = JsonConvert.DeserializeObject(json);
+
+                    comboBox_AdoptionUName.Text = user.u_name;
+                    textBox_AdoptionEmail.Text = user.u_email;
+                }
+                else 
+                {
+                    MessageBox.Show($"1Felhasználó adatai nem találhatóak!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hiba történt az adatok betöltésekor: {ex.Message}", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
         /**nem**/
         private void button_AdoptionInsert_Click(object sender, EventArgs e)
         {
@@ -86,7 +232,8 @@ namespace Vendeghaz
         /**jó**/
         private void button_AdoptionAgain_Click(object sender, EventArgs e)
         {
-           
+            emptyFieldsAdoption();
+            placeholderAdoption();
         }
 
     }

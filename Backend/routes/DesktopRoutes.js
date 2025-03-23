@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-//***** Workers *****//
+//***** Workers *****// servízbe került
 /** jó **/     
 router.get('/workers', async (req, res) => {  
     const w_name = req.params.w_name;
@@ -318,7 +318,8 @@ router.put('/admin/guests/:g_chip', async (req, res) => {
 //*****Chip end*****//
 
 //*****Adaption top*****//
-
+   //**ok**//
+   // Összes örökbefogadás lekérése
 router.get('/adoption', async (req, res) => {
     
     try {
@@ -330,28 +331,80 @@ router.get('/adoption', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a dolgozó lekérésekor!', error });
     }
 });
-
+   //**ok**//
+   // Összes vendég nevének lekérése
 router.get('/allGuests', async (req, res) => {
     try {
-        const [rows] = await db.query(
-            `SELECT * FROM guests`   // ell.!!!!
+        const results = await db.query(
+            `SELECT g_name FROM guests`   // ell.!!!!
         );
-        res.status(200).json(rows);
+        res.status(200).json(results);
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
     }
 });
-
+   //**ok**//
+   // Összes felhasználó nevének lekérése
 router.get('/allUsers', async (req, res) => {
     try {
-        const [rows] = await db.query(
-            `SELECT u_name, u_email FROM users`   
+        const result = await db.query(
+            `SELECT u_name FROM users`   
         );
-        res.status(200).json(rows);
+        res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
     }
 });
+
+// Vendég adatainak lekérése név alapján
+router.get('/guest/:guestname', async (req, res) => {  
+    const { guestname } = req.params;
+
+    try {
+        const guestName  = req.params.name;
+        const result = await db.query(
+            'SELECT g_name, g_species, g_gender, g_image FROM guests WHERE g_name = ?',
+            [guestname]
+        );
+
+        if (result.length > 0) {
+            res.json(result[0]); // Az első találatot küldi vissza
+        } else {
+            res.status(404).json({ message: "Vendég nem található" });
+        }
+    } catch (err) {
+        console.error('Hiba a vendég lekérdezés során:', err);
+        res.status(500).json({ message: "Szerverhiba" });
+    }
+});
+
+// Felhasználó adatainak lekérése név alapján
+router.get('/user/:username', async (req, res) => {
+    const { username } = req.params;
+
+    try {
+        const userName  = req.params.name;
+        const result = await db.query(
+            'SELECT u_name, u_email FROM users WHERE u_name = ?',
+            [username]
+        );
+
+        if (result.length > 0) {
+            res.json(result[0]); // Az első találatot küldi vissza
+        } else {
+            res.status(404).json({ message: "Felhasználó nem található" });
+        }
+    } catch (err) {
+        console.error('Hiba a lekérdezés során:', err);
+        res.status(500).json({ message: "Szerverhiba" });
+    }
+});
+
+
+
+
+
+
 
 router.post('/adoption', async (req, res) => {
     const { a_date, g_name, u_name} = req.body;

@@ -40,18 +40,18 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox_AdoptionInPlace = new System.Windows.Forms.TextBox();
-            this.textBox_AdoptionInDate = new System.Windows.Forms.TextBox();
-            this.textBox_AdoptionGender = new System.Windows.Forms.TextBox();
+            this.textBox_ContractInPlace = new System.Windows.Forms.TextBox();
+            this.textBox_ContractInDate = new System.Windows.Forms.TextBox();
+            this.textBox_ContractGender = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox_AdoptionGName = new System.Windows.Forms.TextBox();
-            this.textBox_AdoptionSpecies = new System.Windows.Forms.TextBox();
-            this.textBox_AdoptionBirthdate = new System.Windows.Forms.TextBox();
+            this.textBox_ContractSecGName = new System.Windows.Forms.TextBox();
+            this.textBox_ContractSecSpecies = new System.Windows.Forms.TextBox();
+            this.textBox_ContractBirthdate = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -59,7 +59,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox_AdoptionDate = new System.Windows.Forms.TextBox();
+            this.textBox_ContractDate = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -196,18 +196,18 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.textBox_AdoptionInPlace);
-            this.panel2.Controls.Add(this.textBox_AdoptionInDate);
-            this.panel2.Controls.Add(this.textBox_AdoptionGender);
+            this.panel2.Controls.Add(this.textBox_ContractInPlace);
+            this.panel2.Controls.Add(this.textBox_ContractInDate);
+            this.panel2.Controls.Add(this.textBox_ContractGender);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.textBox_AdoptionGName);
-            this.panel2.Controls.Add(this.textBox_AdoptionSpecies);
-            this.panel2.Controls.Add(this.textBox_AdoptionBirthdate);
+            this.panel2.Controls.Add(this.textBox_ContractSecGName);
+            this.panel2.Controls.Add(this.textBox_ContractSecSpecies);
+            this.panel2.Controls.Add(this.textBox_ContractBirthdate);
             this.panel2.Location = new System.Drawing.Point(144, 426);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(512, 345);
@@ -222,26 +222,26 @@
             this.label8.TabIndex = 38;
             this.label8.Text = "Érkezés helye:";
             // 
-            // textBox_AdoptionInPlace
+            // textBox_ContractInPlace
             // 
-            this.textBox_AdoptionInPlace.Location = new System.Drawing.Point(173, 276);
-            this.textBox_AdoptionInPlace.Name = "textBox_AdoptionInPlace";
-            this.textBox_AdoptionInPlace.Size = new System.Drawing.Size(229, 22);
-            this.textBox_AdoptionInPlace.TabIndex = 37;
+            this.textBox_ContractInPlace.Location = new System.Drawing.Point(173, 276);
+            this.textBox_ContractInPlace.Name = "textBox_ContractInPlace";
+            this.textBox_ContractInPlace.Size = new System.Drawing.Size(229, 22);
+            this.textBox_ContractInPlace.TabIndex = 37;
             // 
-            // textBox_AdoptionInDate
+            // textBox_ContractInDate
             // 
-            this.textBox_AdoptionInDate.Location = new System.Drawing.Point(174, 239);
-            this.textBox_AdoptionInDate.Name = "textBox_AdoptionInDate";
-            this.textBox_AdoptionInDate.Size = new System.Drawing.Size(228, 22);
-            this.textBox_AdoptionInDate.TabIndex = 35;
+            this.textBox_ContractInDate.Location = new System.Drawing.Point(174, 239);
+            this.textBox_ContractInDate.Name = "textBox_ContractInDate";
+            this.textBox_ContractInDate.Size = new System.Drawing.Size(228, 22);
+            this.textBox_ContractInDate.TabIndex = 35;
             // 
-            // textBox_AdoptionGender
+            // textBox_ContractGender
             // 
-            this.textBox_AdoptionGender.Location = new System.Drawing.Point(174, 165);
-            this.textBox_AdoptionGender.Name = "textBox_AdoptionGender";
-            this.textBox_AdoptionGender.Size = new System.Drawing.Size(228, 22);
-            this.textBox_AdoptionGender.TabIndex = 34;
+            this.textBox_ContractGender.Location = new System.Drawing.Point(174, 165);
+            this.textBox_ContractGender.Name = "textBox_ContractGender";
+            this.textBox_ContractGender.Size = new System.Drawing.Size(228, 22);
+            this.textBox_ContractGender.TabIndex = 34;
             // 
             // label3
             // 
@@ -298,26 +298,26 @@
             this.label10.TabIndex = 26;
             this.label10.Text = "Érkezés ideje:";
             // 
-            // textBox_AdoptionGName
+            // textBox_ContractSecGName
             // 
-            this.textBox_AdoptionGName.Location = new System.Drawing.Point(174, 88);
-            this.textBox_AdoptionGName.Name = "textBox_AdoptionGName";
-            this.textBox_AdoptionGName.Size = new System.Drawing.Size(228, 22);
-            this.textBox_AdoptionGName.TabIndex = 18;
+            this.textBox_ContractSecGName.Location = new System.Drawing.Point(174, 88);
+            this.textBox_ContractSecGName.Name = "textBox_ContractSecGName";
+            this.textBox_ContractSecGName.Size = new System.Drawing.Size(228, 22);
+            this.textBox_ContractSecGName.TabIndex = 18;
             // 
-            // textBox_AdoptionSpecies
+            // textBox_ContractSecSpecies
             // 
-            this.textBox_AdoptionSpecies.Location = new System.Drawing.Point(173, 125);
-            this.textBox_AdoptionSpecies.Name = "textBox_AdoptionSpecies";
-            this.textBox_AdoptionSpecies.Size = new System.Drawing.Size(229, 22);
-            this.textBox_AdoptionSpecies.TabIndex = 14;
+            this.textBox_ContractSecSpecies.Location = new System.Drawing.Point(173, 125);
+            this.textBox_ContractSecSpecies.Name = "textBox_ContractSecSpecies";
+            this.textBox_ContractSecSpecies.Size = new System.Drawing.Size(229, 22);
+            this.textBox_ContractSecSpecies.TabIndex = 14;
             // 
-            // textBox_AdoptionBirthdate
+            // textBox_ContractBirthdate
             // 
-            this.textBox_AdoptionBirthdate.Location = new System.Drawing.Point(173, 202);
-            this.textBox_AdoptionBirthdate.Name = "textBox_AdoptionBirthdate";
-            this.textBox_AdoptionBirthdate.Size = new System.Drawing.Size(229, 22);
-            this.textBox_AdoptionBirthdate.TabIndex = 15;
+            this.textBox_ContractBirthdate.Location = new System.Drawing.Point(173, 202);
+            this.textBox_ContractBirthdate.Name = "textBox_ContractBirthdate";
+            this.textBox_ContractBirthdate.Size = new System.Drawing.Size(229, 22);
+            this.textBox_ContractBirthdate.TabIndex = 15;
             // 
             // pictureBox3
             // 
@@ -373,7 +373,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox_AdoptionDate);
+            this.panel1.Controls.Add(this.textBox_ContractDate);
             this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.label21);
             this.panel1.Controls.Add(this.label20);
@@ -398,12 +398,12 @@
             this.label2.TabIndex = 35;
             this.label2.Text = "elnök";
             // 
-            // textBox_AdoptionDate
+            // textBox_ContractDate
             // 
-            this.textBox_AdoptionDate.Location = new System.Drawing.Point(81, 294);
-            this.textBox_AdoptionDate.Name = "textBox_AdoptionDate";
-            this.textBox_AdoptionDate.Size = new System.Drawing.Size(133, 22);
-            this.textBox_AdoptionDate.TabIndex = 34;
+            this.textBox_ContractDate.Location = new System.Drawing.Point(81, 294);
+            this.textBox_ContractDate.Name = "textBox_ContractDate";
+            this.textBox_ContractDate.Size = new System.Drawing.Size(133, 22);
+            this.textBox_ContractDate.TabIndex = 34;
             // 
             // label22
             // 
@@ -459,7 +459,6 @@
             this.label1.Size = new System.Drawing.Size(159, 50);
             this.label1.TabIndex = 28;
             this.label1.Text = "OKLEVÉL";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label15
             // 
@@ -524,6 +523,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormContract";
             this.Text = "Vendégház Vadaspark";
+            this.Load += new System.EventHandler(this.FormContract_Load);
             this.panel_Contract.ResumeLayout(false);
             this.panel_Contract.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -559,7 +559,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox textBox_AdoptionDate;
+        private System.Windows.Forms.TextBox textBox_ContractDate;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.RichTextBox richTextBox1;
@@ -570,22 +570,22 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox_AdoptionGender;
+        private System.Windows.Forms.TextBox textBox_ContractGender;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox_AdoptionGName;
-        private System.Windows.Forms.TextBox textBox_AdoptionSpecies;
-        private System.Windows.Forms.TextBox textBox_AdoptionBirthdate;
+        private System.Windows.Forms.TextBox textBox_ContractSecGName;
+        private System.Windows.Forms.TextBox textBox_ContractSecSpecies;
+        private System.Windows.Forms.TextBox textBox_ContractBirthdate;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.TextBox textBox_AdoptionInDate;
+        private System.Windows.Forms.TextBox textBox_ContractInDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox_AdoptionInPlace;
+        private System.Windows.Forms.TextBox textBox_ContractInPlace;
     }
 }

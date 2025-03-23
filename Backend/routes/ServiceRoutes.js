@@ -18,14 +18,14 @@ router.post('/login', async (req, res) => {  // /login
     }
 
     try {
-        const [rows] = await db.query(
+        const results = await db.query(
             "SELECT * FROM workers WHERE w_name = ? AND w_role = 'admin'",
             [name]
         );
 
         console.log("Lekérdezett admin:", results);  // Debug kiírás később nem kell
 
-        if (!rows || rows.length === 0) { //(rows.length === 0)
+        if (!results || results.length === 0) { //(rows.length === 0)
             res.status(401).json({ success: false, message: "Hibás adatok vagy nincs admin jogosultság." });
         }
           
