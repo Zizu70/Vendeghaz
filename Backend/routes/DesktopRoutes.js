@@ -209,33 +209,70 @@ router.delete('/worker/:w_id', async (req, res) => {
 });
 
 //*****Choice start*****//
+// Csoport választás kezelése
 
-
-
-// Faj választás kezelése
-
-// Faj választás listázása /guests/all/dogs
-router.get('/admin/guests/all/dogs', async (req, res) => {
+// Csoport választás listázása 
+   //nagyvadak
+router.get('/guests/allLarge', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT g_id, g_name, g_spacies FROM guests WHERE g_species="kutya"`   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('medve', 'farkas')`,   // ell.!!!!
         );
         res.status(200).json(guests);
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a Kutyák listázásakor!', error });
+        res.status(500).json({ message: 'Hiba történt a nagyvadak listázásakor!', error });
     }
 });
 
-router.get('/admin/guests/all/cats', async (req, res) => {
+   //apróvadak   
+router.get('/guests/allSmall', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT g_id, g_name, g_spacies FROM guests WHERE g_species="macska"`    // ell.!!!!  
+            `SELECT * FROM guests WHERE g_species IN ('róka', 'hiúz')`,   // ell.!!!!
         );
         res.status(200).json(guests);
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a Cicák listázáskor!', error });
+        res.status(500).json({ message: 'Hiba történt a nagyvadak listázásakor!', error });
     }
 });
+
+   //madarak
+router.get('/guests/allBird', async (req, res) => {
+    try {
+        const guests = await db.query(
+            `SELECT * FROM guests WHERE g_species IN ('hóbagoly', 'vércse')`,   // ell.!!!!
+        );
+        res.status(200).json(guests);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a apróvadak listázásakor!', error });
+    }
+});
+
+   //parasztudvar
+router.get('/guests/allYard', async (req, res) => {
+    try {
+        const guests = await db.query(
+            `SELECT * FROM guests WHERE g_species IN ('juh', 'kecske')`,   // ell.!!!!
+        );
+        res.status(200).json(guests);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a paraszt udvar listázásakor!', error });
+    }
+});
+
+   //simogató
+router.get('/guests/allStoking', async (req, res) => {
+    try {
+        const guests = await db.query(
+            `SELECT * FROM guests WHERE g_species IN ('muflon', 'dám szarvas')`,   // ell.!!!!
+        );
+        res.status(200).json(guests);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a simogató listázásakor!', error });
+    }
+});
+
+
 
 //*****Choice end*****//
 
@@ -355,13 +392,38 @@ router.get('/allUsers', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
     }
 });
+//**ok**//
+   // Összes felhasználó nevének lekérése
+   router.get('/guests', async (req, res) => {
+    try {
+        const result = await db.query(
+            `SELECT * FROM guests`   
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
+    }
+//**ok**//
+   // Összes felhasználó nevének lekérése
+   router.get('/users', async (req, res) => {
+    try {
+        const result = await db.query(
+            `SELECT * FROM users`   
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
+    }
+});});
+
+
 
 // Vendég adatainak lekérése név alapján
-router.get('/guest/:guestname', async (req, res) => {  
-    const { guestname } = req.params;
+router.get('/guests/:guestname', async (req, res) => {  
+    //const { guestname } = req.params;
 
     try {
-        const guestName  = req.params.name;
+        const guestname  = req.params;
         const result = await db.query(
             'SELECT g_name, g_species, g_gender, g_image FROM guests WHERE g_name = ?',
             [guestname]
@@ -373,18 +435,18 @@ router.get('/guest/:guestname', async (req, res) => {
             res.status(404).json({ message: "Vendég nem található" });
         }
     } catch (err) {
-        console.error('Hiba a vendég lekérdezés során:', err);
+        console.error('Hiba a vendég lekérdezése során:', err);
         res.status(500).json({ message: "Szerverhiba" });
     }
 });
 
 // Felhasználó adatainak lekérése név alapján
-router.get('/user/:username', async (req, res) => {
-    const { username } = req.params;
+router.get('/users/:username', async (req, res) => {
+    //const { userName } = req.params;
 
     try {
-        const userName  = req.params.name;
-        const result = await db.query(
+        const {username}  = req.params;
+        const [result] = await db.query(
             'SELECT u_name, u_email FROM users WHERE u_name = ?',
             [username]
         );
