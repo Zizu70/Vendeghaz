@@ -216,7 +216,7 @@ router.delete('/worker/:w_id', async (req, res) => {
 router.get('/guests/allLarge', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT * FROM guests WHERE g_species IN ('medve', 'farkas')`,   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('medve','farkas','muflon','őz','gímszarvas')`,   // ell.!!!!
         );
         res.status(200).json(guests);
     } catch (error) {
@@ -228,7 +228,7 @@ router.get('/guests/allLarge', async (req, res) => {
 router.get('/guests/allSmall', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT * FROM guests WHERE g_species IN ('róka', 'hiúz')`,   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('róka','vadmacska','hiúz','aranysakál','mosómedve')`,   // ell.!!!!
         );
         res.status(200).json(guests);
     } catch (error) {
@@ -240,7 +240,7 @@ router.get('/guests/allSmall', async (req, res) => {
 router.get('/guests/allBird', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT * FROM guests WHERE g_species IN ('hóbagoly', 'vércse')`,   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('sas','bagoly','páva','holló','vércse','varjú')`,   // ell.!!!!
         );
         res.status(200).json(guests);
     } catch (error) {
@@ -252,7 +252,7 @@ router.get('/guests/allBird', async (req, res) => {
 router.get('/guests/allYard', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT * FROM guests WHERE g_species IN ('juh', 'kecske')`,   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('ló','szamár','tehén','mangalica','baromfiak')`,   // ell.!!!!
         );
         res.status(200).json(guests);
     } catch (error) {
@@ -264,28 +264,25 @@ router.get('/guests/allYard', async (req, res) => {
 router.get('/guests/allStoking', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT * FROM guests WHERE g_species IN ('muflon', 'dám szarvas')`,   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('dámszarvas','juh','kecske','nyúl','póniló')`,   // ell.!!!!
         );
         res.status(200).json(guests);
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a simogató listázásakor!', error });
     }
 });
-
-
-
 //*****Choice end*****//
 
 //*****Guest start*****//
 
 // Új vendég hozzáadása
-router.post('/admin/guests', async (req, res) => {
-    const { g_name, g_chip, g_species, g_gender, g_in_date, g_in_place, g_out_date, g_adoption, g_other, g_image} = req.body;
+router.post('/guests', async (req, res) => {
+    const { g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other, g_image} = req.body;
     
     try {
         const result = await db.query(
-            `INSERT INTO guests (g_name, g_chip, g_species, g_gender, g_in_date, g_in_place, g_out_date, g_adoption, g_other, g_image)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [g_name, g_chip, g_species, g_gender, g_in_date, g_in_place, g_out_date, g_adoption, g_other, g_image] 
+            `INSERT INTO guests (g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other, g_image)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other, g_image] 
         );
         res.status(201).json({ message: 'Vendég hozzáadva!', g_Id: result.insertId });
     } catch (error) {
@@ -294,14 +291,14 @@ router.post('/admin/guests', async (req, res) => {
 });
 
 // Vendég frissítése
-router.put('/admin/guests/:g_Id', async (req, res) => {
+router.put('/guests/:g_Id', async (req, res) => {
     const g_Id = req.params.g_Id;
-    const { g_name, g_chip, g_species, g_gender, g_in_date, g_in_place, g_out_date, g_adoption, g_other, g_image} = req.body;
+    const { g_name, g_species, g_gender, g_birthdate, g_indate,  g_inplace,g_other, g_image} = req.body;
     try {
         const result = await db.query(
             `UPDATE guests
-             SET g_name = ?, g_chip = ?, g_species = ?, g_gender = ?, g_in_date = ?, g_in_place = ?, g_out_date = ?, g_adoption = ?, g_other = ?, g_image = ?
-             WHERE g_id = ?`, [g_name, g_chip, g_species, g_gender, g_in_date, g_in_place, g_out_date, g_adoption, g_other, g_image, g_Id]
+             SET g_name = ?, g_species = ?, g_gender = ?, g_birthdate = ?, g_indate = ?, g_inplace = ?, g_other = ?, g_image = ?
+             WHERE g_id = ?`, [g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other, g_image, g_Id]
         );
         res.status(200).json({ message: 'Vendég adatai frissítve!' });
     } catch (error) {
@@ -310,7 +307,7 @@ router.put('/admin/guests/:g_Id', async (req, res) => {
 });
 
 // Vendég törlése
-router.delete('/admin/guests/:g_Id', async (req, res) => {
+router.delete('/guests/:g_Id', async (req, res) => {
     const g_Id = req.params.eventId;
     try {
         await db.query(`DELETE FROM guests WHERE g_id = ?`, [g_Id]);
