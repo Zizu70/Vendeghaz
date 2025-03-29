@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGuest));
             this.textBox_GuestName = new System.Windows.Forms.TextBox();
-            this.textBox_GuestIn_place = new System.Windows.Forms.TextBox();
+            this.textBox_GuestInplace = new System.Windows.Forms.TextBox();
             this.richTextBox_GuestOther = new System.Windows.Forms.RichTextBox();
             this.pictureBox_GuestImage = new System.Windows.Forms.PictureBox();
             this.comboBox_GuestSpecies = new System.Windows.Forms.ComboBox();
             this.comboBox_GuestGender = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker_GuestIn_date = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_GuestIndate = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_GuestBirthdate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,6 +47,7 @@
             this.button_GuestInsert = new System.Windows.Forms.Button();
             this.button_GuestUpdate = new System.Windows.Forms.Button();
             this.button_GuestDelete = new System.Windows.Forms.Button();
+            this.textBox_GuestId = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_GuestImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,12 +59,12 @@
             this.textBox_GuestName.Size = new System.Drawing.Size(125, 30);
             this.textBox_GuestName.TabIndex = 2;
             // 
-            // textBox_GuestIn_place
+            // textBox_GuestInplace
             // 
-            this.textBox_GuestIn_place.Location = new System.Drawing.Point(212, 337);
-            this.textBox_GuestIn_place.Name = "textBox_GuestIn_place";
-            this.textBox_GuestIn_place.Size = new System.Drawing.Size(316, 30);
-            this.textBox_GuestIn_place.TabIndex = 21;
+            this.textBox_GuestInplace.Location = new System.Drawing.Point(212, 337);
+            this.textBox_GuestInplace.Name = "textBox_GuestInplace";
+            this.textBox_GuestInplace.Size = new System.Drawing.Size(316, 30);
+            this.textBox_GuestInplace.TabIndex = 21;
             // 
             // richTextBox_GuestOther
             // 
@@ -84,6 +85,7 @@
             this.pictureBox_GuestImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox_GuestImage.TabIndex = 28;
             this.pictureBox_GuestImage.TabStop = false;
+            this.pictureBox_GuestImage.Click += new System.EventHandler(this.pictureBox_GuestImage_Click);
             // 
             // comboBox_GuestSpecies
             // 
@@ -110,13 +112,13 @@
             this.comboBox_GuestGender.Size = new System.Drawing.Size(150, 31);
             this.comboBox_GuestGender.TabIndex = 15;
             // 
-            // dateTimePicker_GuestIn_date
+            // dateTimePicker_GuestIndate
             // 
-            this.dateTimePicker_GuestIn_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_GuestIn_date.Location = new System.Drawing.Point(35, 338);
-            this.dateTimePicker_GuestIn_date.Name = "dateTimePicker_GuestIn_date";
-            this.dateTimePicker_GuestIn_date.Size = new System.Drawing.Size(150, 30);
-            this.dateTimePicker_GuestIn_date.TabIndex = 19;
+            this.dateTimePicker_GuestIndate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_GuestIndate.Location = new System.Drawing.Point(35, 338);
+            this.dateTimePicker_GuestIndate.Name = "dateTimePicker_GuestIndate";
+            this.dateTimePicker_GuestIndate.Size = new System.Drawing.Size(150, 30);
+            this.dateTimePicker_GuestIndate.TabIndex = 19;
             // 
             // dateTimePicker_GuestBirthdate
             // 
@@ -205,6 +207,7 @@
             this.button_GuestInsert.TabIndex = 29;
             this.button_GuestInsert.Text = "Felvitel";
             this.button_GuestInsert.UseVisualStyleBackColor = false;
+            this.button_GuestInsert.Click += new System.EventHandler(this.button_GuestInsert_Click);
             // 
             // button_GuestUpdate
             // 
@@ -215,6 +218,7 @@
             this.button_GuestUpdate.TabIndex = 30;
             this.button_GuestUpdate.Text = "Módosítás";
             this.button_GuestUpdate.UseVisualStyleBackColor = false;
+            this.button_GuestUpdate.Click += new System.EventHandler(this.button_GuestUpdate_Click);
             // 
             // button_GuestDelete
             // 
@@ -225,6 +229,15 @@
             this.button_GuestDelete.TabIndex = 31;
             this.button_GuestDelete.Text = "Törlés";
             this.button_GuestDelete.UseVisualStyleBackColor = false;
+            this.button_GuestDelete.Click += new System.EventHandler(this.button_GuestDelete_Click);
+            // 
+            // textBox_GuestId
+            // 
+            this.textBox_GuestId.Location = new System.Drawing.Point(35, 91);
+            this.textBox_GuestId.Name = "textBox_GuestId";
+            this.textBox_GuestId.ReadOnly = true;
+            this.textBox_GuestId.Size = new System.Drawing.Size(57, 30);
+            this.textBox_GuestId.TabIndex = 33;
             // 
             // FormGuest
             // 
@@ -233,6 +246,7 @@
             this.BackgroundImage = global::Vendeghaz.Properties.Resources.Háttér;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(586, 656);
+            this.Controls.Add(this.textBox_GuestId);
             this.Controls.Add(this.button_GuestDelete);
             this.Controls.Add(this.button_GuestUpdate);
             this.Controls.Add(this.button_GuestInsert);
@@ -244,12 +258,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker_GuestBirthdate);
-            this.Controls.Add(this.dateTimePicker_GuestIn_date);
+            this.Controls.Add(this.dateTimePicker_GuestIndate);
             this.Controls.Add(this.comboBox_GuestGender);
             this.Controls.Add(this.comboBox_GuestSpecies);
             this.Controls.Add(this.pictureBox_GuestImage);
             this.Controls.Add(this.richTextBox_GuestOther);
-            this.Controls.Add(this.textBox_GuestIn_place);
+            this.Controls.Add(this.textBox_GuestInplace);
             this.Controls.Add(this.textBox_GuestName);
             this.Font = new System.Drawing.Font("Segoe Print", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -266,12 +280,12 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox_GuestName;
-        private System.Windows.Forms.TextBox textBox_GuestIn_place;
+        private System.Windows.Forms.TextBox textBox_GuestInplace;
         private System.Windows.Forms.RichTextBox richTextBox_GuestOther;
         private System.Windows.Forms.PictureBox pictureBox_GuestImage;
         private System.Windows.Forms.ComboBox comboBox_GuestSpecies;
         private System.Windows.Forms.ComboBox comboBox_GuestGender;
-        private System.Windows.Forms.DateTimePicker dateTimePicker_GuestIn_date;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_GuestIndate;
         private System.Windows.Forms.DateTimePicker dateTimePicker_GuestBirthdate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -283,5 +297,6 @@
         private System.Windows.Forms.Button button_GuestInsert;
         private System.Windows.Forms.Button button_GuestUpdate;
         private System.Windows.Forms.Button button_GuestDelete;
+        private System.Windows.Forms.TextBox textBox_GuestId;
     }
 }

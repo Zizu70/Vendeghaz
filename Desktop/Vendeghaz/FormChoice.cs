@@ -132,24 +132,49 @@ namespace Vendeghaz
                 ListViewItem listViewItem = listView_Choice.SelectedItems[0];
                 
                 int selectedId = int.Parse(listViewItem.SubItems[0].Text); // ID oszlop
+               
                 string selectedName = listViewItem.SubItems[1].Text; // Név oszlop
                 string selectedSpecies = listViewItem.SubItems[2].Text; // Faj oszlop
-
                 string selectedGender = listViewItem.SubItems[3].Text;
                 string selectedInplace = listViewItem.SubItems[4].Text;
                 string selectedOther = listViewItem.SubItems[5].Text;
-                string selectedImage = listViewItem.SubItems[6].Text;
+                /*string selectedImage = listViewItem.SubItems[6].Text;*/
 
-                DateTimeOffset selectedInDate = DateTimeOffset.Parse(listViewItem.SubItems[7].Text);
-                DateTimeOffset selectedBirthDate = DateTimeOffset.Parse(listViewItem.SubItems[8].Text);
+                DateTimeOffset selectedIndate = DateTimeOffset.Parse(listViewItem.SubItems[6].Text);
+                DateTimeOffset selectedBirthdate = DateTimeOffset.Parse(listViewItem.SubItems[7].Text);
 
-                Debug.WriteLine($"BirthDate érték: {listViewItem.SubItems[8].Text}");
+                string selectedImage = listViewItem.SubItems[8].Text;
+
+                /*Debug.WriteLine($"BirthDate érték: {listViewItem.SubItems[8].Text}");
+
+                  Debug.WriteLine($"ID: {selectedId}, Név: {selectedName}, Faj: {selectedSpecies}, Nem: {selectedGender}, Érkezés: {selectedInDate}, Születés: {selectedBirthDate}, Helyszín: {selectedInplace}, Egyéb: {selectedOther}, Kép: {selectedImage}");
+
+          
+                DateTimeOffset selectedInDate;
+                DateTimeOffset selectedBirthDate;
+
+                // Érkezési dátum konvertálása
+                if (!DateTimeOffset.TryParse(listViewItem.SubItems[7].Text, out selectedInDate))
+                {
+                    MessageBox.Show("Hibás érkezési dátum formátum!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Születési dátum konvertálása
+                if (!DateTimeOffset.TryParse(listViewItem.SubItems[8].Text, out selectedBirthDate))
+                {
+                    MessageBox.Show("Hibás születési dátum formátum!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 Debug.WriteLine($"Id: {selectedId}, Név {selectedName}, Faj: {selectedSpecies}");
 
+                Debug.WriteLine($"Születési dátum a ListView-ban: '{listViewItem.SubItems[8].Text}'");
+                */
+
                 // FormGuest példány létrehozása és adatok átadása
                 //Módosítás, törléshez átlépés Formguestbe
-                FormGuest formGuest = new FormGuest(selectedId, selectedName, selectedSpecies, selectedGender, selectedInDate, selectedBirthDate, selectedInplace, selectedOther, selectedImage);
+                FormGuest formGuest = new FormGuest(selectedId, selectedName, selectedSpecies, selectedGender,  selectedInplace, selectedOther, selectedImage, selectedIndate, selectedBirthdate);
                 formGuest.Show();
 
                
@@ -169,6 +194,7 @@ namespace Vendeghaz
 
         private async void button_ChoicePick_Click(object sender, EventArgs e) // választás nagy, apró, madár, udvar és simogató, üres-e
         {
+            listView_Choice.Items.Clear();
             // Ellenőrizzük, hogy van-e kiválasztott CheckBox
             bool anyChecked = false;
             CheckBox selectedCheckBox = null;
@@ -260,11 +286,5 @@ namespace Vendeghaz
 
             emptyFieldsChoice();
         }
-
-
-
-
-
-
     } 
 }

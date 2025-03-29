@@ -90,7 +90,9 @@ namespace Vendeghaz
 
         public class Guest
         {
-            public string g_name { get; set; }
+            public string g_name { get; set; }        
+           // public string G_species { get; set; }
+           // public string G_gender { get; set; }
         }
 
         public class User
@@ -158,7 +160,7 @@ namespace Vendeghaz
                     textBox_AdoptionGender.Text = guest.g_gender;
 
                   // Kép elérési útjának összeállítása
-                    string basePath = @"C:\Vendeghaz\Desktop\Guest_Image\";
+                    string basePath = @"C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Guest_Image\";
                     string fullPath = Path.Combine(basePath, (string)guest.g_image); 
 
                     /* string imagePath = guest.g_image; //guest.image_path */

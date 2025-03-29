@@ -4,7 +4,7 @@
 //
 //    using Vendeghaz;
 //
-//    var guests = Guests.FromJson(jsonString);
+//    var guest = Guest.FromJson(jsonString);
 
 namespace Vendeghaz
 {
@@ -15,7 +15,7 @@ namespace Vendeghaz
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class Guests
+    public partial class Guest
     {
         [JsonProperty("g_id")]
         public long G_id { get; set; }
@@ -32,11 +32,11 @@ namespace Vendeghaz
         [JsonProperty("g_birthdate")]
         public DateTimeOffset G_birthdate { get; set; }
 
-        [JsonProperty("g_in_date")]
-        public DateTimeOffset G_inDate { get; set; }
+        [JsonProperty("g_indate")]
+        public DateTimeOffset G_indate { get; set; }
 
-        [JsonProperty("g_in_place")]
-        public string G_inPlace { get; set; }
+        [JsonProperty("g_inplace")]
+        public string G_inplace { get; set; }
 
         [JsonProperty("g_other")]
         public string G_other { get; set; }
@@ -53,27 +53,18 @@ namespace Vendeghaz
         [JsonProperty("deleted_at")]
         public DateTimeOffset? Deleted_at { get; set; }
     }
-
-    public partial class G_image
+        
+    public partial class Guest
     {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("data")]
-        public long[] Data { get; set; }
+        public static Guest[] FromJson(string json) => JsonConvert.DeserializeObject<Guest[]>(json, Vendeghaz.GuestConverter.Settings);
     }
 
-    public partial class Guests
+    public static class GuestSerialize
     {
-        public static Guests[] FromJson(string json) => JsonConvert.DeserializeObject<Guests[]>(json, Vendeghaz.GuestsConverter.Settings);
+        public static string ToJson(this Guest[] self) => JsonConvert.SerializeObject(self, Vendeghaz.GuestConverter.Settings);
     }
 
-    public static class GuestsSerialize
-    {
-        public static string ToJson(this Guests[] self) => JsonConvert.SerializeObject(self, Vendeghaz.GuestsConverter.Settings);
-    }
-
-    internal static class GuestsConverter
+    internal static class GuestConverter
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {
@@ -85,4 +76,218 @@ namespace Vendeghaz
             },
         };
     }
+    /*** enumok ***/
+    public enum G_species { medve, farkas, muflon, őz, gímszarvas, róka, vadmacska, hiúz, aranysakál, mosómedve, sas, bagoly, páva, holló, vércse, varjú, ló, szamár, tehén, mangalica, baromfiak, dámszarvas, juh, kecske, nyúl, póniló };
+    public enum G_gender { hím, nőstény, ivartalanított };
+
+    internal class G_speciesConverter : JsonConverter
+    {
+        public override bool CanConvert(Type t) => t == typeof(G_species) || t == typeof(G_species?);
+
+        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null) return null;
+            var value = serializer.Deserialize<string>(reader);
+            switch (value)
+            {
+                case "medve":
+                    return G_species.medve;
+                case "farkas":
+                    return G_species.farkas;
+                case "muflon":
+                    return G_species.muflon;
+                case "őz":
+                    return G_species.őz;
+                case "gímszarvas":
+                    return G_species.gímszarvas;
+                case "róka":
+                    return G_species.róka;
+                case "vadmacska":
+                    return G_species.vadmacska;
+                case "hiúz":
+                    return G_species.hiúz;
+                case "aranysakál":
+                    return G_species.aranysakál;
+                case "mosómedve":
+                    return G_species.mosómedve;
+                case "sas":
+                    return G_species.sas;
+                case "bagoly":
+                    return G_species.bagoly;
+                case "páva":
+                    return G_species.páva;
+                case "holló":
+                    return G_species.holló;
+                case "vércse":
+                    return G_species.vércse;
+                case "varjú":
+                    return G_species.varjú;
+                case "ló":
+                    return G_species.ló;
+                case "szamár":
+                    return G_species.szamár;
+                case "tehén":
+                    return G_species.tehén;
+                case "mangalica":
+                    return G_species.mangalica;
+                case "baromfiak":
+                    return G_species.baromfiak;
+                case "dámszarvas":
+                    return G_species.dámszarvas;
+                case "juh":
+                    return G_species.juh;
+                case "kecske":
+                    return G_species.kecske;
+                case "nyúl":
+                    return G_species.nyúl;
+                case "póniló":
+                    return G_species.póniló;
+
+            }
+            throw new Exception("Cannot unmarshal type Gender");
+        }
+
+        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
+        {
+            if (untypedValue == null)
+            {
+                serializer.Serialize(writer, null);
+                return;
+            }
+            var value = (G_species)untypedValue;
+            switch (value)
+            {
+                case G_species.medve:
+                    serializer.Serialize(writer, "medve");
+                    return;
+                case G_species.farkas:
+                    serializer.Serialize(writer, "farkas");
+                    return;
+                case G_species.muflon:
+                    serializer.Serialize(writer, "muflon");
+                    return;
+                case G_species.őz:
+                    serializer.Serialize(writer, "őz");
+                    return;
+                case G_species.gímszarvas:
+                    serializer.Serialize(writer, "gímszarvas");
+                    return;
+                case G_species.róka:
+                    serializer.Serialize(writer, "róka");
+                    return;
+                case G_species.vadmacska:
+                    serializer.Serialize(writer, "vadmacska");
+                    return;
+                case G_species.hiúz:
+                    serializer.Serialize(writer, "hiúz");
+                    return;
+                case G_species.aranysakál:
+                    serializer.Serialize(writer, "aranysakál");
+                    return;
+                case G_species.mosómedve:
+                    serializer.Serialize(writer, "mosómedve");
+                    return;
+                case G_species.sas:
+                    serializer.Serialize(writer, "sas");
+                    return;
+                case G_species.bagoly:
+                    serializer.Serialize(writer, "bagoly");
+                    return;
+                case G_species.páva:
+                    serializer.Serialize(writer, "páva");
+                    return;
+                case G_species.holló:
+                    serializer.Serialize(writer, "holló");
+                    return;
+                case G_species.vércse:
+                    serializer.Serialize(writer, "vércse");
+                    return;
+                case G_species.varjú:
+                    serializer.Serialize(writer, "varjú");
+                    return;
+                case G_species.ló:
+                    serializer.Serialize(writer, "ló");
+                    return;
+                case G_species.szamár:
+                    serializer.Serialize(writer, "szamár");
+                    return;
+                case G_species.tehén:
+                    serializer.Serialize(writer, "tehén");
+                    return;
+                case G_species.mangalica:
+                    serializer.Serialize(writer, "mangalica");
+                    return;
+                case G_species.baromfiak:
+                    serializer.Serialize(writer, "baromfiak");
+                    return;
+                case G_species.dámszarvas:
+                    serializer.Serialize(writer, "dámszarvas");
+                    return;
+                case G_species.juh:
+                    serializer.Serialize(writer, "juh");
+                    return;
+                case G_species.kecske:
+                    serializer.Serialize(writer, "kecske");
+                    return;
+                case G_species.nyúl:
+                    serializer.Serialize(writer, "nyúl");
+                    return;
+                case G_species.póniló:
+                    serializer.Serialize(writer, "póniló");
+                    return;
+
+            }
+            throw new Exception("Cannot marshal type G_species");
+        }
+
+        public static readonly G_speciesConverter Singleton = new G_speciesConverter();
+    }
+
+    internal class G_genderConverter : JsonConverter
+    {
+        public override bool CanConvert(Type t) => t == typeof(G_gender) || t == typeof(G_gender?);
+
+        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null) return null;
+            var value = serializer.Deserialize<string>(reader);
+            switch (value)
+            {
+                case "hím":
+                    return G_gender.hím;
+                case "nőstény":
+                    return G_gender.nőstény;
+                case "ivartalanított":
+                    return G_gender.ivartalanított;
+            }
+            throw new Exception("Cannot unmarshal type G_gender");
+        }
+
+        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
+        {
+            if (untypedValue == null)
+            {
+                serializer.Serialize(writer, null);
+                return;
+            }
+            var value = (G_gender)untypedValue;
+            switch (value)
+            {
+                case G_gender.hím:
+                    serializer.Serialize(writer, "hím");
+                    return;
+                case G_gender.nőstény:
+                    serializer.Serialize(writer, "nőstény");
+                    return;
+                case G_gender.ivartalanított:
+                    serializer.Serialize(writer, "ivartalanított");
+                    return;
+            }
+            throw new Exception("Cannot marshal type G_gender");
+        }
+
+        public static readonly G_genderConverter Singleton = new G_genderConverter();
+    }
 }
+
+
