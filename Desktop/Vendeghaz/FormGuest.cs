@@ -42,6 +42,15 @@ namespace Vendeghaz
                 {
                     string json = await response.Content.ReadAsStringAsync();
                     var guestNames = JsonConvert.DeserializeObject<List<Guest>>(json);
+
+                    // Csak azokat töltjük be, amelyek nincsenek törölve
+                    var filteredGuests = guestNames.Where(g => g.Deleted_at == null).ToList();
+
+                    // Ha ComboBoxot vagy ListBoxot használunk:
+                    comboBox_GuestSpecies.DataSource = filteredGuests;
+                    comboBox_GuestSpecies.DisplayMember = "G_species";
+                    comboBox_GuestGender.DataSource = filteredGuests;
+                    comboBox_GuestGender.DisplayMember = "G_name";
                 }
                 else
                 {
@@ -86,6 +95,19 @@ namespace Vendeghaz
             {
                 pictureBox_GuestImage.Image = null; // Ha nincs kép, töröljük
             }
+
+            selectedGuest = new Guest
+            {
+                G_id = G_id,
+                G_name = G_name,
+                G_species = G_species,
+                G_gender = G_gender,
+                G_inplace = G_inplace,
+                G_other = G_other,
+                G_image = G_image,
+                G_indate = G_indate,
+                G_birthdate = G_birthdate
+            };
             /*
             // Kép elérési útjának összeállítása
             string basePath = @"C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Guest_Image\";  
@@ -153,7 +175,44 @@ namespace Vendeghaz
 
         private async void button_GuestInsert_Click(object sender, EventArgs e)
         {
+            if (!validateInputGuest()) return;
 
+            var guestData = new
+            {
+                g_name = textBox_GuestName.Text,
+                g_species = comboBox_GuestSpecies.Text,
+                g_gender = comboBox_GuestGender.Text,
+                g_birthdate = dateTimePicker_GuestBirthdate.Value.ToString("yyyy-MM-dd"),
+                g_indate = dateTimePicker_GuestIndate.Value.ToString("yyyy-MM-dd"),
+                g_inplace = textBox_GuestInplace.Text,
+                g_other = richTextBox_GuestOther.Text,
+                g_image = selectedImage != null ? Convert.ToBase64String(selectedImage) : null
+            };
+
+            string json = JsonConvert.SerializeObject(guestData);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                HttpResponseMessage result = await client.PostAsync(guestsBaseURL, content);
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Sikeres feltöltés!");
+                    await LoadGuests();
+                    emptyFieldsGuest();
+                }
+                else
+                {
+                    MessageBox.Show("Hiba a feltöltés során!");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show("Hálózati hiba: " + ex.Message);
+            }
+
+
+            /*
             if (string.IsNullOrWhiteSpace(textBox_GuestName.Text) ||
                 string.IsNullOrWhiteSpace(comboBox_GuestSpecies.Text) ||
                 string.IsNullOrWhiteSpace(comboBox_GuestGender.Text))
@@ -171,13 +230,13 @@ namespace Vendeghaz
             string G_other = richTextBox_GuestOther.Text;
 
             string G_image = selectedImage != null ? Convert.ToBase64String(selectedImage) : null;
-            /*
+            /**********
             string debugPath = Path.Combine(System.Windows.Forms.Application.StartupPath, "Guest_Images");
             if (!Directory.Exists(debugPath))
             {
                 Directory.CreateDirectory(debugPath);
             }
-            */
+            ///////////*//*
             var content = new StringContent($"{{\"g_name\":\"{G_name}\",\"g_species\":\"{G_species}\",\"g_gender\":\"{G_gender}\",\"g_birthdate\":\"{G_birthdate}\",\"g_indate\":\"{G_indate}\",\"g_inplace\":\"{G_inplace}\",\"g_other\":\"{G_other}\"}}", Encoding.UTF8, "application/json");
             // ,\"g_image\":\"{G_image}\"
             try
@@ -199,7 +258,7 @@ namespace Vendeghaz
                 MessageBox.Show(ex.Message);
                 throw;
             }
-
+            */
         }  
 
                 //guest.Created_at = DateTime.Now;
@@ -207,6 +266,49 @@ namespace Vendeghaz
 
         private async void button_GuestUpdate_Click(object sender, EventArgs e)
         {
+            if (selectedGuest == null)
+            {
+                MessageBox.Show("Nincs kiválasztott vendég a frissítéshez!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!validateInputGuest()) return;
+
+            var guestUpdateData = new
+            {
+                g_name = textBox_GuestName.Text,
+                g_species = comboBox_GuestSpecies.Text,
+                g_gender = comboBox_GuestGender.Text,
+                g_birthdate = dateTimePicker_GuestBirthdate.Value.ToString("yyyy-MM-dd"),
+                g_indate = dateTimePicker_GuestIndate.Value.ToString("yyyy-MM-dd"),
+                g_inplace = textBox_GuestInplace.Text,
+                g_other = richTextBox_GuestOther.Text,
+                updated_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            };
+
+            string json = JsonConvert.SerializeObject(guestUpdateData);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                HttpResponseMessage result = await client.PutAsync($"{guestsBaseURL}/{selectedGuest.G_id}", content);
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Sikeres frissítés!");
+                    await LoadGuests();
+                    emptyFieldsGuest();
+                }
+                else
+                {
+                    MessageBox.Show("Hiba a frissítés során!");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show("Hálózati hiba: " + ex.Message);
+            }
+
+
             /*
             if (string.IsNullOrWhiteSpace(textBox_GuestName.Text) ||
                 string.IsNullOrWhiteSpace(comboBox_GuestSpecies.Text) ||
@@ -215,7 +317,7 @@ namespace Vendeghaz
                 MessageBox.Show("Minden mező kitöltése kötelező!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }*/
-            if (validateInputGuest()) // Ellenőrizzük, hogy minden kötelező mező kitöltve van-e
+            /*if (validateInputGuest()) // Ellenőrizzük, hogy minden kötelező mező kitöltve van-e
             {
                 if (selectedGuest != null)
                 {
@@ -239,37 +341,36 @@ namespace Vendeghaz
                         //MessageBox.Show(description);  ???
                         HttpResponseMessage result = await client.PutAsync($"{guestsBaseURL}/{selectedGuest.G_id}", content);
 
-
-                        //*** kép kezelés ***/
-                        if (result.IsSuccessStatusCode)
-                        {
-                            MessageBox.Show("Sikeres frissítés!");
-                            await LoadGuests();
-                            emptyFieldsGuest();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Hiba a frissítés során!");
-                        }
-                    }
-                    catch (HttpRequestException ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
+            */
+            //*** kép kezelés ***/
+            /*if (result.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Sikeres frissítés!");
+                await LoadGuests();
+                emptyFieldsGuest();
             }
-            // Vissza a FormChoicera
-            FormChoice formChoice = new FormChoice();
-            formChoice.Show();
-            this.Close();
+            else
+            {
+                MessageBox.Show("Hiba a frissítés során!");
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+}
+// Vissza a FormChoicera
+FormChoice formChoice = new FormChoice();
+formChoice.Show();
+this.Close();*/
 
         }
 
         //** jó **//
         private async void button_GuestDelete_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show($"{textBox_GuestId.Text}");
-            if (Convert.ToInt32(textBox_GuestId.Text) == 0)
+            if (string.IsNullOrWhiteSpace(textBox_GuestId.Text))
             {
                 MessageBox.Show("Nincs kiválasztott vendég!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -280,7 +381,6 @@ namespace Vendeghaz
                 try
                 {
                     HttpResponseMessage result = await client.DeleteAsync($"{guestsBaseURL}/{textBox_GuestId.Text}");
-
                     if (result.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Vendég sikeresen törölve!");
@@ -294,14 +394,45 @@ namespace Vendeghaz
                 }
                 catch (HttpRequestException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Hálózati hiba: " + ex.Message);
                 }
+
+                /*
+                //MessageBox.Show($"{textBox_GuestId.Text}");
+                if (Convert.ToInt32(textBox_GuestId.Text) == 0)
+                {
+                    MessageBox.Show("Nincs kiválasztott vendég!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (MessageBox.Show("Biztosan törölni szeretnéd?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        HttpResponseMessage result = await client.DeleteAsync($"{guestsBaseURL}/{textBox_GuestId.Text}");
+
+                        if (result.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Vendég sikeresen törölve!");
+                            await LoadGuests();
+                            emptyFieldsGuest();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Hiba a törlés során!");
+                        }
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }*/
+
+                // Vissza a FormChoicera
+                FormChoice formChoice = new FormChoice();
+                formChoice.Show();
+                this.Close();
             }
-            
-            // Vissza a FormChoicera
-            FormChoice formChoice = new FormChoice();
-            formChoice.Show();
-            this.Close();
         }
     }
 }
