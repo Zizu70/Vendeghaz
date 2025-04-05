@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
         }
     } catch (err) {
         console.error('Hiba a bejelentkezés során:', err);
-        res.status(500).json({ success: false, message: 'Szerverhiba!' });
+        res.status(500).json({ success: false, message: 'BE Szerverhiba!' });
     }
 });
 
@@ -208,7 +208,7 @@ router.delete('/worker/:w_id', async (req, res) => {
     }
 });
 
-//*****Choice start*****//
+//*****Choice start***********************************************************************//
 // Csoport választás kezelése
 
 // Csoport választás listázása 
@@ -271,10 +271,21 @@ router.get('/guests/allStoking', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a simogató listázásakor!', error });
     }
 });
-//*****Choice end*****//
+//*****Choice end**************************************************************************//
 
-//*****Guest start*****//
+//*****Guest start*************************************************************************//
 
+// Vendégek lekérdezése
+router.get('/guests', async (req, res) => {
+    try {
+        const result = await db.query(
+            `SELECT * FROM guests`   
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
+    }
+});
 // Új vendég hozzáadása
 router.post('/guests', async (req, res) => {
     const { g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other, g_image} = req.body;
@@ -289,8 +300,7 @@ router.post('/guests', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt Vendég hozzáadáskor!', error });
     }
 });
-
-// Vendég frissítése
+// Vendég módosítása
 router.put('/guests/:g_Id', async (req, res) => {
     const g_Id = req.params.g_Id;
     const { g_name, g_species, g_gender, g_birthdate, g_indate,  g_inplace,g_other, g_image} = req.body;
@@ -305,7 +315,6 @@ router.put('/guests/:g_Id', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt Vendég adatainak frissítése közben!', error });
     }
 });
-
 // Vendég törlése
 router.delete('/guests/:g_Id', async (req, res) => {
     const g_Id = req.params.eventId;
@@ -317,9 +326,9 @@ router.delete('/guests/:g_Id', async (req, res) => {
     }
 });
 
-//*****Guest end*****//
+//*****Guest end****************************************************************************//
 
-//*****Chip start*****//
+//*****Chip start**************************************************************************//
 
 // Chip listázása 
 router.get('/admin/guests/:g_chip', async (req, res) => {
@@ -351,7 +360,7 @@ router.put('/admin/guests/:g_chip', async (req, res) => {
 
 //*****Chip end*****//
 
-//*****Adaption top*****//
+//*****Adaption top****************************AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*************//
    //**ok**//
    // Összes örökbefogadás lekérése
 router.get('/adoption', async (req, res) => {
@@ -390,7 +399,7 @@ router.get('/allUsers', async (req, res) => {
     }
 });
 //**ok**//
-   // Összes felhasználó nevének lekérése
+   // Összes vendég nevének lekérése // nem kell
    router.get('/guests', async (req, res) => {
     try {
         const result = await db.query(
@@ -401,7 +410,7 @@ router.get('/allUsers', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
     }
 //**ok**//
-   // Összes felhasználó nevének lekérése
+   // Összes felhasználó nevének lekérése // nem kell
    router.get('/users', async (req, res) => {
     try {
         const result = await db.query(
@@ -412,55 +421,99 @@ router.get('/allUsers', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
     }
 });});
+// Örökbefogadott adatainak lekérése név alapján
 
 
-
-// Vendég adatainak lekérése név alapján
+// Marcival Örökbefogadott adatainak lekérése név alapján
 router.get('/guests/:guestname', async (req, res) => {  
-    //const { guestname } = req.params;
+    const guestname = req.params;  //const { guestname } = req.params;
 
     try {
-        const guestname  = req.params;
-        const result = await db.query(
+        //const guestname  = req.params;
+        const [row] = await db.query(
             'SELECT g_name, g_species, g_gender, g_image FROM guests WHERE g_name = ?',
             [guestname]
         );
 
-        if (result.length > 0) {
-            res.json(result[0]); // Az első találatot küldi vissza
-        } else {
-            res.status(404).json({ message: "Vendég nem található" });
-        }
+        //if (result.length > 0) {
+            //res.json(result[0]); // Az első találatot küldi vissza
+        //}
+         //else {
+            res.status(404).json({ message: "Örökbefogadott nem található" });
+        //}
     } catch (err) {
-        console.error('Hiba a vendég lekérdezése során:', err);
+        console.error('Hiba a örökbefagadott állat lekérdezése során:', err);
         res.status(500).json({ message: "Szerverhiba" });
     }
 });
 
-// Felhasználó adatainak lekérése név alapján
-router.get('/users/:username', async (req, res) => {
-    //const { userName } = req.params;
+// Marcival Örökbefogadó adatainak lekérése név alapján
+router.get('/users/:username1', async (req, res) => {
+    const u_name = req.params.username1;
+
+    console.log("Lekérdezett felhasználónév:", u_name);
 
     try {
-        const {username}  = req.params;
-        const [result] = await db.query(
-            'SELECT u_name, u_email FROM users WHERE u_name = ?',
-            [username]
+        const [rows] = await db.query(
+            `SELECT u_name, u_email FROM users WHERE u_name = ?`,
+            [u_name]
         );
-
-        if (result.length > 0) {
-            res.json(result[0]); // Az első találatot küldi vissza
+        res.json(rows);
+        //console.log("SQL: SELECT u_name, u_email FROM users WHERE u_name = ?");
+        console.table(rows);  // terminálra info
+        /*
+        if (rows.length > 0) {
+            res.json(rows[0]);
         } else {
             res.status(404).json({ message: "Felhasználó nem található" });
         }
+        */
     } catch (err) {
-        console.error('Hiba a lekérdezés során:', err);
+        console.error('Hiba az örökbefogadó lekérdezés során:', err);
         res.status(500).json({ message: "Szerverhiba" });
     }
 });
 
+// Örökbefogadó adatainak lekérése név alapján
+router.get('/adoptive/:username', async (req, res) => {
+    const u_name = req.params.username;
 
+    console.log("Lekérdezett felhasználónév:", u_name);
 
+    try {
+        const [rows] = await db.query(
+            `SELECT u_name, u_email FROM users WHERE u_name = ?`,
+            [u_name]
+        );
+        res.json(rows);
+        //console.log("SQL: SELECT u_name, u_email FROM users WHERE u_name = ?");
+        console.table(rows);  // terminálra info
+        /*
+        if (rows.length > 0) {
+            res.json(rows[0]);
+        } else {
+            res.status(404).json({ message: "Felhasználó nem található" });
+        }
+        */
+    } catch (err) {
+        console.error('Hiba az örökbefogadó lekérdezés során:', err);
+        res.status(500).json({ message: "Szerverhiba" });
+    }
+});
+
+router.get('/adopted/:guestname', async (req, res) => {
+    const guestname = req.params.guestname;
+    
+    try {
+        const [row] = await db.query(
+           'SELECT g_name, g_species, g_gender, g_image FROM guests WHERE g_name = ?',
+            [guestname]
+        );
+        res.json(row);
+    } catch (error) {
+        res.status(500).json({ message: 'Szerverhiba - Örökbefogadott adatainak letöltése közben!', error });
+    }
+});
 
 
 
@@ -474,10 +527,12 @@ router.post('/adoption', async (req, res) => {
              VALUES ( ?, ?, ?)`, [a_date, g_name, u_name] 
         );
         res.status(201).json({ message: 'Támogatói örökbefogadás rögzítve!', g_Id: result.insertId });
+        console.table(result);
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a támogatói örökbefogadás rögzítésekor!', error });
     }
 });
 
-//*****Adaption end*****//
+//*****Adaption end********************************AAAAAAAAAAAAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVVVVVVVV**//
+
 module.exports = router;
