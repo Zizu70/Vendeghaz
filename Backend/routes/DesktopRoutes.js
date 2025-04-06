@@ -328,39 +328,7 @@ router.delete('/guests/:g_Id', async (req, res) => {
 
 //*****Guest end****************************************************************************//
 
-//*****Chip start**************************************************************************//
-
-// Chip listázása 
-router.get('/admin/guests/:g_chip', async (req, res) => {
-    try {
-        const guests = await db.query(
-            `SELECT g_name, g_spacies, g_other FROM guests WHERE g_chip = ?` 
-        );
-        res.status(200).json(guests);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a chip olvasás listázása közben!', error });
-    }
-});
-
-// Chip szám alapján megjegyzés frissítése
-router.put('/admin/guests/:g_chip', async (req, res) => {
-    const g_chip = req.params.g_chip;
-    const { g_other } = req.body;
-    try {
-        const result = await db.query(
-            `UPDATE guests
-             SET g_other = ?  
-             WHERE g_chip = ?`, [g_other] 
-        );
-        res.status(200).json({ message: 'Megjegyzés frissítve!' });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a megjegyzés frissítéskor!', error });
-    }
-});
-
-//*****Chip end*****//
-
-//*****Adaption top****************************AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*************//
+//*****Adaption top - OK   ****************************AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*************//
    //**ok**//
    // Összes örökbefogadás lekérése
 router.get('/adoption', async (req, res) => {
@@ -375,7 +343,7 @@ router.get('/adoption', async (req, res) => {
     }
 });
    //**ok**//
-   // Összes vendég nevének lekérése
+   // Összes vendég nevének lekérése comboBoxba
 router.get('/allGuests', async (req, res) => {
     try {
         const results = await db.query(
@@ -387,7 +355,7 @@ router.get('/allGuests', async (req, res) => {
     }
 });
    //**ok**//
-   // Összes felhasználó nevének lekérése
+   // Összes felhasználó nevének lekérése comboBoxba
 router.get('/allUsers', async (req, res) => {
     try {
         const result = await db.query(
@@ -398,7 +366,7 @@ router.get('/allUsers', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
     }
 });
-//**ok**//
+   //**ok**//
    // Összes vendég nevének lekérése // nem kell
    router.get('/guests', async (req, res) => {
     try {
@@ -421,60 +389,8 @@ router.get('/allUsers', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
     }
 });});
-// Örökbefogadott adatainak lekérése név alapján
-
-
-// Marcival Örökbefogadott adatainak lekérése név alapján
-router.get('/guests/:guestname', async (req, res) => {  
-    const guestname = req.params;  //const { guestname } = req.params;
-
-    try {
-        //const guestname  = req.params;
-        const [row] = await db.query(
-            'SELECT g_name, g_species, g_gender, g_image FROM guests WHERE g_name = ?',
-            [guestname]
-        );
-
-        //if (result.length > 0) {
-            //res.json(result[0]); // Az első találatot küldi vissza
-        //}
-         //else {
-            res.status(404).json({ message: "Örökbefogadott nem található" });
-        //}
-    } catch (err) {
-        console.error('Hiba a örökbefagadott állat lekérdezése során:', err);
-        res.status(500).json({ message: "Szerverhiba" });
-    }
-});
-
-// Marcival Örökbefogadó adatainak lekérése név alapján
-router.get('/users/:username1', async (req, res) => {
-    const u_name = req.params.username1;
-
-    console.log("Lekérdezett felhasználónév:", u_name);
-
-    try {
-        const [rows] = await db.query(
-            `SELECT u_name, u_email FROM users WHERE u_name = ?`,
-            [u_name]
-        );
-        res.json(rows);
-        //console.log("SQL: SELECT u_name, u_email FROM users WHERE u_name = ?");
-        console.table(rows);  // terminálra info
-        /*
-        if (rows.length > 0) {
-            res.json(rows[0]);
-        } else {
-            res.status(404).json({ message: "Felhasználó nem található" });
-        }
-        */
-    } catch (err) {
-        console.error('Hiba az örökbefogadó lekérdezés során:', err);
-        res.status(500).json({ message: "Szerverhiba" });
-    }
-});
-
-// Örökbefogadó adatainak lekérése név alapján
+   //**ok**//
+   // Örökbefogadó adatainak lekérése név alapján
 router.get('/adoptive/:username', async (req, res) => {
     const u_name = req.params.username;
 
@@ -500,13 +416,14 @@ router.get('/adoptive/:username', async (req, res) => {
         res.status(500).json({ message: "Szerverhiba" });
     }
 });
-
-router.get('/adopted/:guestname', async (req, res) => {
+   //**ok**//
+   // Örökbefogadott adatainak lekérése név alapján
+router.get('/adopted/:guestname', async (req, res) => {  
     const guestname = req.params.guestname;
     
     try {
         const [row] = await db.query(
-           'SELECT g_name, g_species, g_gender, g_image FROM guests WHERE g_name = ?',
+           'SELECT g_name, g_species, g_gender, g_birthdate, g_image FROM guests WHERE g_name = ?',
             [guestname]
         );
         res.json(row);
@@ -514,17 +431,15 @@ router.get('/adopted/:guestname', async (req, res) => {
         res.status(500).json({ message: 'Szerverhiba - Örökbefogadott adatainak letöltése közben!', error });
     }
 });
-
-
-
-
+   //**ok**//
+   // Örökbefogadás mentése
 router.post('/adoption', async (req, res) => {
-    const { a_date, g_name, u_name} = req.body;
+    const { g_name, g_species, g_gender, g_birthdate, u_name, a_date} = req.body;
     
     try {
         const result = await db.query(
-            `INSERT INTO adoption (a_date, g_name, u_name)
-             VALUES ( ?, ?, ?)`, [a_date, g_name, u_name] 
+            `INSERT INTO adoption (g_name, g_species, g_gender, g_birthdate, u_name, a_date)
+             VALUES ( ?, ?, ?, ?, ?, ?)`, [g_name, g_species, g_gender, g_birthdate, u_name, a_date] 
         );
         res.status(201).json({ message: 'Támogatói örökbefogadás rögzítve!', g_Id: result.insertId });
         console.table(result);
@@ -535,4 +450,43 @@ router.post('/adoption', async (req, res) => {
 
 //*****Adaption end********************************AAAAAAAAAAAAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVVVVVVVV**//
 
+
+//*****Contract top - OK ********************************CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC*****//
+router.get('/contract', (req, res) => {
+    const { g_name, u_name, a_date } = req.query;
+  
+    if (!g_name || !u_name || !a_date) {
+      return res.status(400).json({ message: 'Hiányzó paraméter(ek): g_name, u_name vagy a_date' });
+    }
+  
+    const sql = `
+      SELECT 
+        g.g_name,
+        g.g_species,
+        g.g_gender,
+        g.g_birthdate,
+        u.u_name,
+        u.u_email,
+        a.a_date
+      FROM adoption a
+      JOIN guests g ON a.guest_id = g.guest_id
+      JOIN users u ON a.user_id = u.user_id
+      WHERE g.g_name = ? AND u.u_name = ? AND a.a_date = ?
+    `;
+  
+    db.query(sql, [g_name, u_name, a_date], (err, results) => {
+      if (err) {
+        console.error('Hiba az adatbázis lekérdezés során:', err);
+        return res.status(500).json({ message: 'Szerverhiba' });
+      }
+  
+      if (results.length === 0) {
+        return res.status(404).json({ message: 'Nem található ilyen örökbefogadás' });
+      }
+  
+      res.json(results); // csak egy rekordra számítunk
+    });
+  });
+
+//*****Contract top********************************CCCCCCCCCCCCCCCCCCCCCCCCCCVVVVVVVVVVVVVVVVVVVVVVV*****//
 module.exports = router;
