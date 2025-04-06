@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors'); // Ha több domainről szeretnél hozzáférni
 const WebRoutes = require('./routes/WebRoutes');  // Webes végpontok
 const DesktopRoutes = require('./routes/DesktopRoutes'); // Asztali alk. végpontok
-const LoginRoutes = require('./routes/LoginRoutes'); // A bejelentkezéshez útvonal
 
+const LoginRoutes = require('./routes/LoginRoutes'); // A bejelentkezéshez útvonal
 const ServiceRoutes = require('./routes/ServiceRoutes'); // Szervízhez Admin útvonal const kisbetű - req nagybetű
 
 //dotenv.config(); cg

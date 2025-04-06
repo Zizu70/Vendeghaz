@@ -20,10 +20,7 @@ namespace Vendeghaz
     public partial class FormLogin : Form
     {
         private readonly HttpClient client = new HttpClient();
-        private readonly string loginUrl = "http://localhost:3000/desktop/login";
-
-        private string workersBaseURL = "http://localhost:3000/desktop/workers";
-
+        private readonly string loginURL = "http://localhost:3000/desktop/login";
         public FormLogin()
         {
             InitializeComponent();
@@ -31,27 +28,23 @@ namespace Vendeghaz
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            
         }
+
         //belépés gomb klikkje
         private async void button_Login_Click(object sender, EventArgs e)
         {
             string name = textBox_LoginName.Text.Trim();
             string password = textBox_LoginPass.Text.Trim();
 
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Kérlek, töltsd ki mindkét mezőt!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (!validateInputLogin()) return;  // új return
 
-            var serviceData = new { name, password };
-            var json = JsonConvert.SerializeObject(serviceData);
+            var loginData = new { name, password };
+            var json = JsonConvert.SerializeObject(loginData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             try
             {
-                HttpResponseMessage response = await client.PostAsync(loginUrl, content);
+                HttpResponseMessage response = await client.PostAsync(loginURL, content);
                 string responseString = await response.Content.ReadAsStringAsync();
                 dynamic result = JsonConvert.DeserializeObject(responseString);
 
@@ -60,12 +53,11 @@ namespace Vendeghaz
                     MessageBox.Show("Sikeres bejelentkezés!", "Üdv", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Új form megnyitása
-                FormMain mainForm = new FormMain();
-                mainForm.Show();
+                    FormMain mainForm = new FormMain();
+                    mainForm.Show();
 
                     // Jelenlegi form elrejtése (nem zárjuk be azonnal)
                     this.Hide();
-
                 }
                 else
                 {
@@ -78,100 +70,37 @@ namespace Vendeghaz
             }
         }
 
-  
-        private void comboBox_LoginRole_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        // szerviz gomb klikje
-        private async void button_LoginService_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private bool validateInputService() // RR inserthez + üres konstruktor worksben!
-        { //-- adatellenőrzés
-            if (string.IsNullOrEmpty(textBox_LoginName.Text))
+        // adatellenőrzés
+        private bool validateInputLogin() 
+        { 
+            // -- adatellenőrzés: Név
+            if (string.IsNullOrWhiteSpace(textBox_LoginName.Text))
             {
-                MessageBox.Show("Kérjük adja meg a nevét!", "Hiányzó adatok", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Kérjük, adja meg a nevét!", "Hiányzó adatok", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBox_LoginName.Focus();
                 return false;
             }
-            if (textBox_LoginPass.Text.Length < 3 || textBox_LoginPass.Text.Length > 10)
+
+            // -- adatellenőrzés: Jelszó: hosszellenőrzés + regex előírás
+            var password = textBox_LoginPass.Text;
+
+            if (password.Length < 3 || password.Length > 10)
             {
-                // Ellenőrizzük a jelszót regex-szel
-                var password = textBox_LoginPass.Text;
-                var regex = new Regex(@"^(?=.*[a-záéíóöőúüű])(?=.*[A-ZÁÉÍÓÖŐÚÜŰ])(?=.*\d).{3,10}$");
-                if (!regex.IsMatch(password))
-                {
-                    MessageBox.Show("Jelszó megadása kötelező! Jelszónak tartalmaznia kell min:3 max:10 karaktert, amiben legalább egy kisbetű, egy nagybetű és egy szám szerepel!", "Hiányzó adatok", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBox_LoginPass.Focus();
-                    return false;
-                }
+                MessageBox.Show("A jelszónak legalább 3 és legfeljebb 10 karakter hosszúnak kell lennie.", "Hibás jelszó", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox_LoginPass.Focus();
+                return false;
             }
-            
+
+            // Regex: kisbetű, nagybetű, szám kötelező, case-sensitive
+            var regex = new Regex(@"^(?=.*[a-záéíóöőúüű])(?=.*[A-ZÁÉÍÓÖŐÚÜŰ])(?=.*\d)[\S]{3,10}$");
+
+            if (!regex.IsMatch(password))
+            {
+                MessageBox.Show("A jelszónak tartalmaznia kisbetűt, nagybetűt számot!\n(Az ékezetes betűk is használhatók.)", "Érvénytelen jelszó", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox_LoginPass.Focus();
+                return false;
+            }
             return true;
         }
-
-         
-       
-
-        private async Task<bool> checkPermission(string name, string password) // u 
-        {
-            try
-            {
-                var loginData = new { name = name, password = password };
-                string jsonData = JsonConvert.SerializeObject(loginData);
-                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await client.PostAsync(workersBaseURL + "/login", content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<dynamic>(responseContent);
-
-                    MessageBox.Show("Response: " + responseContent, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-                    if (result.success == true)
-                    {
-                        string userRole = result.role; // // Tároljuk a szerepkört osztályszinten
-
-                        // Debug: Ellenőrizzük a role értéket
-                        MessageBox.Show("User role: " + userRole, "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-                        if (userRole == "admin")
-                        {
-                            return true; // Ha admin, visszaadjuk a sikeres bejelentkezést
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("CP Hiba történt: " + response.ReasonPhrase, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    /*return false;*/
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("CP Hiba történt a bejelentkezés során: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return false; // Sikertelen bejelentkezés
-        }
-
-
-        private void emptyFields() // RR - Mezű ürítés
-        {
-            // Kiürítjük a mezőket
-            textBox_LoginName.Text = "";
-            textBox_LoginPass.Text = "";
-        }
-        
     }
 }
