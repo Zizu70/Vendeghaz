@@ -47,6 +47,8 @@
             this.textBox_AdoptionGender = new System.Windows.Forms.TextBox();
             this.textBox_AdoptionEmail = new System.Windows.Forms.TextBox();
             this.pictureBox_AdoptionImage = new System.Windows.Forms.PictureBox();
+            this.textBox_AdoptionBirthdate = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_AdoptionImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,7 +75,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(219, 210);
+            this.label3.Location = new System.Drawing.Point(220, 100);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 23);
             this.label3.TabIndex = 2;
@@ -82,7 +84,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(224, 253);
+            this.label4.Location = new System.Drawing.Point(225, 143);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 23);
             this.label4.TabIndex = 3;
@@ -91,7 +93,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(213, 293);
+            this.label5.Location = new System.Drawing.Point(214, 183);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 23);
             this.label5.TabIndex = 4;
@@ -167,7 +169,7 @@
             // comboBox_AdoptionGName
             // 
             this.comboBox_AdoptionGName.FormattingEnabled = true;
-            this.comboBox_AdoptionGName.Location = new System.Drawing.Point(274, 202);
+            this.comboBox_AdoptionGName.Location = new System.Drawing.Point(275, 92);
             this.comboBox_AdoptionGName.Name = "comboBox_AdoptionGName";
             this.comboBox_AdoptionGName.Size = new System.Drawing.Size(121, 31);
             this.comboBox_AdoptionGName.TabIndex = 24;
@@ -184,14 +186,14 @@
             // 
             // textBox_AdoptionSpecies
             // 
-            this.textBox_AdoptionSpecies.Location = new System.Drawing.Point(274, 246);
+            this.textBox_AdoptionSpecies.Location = new System.Drawing.Point(275, 136);
             this.textBox_AdoptionSpecies.Name = "textBox_AdoptionSpecies";
             this.textBox_AdoptionSpecies.Size = new System.Drawing.Size(121, 30);
             this.textBox_AdoptionSpecies.TabIndex = 15;
             // 
             // textBox_AdoptionGender
             // 
-            this.textBox_AdoptionGender.Location = new System.Drawing.Point(274, 286);
+            this.textBox_AdoptionGender.Location = new System.Drawing.Point(275, 176);
             this.textBox_AdoptionGender.Name = "textBox_AdoptionGender";
             this.textBox_AdoptionGender.Size = new System.Drawing.Size(121, 30);
             this.textBox_AdoptionGender.TabIndex = 16;
@@ -210,8 +212,25 @@
             this.pictureBox_AdoptionImage.Location = new System.Drawing.Point(41, 91);
             this.pictureBox_AdoptionImage.Name = "pictureBox_AdoptionImage";
             this.pictureBox_AdoptionImage.Size = new System.Drawing.Size(140, 140);
+            this.pictureBox_AdoptionImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox_AdoptionImage.TabIndex = 30;
             this.pictureBox_AdoptionImage.TabStop = false;
+            // 
+            // textBox_AdoptionBirthdate
+            // 
+            this.textBox_AdoptionBirthdate.Location = new System.Drawing.Point(274, 224);
+            this.textBox_AdoptionBirthdate.Name = "textBox_AdoptionBirthdate";
+            this.textBox_AdoptionBirthdate.Size = new System.Drawing.Size(121, 30);
+            this.textBox_AdoptionBirthdate.TabIndex = 32;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(194, 224);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(69, 23);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "Született";
             // 
             // FormAdoption
             // 
@@ -220,6 +239,8 @@
             this.BackgroundImage = global::Vendeghaz.Properties.Resources.Háttér;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(481, 632);
+            this.Controls.Add(this.textBox_AdoptionBirthdate);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox_AdoptionImage);
             this.Controls.Add(this.textBox_AdoptionEmail);
             this.Controls.Add(this.textBox_AdoptionGender);
@@ -270,5 +291,7 @@
         private System.Windows.Forms.TextBox textBox_AdoptionGender;
         private System.Windows.Forms.TextBox textBox_AdoptionEmail;
         private System.Windows.Forms.PictureBox pictureBox_AdoptionImage;
+        private System.Windows.Forms.TextBox textBox_AdoptionBirthdate;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -66,8 +66,8 @@ namespace Vendeghaz
         //cgjav
         private void FormGuest_Load(object sender, EventArgs e)
         {
-            comboBox_GuestSpecies.DataSource = Enum.GetValues(typeof(G_species));
-            comboBox_GuestSpecies.SelectedIndex = -1; // Ne legyen előre kiválasztott érték
+            //comboBox_GuestSpecies.DataSource = Enum.GetValues(typeof(G_species));
+            //comboBox_GuestSpecies.SelectedIndex = -1; // Ne legyen előre kiválasztott érték
         }
 
 
@@ -383,6 +383,7 @@ this.Close();*/
                     HttpResponseMessage result = await client.DeleteAsync($"{guestsBaseURL}/{textBox_GuestId.Text}");
                     if (result.IsSuccessStatusCode)
                     {
+                        //deleted_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         MessageBox.Show("Vendég sikeresen törölve!");
                         await LoadGuests();
                         emptyFieldsGuest();

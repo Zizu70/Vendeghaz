@@ -24,7 +24,7 @@ namespace Vendeghaz
         private readonly string serviceUrl = "http://localhost:3000/desktop/service";
 
         private string workersBaseURL = "http://localhost:3000/desktop/workers";
-        //public string endPoint;
+        
         public FormServices()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace Vendeghaz
         {
             comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role)); //törlendő nem
         }
-        //szervíz gomb clickje     
+        //szervíz belépés clickje     
         private async void button_ServicesEntry_Click(object sender, EventArgs e)
         {
             string name = textBox_ServicesName.Text.Trim();

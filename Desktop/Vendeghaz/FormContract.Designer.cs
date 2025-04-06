@@ -39,16 +39,12 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox_ContractInPlace = new System.Windows.Forms.TextBox();
-            this.textBox_ContractInDate = new System.Windows.Forms.TextBox();
             this.textBox_ContractGender = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.textBox_ContractSecGName = new System.Windows.Forms.TextBox();
             this.textBox_ContractSecSpecies = new System.Windows.Forms.TextBox();
             this.textBox_ContractBirthdate = new System.Windows.Forms.TextBox();
@@ -110,7 +106,6 @@
             this.panel_Contract.Name = "panel_Contract";
             this.panel_Contract.Size = new System.Drawing.Size(816, 856);
             this.panel_Contract.TabIndex = 0;
-            this.panel_Contract.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Contract_Paint);
             // 
             // pictureBox8
             // 
@@ -195,16 +190,12 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.textBox_ContractInPlace);
-            this.panel2.Controls.Add(this.textBox_ContractInDate);
             this.panel2.Controls.Add(this.textBox_ContractGender);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.textBox_ContractSecGName);
             this.panel2.Controls.Add(this.textBox_ContractSecSpecies);
             this.panel2.Controls.Add(this.textBox_ContractBirthdate);
@@ -213,32 +204,9 @@
             this.panel2.Size = new System.Drawing.Size(512, 345);
             this.panel2.TabIndex = 36;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(77, 283);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(88, 15);
-            this.label8.TabIndex = 38;
-            this.label8.Text = "Érkezés helye:";
-            // 
-            // textBox_ContractInPlace
-            // 
-            this.textBox_ContractInPlace.Location = new System.Drawing.Point(173, 276);
-            this.textBox_ContractInPlace.Name = "textBox_ContractInPlace";
-            this.textBox_ContractInPlace.Size = new System.Drawing.Size(229, 22);
-            this.textBox_ContractInPlace.TabIndex = 37;
-            // 
-            // textBox_ContractInDate
-            // 
-            this.textBox_ContractInDate.Location = new System.Drawing.Point(174, 239);
-            this.textBox_ContractInDate.Name = "textBox_ContractInDate";
-            this.textBox_ContractInDate.Size = new System.Drawing.Size(228, 22);
-            this.textBox_ContractInDate.TabIndex = 35;
-            // 
             // textBox_ContractGender
             // 
-            this.textBox_ContractGender.Location = new System.Drawing.Point(174, 165);
+            this.textBox_ContractGender.Location = new System.Drawing.Point(162, 195);
             this.textBox_ContractGender.Name = "textBox_ContractGender";
             this.textBox_ContractGender.Size = new System.Drawing.Size(228, 22);
             this.textBox_ContractGender.TabIndex = 34;
@@ -246,7 +214,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(107, 209);
+            this.label3.Location = new System.Drawing.Point(78, 246);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 15);
             this.label3.TabIndex = 32;
@@ -255,7 +223,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(126, 172);
+            this.label4.Location = new System.Drawing.Point(96, 198);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 15);
             this.label4.TabIndex = 31;
@@ -264,7 +232,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(139, 132);
+            this.label5.Location = new System.Drawing.Point(110, 162);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(28, 15);
             this.label5.TabIndex = 30;
@@ -273,7 +241,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(137, 95);
+            this.label6.Location = new System.Drawing.Point(107, 125);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 15);
             this.label6.TabIndex = 29;
@@ -283,38 +251,29 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe Print", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(180, 0);
+            this.label7.Location = new System.Drawing.Point(170, 35);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(178, 50);
             this.label7.TabIndex = 28;
             this.label7.Text = "ÉLETRAJZ";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(77, 246);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(85, 15);
-            this.label10.TabIndex = 26;
-            this.label10.Text = "Érkezés ideje:";
-            // 
             // textBox_ContractSecGName
             // 
-            this.textBox_ContractSecGName.Location = new System.Drawing.Point(174, 88);
+            this.textBox_ContractSecGName.Location = new System.Drawing.Point(162, 118);
             this.textBox_ContractSecGName.Name = "textBox_ContractSecGName";
             this.textBox_ContractSecGName.Size = new System.Drawing.Size(228, 22);
             this.textBox_ContractSecGName.TabIndex = 18;
             // 
             // textBox_ContractSecSpecies
             // 
-            this.textBox_ContractSecSpecies.Location = new System.Drawing.Point(173, 125);
+            this.textBox_ContractSecSpecies.Location = new System.Drawing.Point(161, 155);
             this.textBox_ContractSecSpecies.Name = "textBox_ContractSecSpecies";
             this.textBox_ContractSecSpecies.Size = new System.Drawing.Size(229, 22);
             this.textBox_ContractSecSpecies.TabIndex = 14;
             // 
             // textBox_ContractBirthdate
             // 
-            this.textBox_ContractBirthdate.Location = new System.Drawing.Point(173, 202);
+            this.textBox_ContractBirthdate.Location = new System.Drawing.Point(162, 239);
             this.textBox_ContractBirthdate.Name = "textBox_ContractBirthdate";
             this.textBox_ContractBirthdate.Size = new System.Drawing.Size(229, 22);
             this.textBox_ContractBirthdate.TabIndex = 15;
@@ -400,7 +359,7 @@
             // 
             // textBox_ContractDate
             // 
-            this.textBox_ContractDate.Location = new System.Drawing.Point(81, 294);
+            this.textBox_ContractDate.Location = new System.Drawing.Point(99, 294);
             this.textBox_ContractDate.Name = "textBox_ContractDate";
             this.textBox_ContractDate.Size = new System.Drawing.Size(133, 22);
             this.textBox_ContractDate.TabIndex = 34;
@@ -417,7 +376,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(78, 243);
+            this.label21.Location = new System.Drawing.Point(77, 261);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(363, 15);
             this.label21.TabIndex = 32;
@@ -426,7 +385,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(78, 218);
+            this.label20.Location = new System.Drawing.Point(77, 236);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(354, 15);
             this.label20.TabIndex = 31;
@@ -435,7 +394,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(177, 136);
+            this.label17.Location = new System.Drawing.Point(176, 152);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(135, 15);
             this.label17.TabIndex = 30;
@@ -444,7 +403,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(107, 74);
+            this.label16.Location = new System.Drawing.Point(114, 77);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(284, 15);
             this.label16.TabIndex = 29;
@@ -472,25 +431,25 @@
             // textBox_ContractUName
             // 
             this.textBox_ContractUName.Font = new System.Drawing.Font("Segoe Print", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_ContractUName.Location = new System.Drawing.Point(129, 94);
+            this.textBox_ContractUName.Location = new System.Drawing.Point(139, 108);
             this.textBox_ContractUName.Name = "textBox_ContractUName";
-            this.textBox_ContractUName.Size = new System.Drawing.Size(246, 39);
+            this.textBox_ContractUName.Size = new System.Drawing.Size(238, 39);
             this.textBox_ContractUName.TabIndex = 18;
             // 
             // textBox_ContractGName
             // 
             this.textBox_ContractGName.Font = new System.Drawing.Font("Segoe Print", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_ContractGName.Location = new System.Drawing.Point(15, 160);
+            this.textBox_ContractGName.Location = new System.Drawing.Point(14, 176);
             this.textBox_ContractGName.Name = "textBox_ContractGName";
-            this.textBox_ContractGName.Size = new System.Drawing.Size(246, 39);
+            this.textBox_ContractGName.Size = new System.Drawing.Size(238, 39);
             this.textBox_ContractGName.TabIndex = 14;
             // 
             // textBox_ContractSpecies
             // 
             this.textBox_ContractSpecies.Font = new System.Drawing.Font("Segoe Print", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_ContractSpecies.Location = new System.Drawing.Point(267, 160);
+            this.textBox_ContractSpecies.Location = new System.Drawing.Point(258, 176);
             this.textBox_ContractSpecies.Name = "textBox_ContractSpecies";
-            this.textBox_ContractSpecies.Size = new System.Drawing.Size(229, 39);
+            this.textBox_ContractSpecies.Size = new System.Drawing.Size(238, 39);
             this.textBox_ContractSpecies.TabIndex = 15;
             // 
             // pictureBox1
@@ -506,12 +465,13 @@
             // button_ContractJPG
             // 
             this.button_ContractJPG.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.button_ContractJPG.Location = new System.Drawing.Point(330, 874);
+            this.button_ContractJPG.Location = new System.Drawing.Point(318, 874);
             this.button_ContractJPG.Name = "button_ContractJPG";
             this.button_ContractJPG.Size = new System.Drawing.Size(205, 45);
             this.button_ContractJPG.TabIndex = 27;
             this.button_ContractJPG.Text = "JPG";
             this.button_ContractJPG.UseVisualStyleBackColor = false;
+            this.button_ContractJPG.Click += new System.EventHandler(this.button_ContractJPG_Click);
             // 
             // FormContract
             // 
@@ -576,16 +536,12 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox_ContractSecGName;
         private System.Windows.Forms.TextBox textBox_ContractSecSpecies;
         private System.Windows.Forms.TextBox textBox_ContractBirthdate;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.TextBox textBox_ContractInDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox_ContractInPlace;
     }
 }

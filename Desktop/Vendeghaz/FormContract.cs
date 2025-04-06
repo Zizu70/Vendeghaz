@@ -24,7 +24,6 @@ namespace Vendeghaz
             InitializeComponent();
             this.selectedAnimal = selectedAnimal;
             this.selectedUser = selectedUser;
-            uploadDataContract();
         }
 
         public FormContract(FormAdoption.Guest selectedAnimal1, User selectedUser)
@@ -34,7 +33,7 @@ namespace Vendeghaz
         }
 
         private void FormContract_Load(object sender, EventArgs e)
-        {  // üres
+        { 
         }
 
         public class Guest
@@ -49,43 +48,47 @@ namespace Vendeghaz
 
         }
 
-        public void uploadDataContract()  // adat feltöltése () üres upload
-        {  // üres
-
-        }
-
-        public void fillData(string userName, string animalName, string species, string date, /*string secAnimalName, string secSpecies,*/ string gender/*, string birthdate, string inDate, string inPlace*/)
+        public FormContract(string G_name, string G_species, string G_gender, string G_birthdate, string U_name, string A_date)
         {
-            textBox_ContractUName.Text = userName;
-            textBox_ContractGName.Text = animalName;
-            textBox_ContractSpecies.Text = species;
-            textBox_ContractDate.Text = date;
+            InitializeComponent();
+
+            // A kapott adatok betöltése a megfelelő mezőkbe
             
-            textBox_ContractSecGName.Text = animalName;
-            textBox_ContractSecSpecies.Text = species;
-            textBox_ContractGender.Text = gender;
-            //textBox_ContractBirthdate.Text = guest.g_birthdate;
-            //textBox_ContractInDate.Text = inDate;
-            //textBox_ContractInPlace.Text = Guest.G_inplace;
+            textBox_ContractUName.Text = U_name;
+            textBox_ContractGName.Text = G_name;
+            textBox_ContractSpecies.Text = G_species;
+
+            textBox_ContractDate.Text = A_date;
+
+            textBox_ContractSecGName.Text = G_name;
+            textBox_ContractSecSpecies.Text = G_species;
+            textBox_ContractGender.Text = G_gender;
+            textBox_ContractBirthdate.Text = G_birthdate;
+
         }
 
-        private void button_ContractPDF_Click(object sender, EventArgs e)
+        private void button_ContractJPG_Click(object sender, EventArgs e)
         {
-            string animalName = selectedAnimal.G_name.Replace(" ", "_");
-            string userName = selectedUser.U_name.Replace(" ", "_");
+            string animalName = textBox_ContractGName.Text.Replace(" ", "_");
+            string userName = textBox_ContractUName.Text.Replace(" ", "_");
             string imageName = $"{userName}_és_{animalName}_{DateTime.Now.ToString("yyyy.MM.dd")}_oklevél.jpg";
 
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(this.Width, this.Height);
             this.DrawToBitmap(bmp, new System.Drawing.Rectangle(0, 0, bmp.Width, bmp.Height));
-            string imagePath = Path.Combine(@"C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Contract", imageName);
+            string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "/Contract";
+            string imagePath = Path.Combine(path, imageName);
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
             bmp.Save(imagePath, System.Drawing.Imaging.ImageFormat.Jpeg);
 
             MessageBox.Show("Az oklevél sikeresen el lett mentve: " + imagePath);
-        }
 
-        private void panel_Contract_Paint(object sender, PaintEventArgs e)
-        {
-            //IDE NEM TÖRÖLNI KELL
+//Kell
+            //System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "/Guest_Image" //guestimages elerese
+            //C:\Users\Zita\Desktop\VendégHáz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Contract
         }
     }
 }

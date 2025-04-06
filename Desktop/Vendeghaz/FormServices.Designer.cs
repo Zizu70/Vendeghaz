@@ -50,7 +50,7 @@
             this.button_ServicesEntry.Name = "button_ServicesEntry";
             this.button_ServicesEntry.Size = new System.Drawing.Size(200, 30);
             this.button_ServicesEntry.TabIndex = 2;
-            this.button_ServicesEntry.Text = "Belépés";
+            this.button_ServicesEntry.Text = "Szervíz belépés";
             this.button_ServicesEntry.UseVisualStyleBackColor = false;
             this.button_ServicesEntry.Click += new System.EventHandler(this.button_ServicesEntry_Click);
             // 

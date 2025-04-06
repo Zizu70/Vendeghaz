@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Vendeghaz
-{
+{                  // átállítani s c
     internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
-        /// </summary>
+        /// 
+        /// 
+        /// </summary> // Ezzel állítjuk be az STA módot
         [STAThread]
         static void Main()
         {
