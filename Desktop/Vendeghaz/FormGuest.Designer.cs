@@ -91,8 +91,32 @@
             // 
             this.comboBox_GuestSpecies.FormattingEnabled = true;
             this.comboBox_GuestSpecies.Items.AddRange(new object[] {
-            "kutya",
-            "macska"});
+            "medve",
+            "farkas",
+            "muflon",
+            "őz",
+            "gímszarvas",
+            "róka",
+            "vadmacska",
+            "hiúz",
+            "aranysakál",
+            "mosómedve",
+            "sas",
+            "bagoly",
+            "páva",
+            "holló",
+            "vércse",
+            "varjú",
+            "ló",
+            "szamár",
+            "tehén",
+            "mangalica",
+            "baromfiak",
+            "dámszarvas",
+            "juh",
+            "kecske",
+            "nyúl",
+            "póniló "});
             this.comboBox_GuestSpecies.Location = new System.Drawing.Point(35, 247);
             this.comboBox_GuestSpecies.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox_GuestSpecies.Name = "comboBox_GuestSpecies";
@@ -105,7 +129,7 @@
             this.comboBox_GuestGender.Items.AddRange(new object[] {
             "hím",
             "nőstény",
-            "ivartalan"});
+            "ivartalanított"});
             this.comboBox_GuestGender.Location = new System.Drawing.Point(207, 247);
             this.comboBox_GuestGender.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox_GuestGender.Name = "comboBox_GuestGender";

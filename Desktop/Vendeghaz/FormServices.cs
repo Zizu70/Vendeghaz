@@ -24,7 +24,7 @@ namespace Vendeghaz
         private readonly HttpClient client = new HttpClient();
 
         private readonly string servicesURL = "http://localhost:3000/desktop/services";
-        private readonly string checkNameURL = "http://localhost:3000/desktop/check";
+        private readonly string checknameURL = "http://localhost:3000/desktop/checkname";
 
         private readonly string workersURL = "http://localhost:3000/desktop/workers";
 
@@ -155,10 +155,10 @@ namespace Vendeghaz
             if (string.IsNullOrWhiteSpace(name))
                 return false;
 
-            var response = await client.GetAsync(checkNameURL);
+            var response = await client.GetAsync(checknameURL);
             return response.IsSuccessStatusCode && bool.Parse(await response.Content.ReadAsStringAsync());
             */
-            string url = "http://localhost:3000/desktop/checkName";
+            string url = "http://localhost:3000/desktop/checkname";
 
             if (string.IsNullOrWhiteSpace(name))
             return false;  // vagy dobhatunk kivételt is

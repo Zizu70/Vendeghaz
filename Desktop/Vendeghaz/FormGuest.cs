@@ -23,7 +23,7 @@ namespace Vendeghaz
     public partial class FormGuest : Form
     {
         private readonly HttpClient client = new HttpClient();
-        public string guestsBaseURL = "http://localhost:3000/desktop/Guests";
+        public string guestsURL = "http://localhost:3000/desktop/guests";
         private Guest selectedGuest;
         private byte[] selectedImage;
 
@@ -37,7 +37,7 @@ namespace Vendeghaz
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync(guestsBaseURL);
+                HttpResponseMessage response = await client.GetAsync(guestsURL);
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
@@ -194,7 +194,7 @@ namespace Vendeghaz
 
             try
             {
-                HttpResponseMessage result = await client.PostAsync(guestsBaseURL, content);
+                HttpResponseMessage result = await client.PostAsync(guestsURL, content);
                 if (result.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Sikeres feltöltés!");
@@ -291,7 +291,7 @@ namespace Vendeghaz
 
             try
             {
-                HttpResponseMessage result = await client.PutAsync($"{guestsBaseURL}/{selectedGuest.G_id}", content);
+                HttpResponseMessage result = await client.PutAsync($"{guestsURL}/{selectedGuest.G_id}", content);
                 if (result.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Sikeres frissítés!");
@@ -367,10 +367,45 @@ this.Close();*/
 
         }
 
-        //** jó **//
+        //**  **//  //soft delete
         private async void button_GuestDelete_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox_GuestId.Text))
+
+            if (selectedGuest == null)
+            {
+                MessageBox.Show("Nincs kiválasztott vendég a törléshez!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var content = new StringContent("", Encoding.UTF8, "application/json");
+                HttpResponseMessage result = await client.PutAsync($"{guestsURL}/{selectedGuest.G_id}", content);
+
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Vendég törölve (soft delete)!");
+                    await LoadGuests();
+                    emptyFieldsGuest();
+                }
+                else
+                {
+                    MessageBox.Show("Törlés sikertelen!");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show("Hálózati hiba: " + ex.Message);
+            }
+
+
+
+
+
+
+
+
+            /*if (string.IsNullOrWhiteSpace(textBox_GuestId.Text))
             {
                 MessageBox.Show("Nincs kiválasztott vendég!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -380,10 +415,10 @@ this.Close();*/
             {
                 try
                 {
-                    HttpResponseMessage result = await client.DeleteAsync($"{guestsBaseURL}/{textBox_GuestId.Text}");
+                    HttpResponseMessage result = await client.DeleteAsync($"{guestsURL}/{textBox_GuestId.Text}");
                     if (result.IsSuccessStatusCode)
                     {
-                        //deleted_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        deleted_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         MessageBox.Show("Vendég sikeresen törölve!");
                         await LoadGuests();
                         emptyFieldsGuest();
@@ -396,44 +431,44 @@ this.Close();*/
                 catch (HttpRequestException ex)
                 {
                     MessageBox.Show("Hálózati hiba: " + ex.Message);
-                }
-
-                /*
-                //MessageBox.Show($"{textBox_GuestId.Text}");
-                if (Convert.ToInt32(textBox_GuestId.Text) == 0)
-                {
-                    MessageBox.Show("Nincs kiválasztott vendég!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                if (MessageBox.Show("Biztosan törölni szeretnéd?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    try
-                    {
-                        HttpResponseMessage result = await client.DeleteAsync($"{guestsBaseURL}/{textBox_GuestId.Text}");
-
-                        if (result.IsSuccessStatusCode)
-                        {
-                            MessageBox.Show("Vendég sikeresen törölve!");
-                            await LoadGuests();
-                            emptyFieldsGuest();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Hiba a törlés során!");
-                        }
-                    }
-                    catch (HttpRequestException ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
                 }*/
 
-                // Vissza a FormChoicera
-                FormChoice formChoice = new FormChoice();
-                formChoice.Show();
-                this.Close();
+            /*
+            //MessageBox.Show($"{textBox_GuestId.Text}");
+            if (Convert.ToInt32(textBox_GuestId.Text) == 0)
+            {
+                MessageBox.Show("Nincs kiválasztott vendég!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            if (MessageBox.Show("Biztosan törölni szeretnéd?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                try
+                {
+                    HttpResponseMessage result = await client.DeleteAsync($"{guestsBaseURL}/{textBox_GuestId.Text}");
+
+                    if (result.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Vendég sikeresen törölve!");
+                        await LoadGuests();
+                        emptyFieldsGuest();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hiba a törlés során!");
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }*/
+
+            /* // Vissza a FormChoicera
+             FormChoice formChoice = new FormChoice();
+             formChoice.Show();
+             this.Close();
+         }*/
         }
     }
 }

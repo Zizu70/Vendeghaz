@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 // **Admin bejelentkezés ellenőrzése**
-router.post('/login', async (req, res) => {  // /login
+/*router.post('/login', async (req, res) => {  // /login
     //const { name, password } = req.body;
     console.log("Bejelentkezési kérés érkezett:", req.body);
 
@@ -44,6 +44,6 @@ router.post('/login', async (req, res) => {  // /login
         console.error("Adatbázis hiba:", error);
         res.status(500).json({ success: false, message: "Szerverhiba a bejelentkezés során." });
     }
-});
+});*/
 
 module.exports = router;

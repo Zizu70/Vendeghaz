@@ -40,8 +40,21 @@ router.post('/login', async (req, res) => {
 });
 
 //***** Szervíz *****//
+   //** ok **//
+   // Összes dolgoző lekérdezése
+router.get('/workers', async (req, res) => {
+    try {
+        const result = await db.query(
+            `SELECT * FROM workers`   
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
+    }
+});
+
    //**ok**//
-router.get('/workers', async (req, res) => {  
+/*router.get('/workers', async (req, res) => {  
     const w_name = req.params.w_name;
     const w_password = req.params.w_password;
     try {
@@ -53,7 +66,7 @@ router.get('/workers', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a dolgozó lekérésekor!', error });
     }
-});
+});*/
    //**ok**//
    // Szervíz belépés - belépés gomb
 router.post("/services", async (req, res) => {
@@ -93,7 +106,7 @@ router.post("/services", async (req, res) => {
     }
   });
 
-// Névellenőrzés
+// Névellenőrzés felvitelhez
 router.post("/checkname", async (req, res) => {
   const { name } = req.body;
 
@@ -348,7 +361,7 @@ router.put('/guests/:g_Id', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt Vendég adatainak frissítése közben!', error });
     }
 });
-// Vendég törlése
+// Vendég törlése nem
 router.delete('/guests/:g_Id', async (req, res) => {
     const g_Id = req.params.eventId;
     try {
@@ -358,6 +371,27 @@ router.delete('/guests/:g_Id', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt Vendég törlése közben', error });
     }
 });
+// Vendég törlése soft delete-tel
+router.put("/guests/:g_Id", async (req, res) => {
+    const guestId = req.params.g_Id;
+    const currentDateTime = new Date();
+  
+    try {
+      const [result] = await conn.query(
+        "UPDATE guests SET deleted_at = ? WHERE g_id = ? AND deleted_at IS NULL",
+        [currentDateTime, guestId]
+      );
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Nincs ilyen aktív vendég vagy már törölve lett." });
+      }
+  
+      res.json({ message: "Vendég törölve (soft delete)", timestamp: currentDateTime });
+    } catch (err) {
+      console.error("Soft delete hiba:", err);
+      res.status(500).json({ message: "Szerverhiba történt a soft delete során." });
+    }
+  });
 
 //*****Guest end****************************************************************************//
 
@@ -399,7 +433,7 @@ router.get('/allUsers', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
     }
 });
-   //**ok**//
+   //**ok** nem kell ide **//
    // Összes vendég nevének lekérése // nem kell
 router.get('/guests', async (req, res) => {
     try {
@@ -422,6 +456,21 @@ router.get('/guests', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
     }
 });});
+   //**ok**//
+   // Örökbefogadott adatainak lekérése név alapján
+   router.get('/adopted/:guestname', async (req, res) => {  
+    const guestname = req.params.guestname;
+    
+    try {
+        const [row] = await db.query(
+           'SELECT g_name, g_species, g_gender, g_birthdate, g_image FROM guests WHERE g_name = ?',
+            [guestname]
+        );
+        res.json(row);
+    } catch (error) {
+        res.status(500).json({ message: 'Szerverhiba - Örökbefogadott adatainak letöltése közben!', error });
+    }
+});
    //**ok**//
    // Örökbefogadó adatainak lekérése név alapján
 router.get('/adoptive/:username', async (req, res) => {
@@ -450,21 +499,6 @@ router.get('/adoptive/:username', async (req, res) => {
     }
 });
    //**ok**//
-   // Örökbefogadott adatainak lekérése név alapján
-router.get('/adopted/:guestname', async (req, res) => {  
-    const guestname = req.params.guestname;
-    
-    try {
-        const [row] = await db.query(
-           'SELECT g_name, g_species, g_gender, g_birthdate, g_image FROM guests WHERE g_name = ?',
-            [guestname]
-        );
-        res.json(row);
-    } catch (error) {
-        res.status(500).json({ message: 'Szerverhiba - Örökbefogadott adatainak letöltése közben!', error });
-    }
-});
-   //**ok**//
    // Örökbefogadás mentése
 router.post('/adoption', async (req, res) => {
     const { g_name, g_species, g_gender, g_birthdate, u_name, a_date} = req.body;
@@ -482,7 +516,6 @@ router.post('/adoption', async (req, res) => {
 });
 
 //*****Adaption end********************************AAAAAAAAAAAAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVVVVVVVV**//
-
 
 //*****Contract top - OK ********************************CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC*****//
 router.get('/contract', (req, res) => {
@@ -522,4 +555,5 @@ router.get('/contract', (req, res) => {
   });
 
 //*****Contract top********************************CCCCCCCCCCCCCCCCCCCCCCCCCCVVVVVVVVVVVVVVVVVVVVVVV*****//
+
 module.exports = router;

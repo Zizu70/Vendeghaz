@@ -4,7 +4,7 @@ const db = require('../db');  // Az adatbázis kapcsolat importálása
 const router = express.Router();
 
 // Bejelentkezési route
-router.post('/login', async (req, res) => {
+/*router.post('/login', async (req, res) => {
     const { name, password } = req.body;
 
     if (!name || !password) {
@@ -33,6 +33,6 @@ router.post('/login', async (req, res) => {
         console.error("Database query error:", err);
         return res.status(500).json({ message: 'Szerver hiba.' });
     }
-});
+});*/
 
 module.exports = router;
