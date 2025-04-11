@@ -458,7 +458,7 @@ router.get('/guests', async (req, res) => {
 });});
    //**ok**//
    // Örökbefogadott adatainak lekérése név alapján
-   router.get('/adopted/:guestname', async (req, res) => {  
+router.get('/adopted/:guestname', async (req, res) => {  
     const guestname = req.params.guestname;
     
     try {
@@ -555,5 +555,48 @@ router.get('/contract', (req, res) => {
   });
 
 //*****Contract top********************************CCCCCCCCCCCCCCCCCCCCCCCCCCVVVVVVVVVVVVVVVVVVVVVVV*****//
+
+//***** Ticket *************************************//
+   //** **//
+   // Összes foglalás
+router.get('/tickets', async (req, res) => {
+    
+    try {
+        const tickets = await db.query(
+            `SELECT * FROM tickets`
+        );
+        res.status(200).json(tickets);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a jegyek lekérésekor!', error });
+    }
+});
+   //**ok**//
+   // Összes rendelés lekérése comboBoxba
+   router.get('/allTickets', async (req, res) => {
+    try {
+        const results = await db.query(
+            `SELECT t_id FROM tickets`   
+        );
+        res.status(200).json(results);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a jegy rendelések listázásakor!', error });
+    }
+});
+   //**  **//
+   // Jegyrendelés adatainak lekérése név alapján
+   router.get('/tickets/:ticketid', async (req, res) => {  
+    const ticketid = req.params.ticketid;
+    
+    try {
+        const [row] = await db.query(
+           'SELECT * FROM tickets WHERE t_id = ?',
+            [ticketid]
+        );
+        res.json(row);
+    } catch (error) {
+        res.status(500).json({ message: 'Szerverhiba - Örökbefogadott adatainak letöltése közben!', error });
+    }
+});
+//***** Ticket *************************************//
 
 module.exports = router;

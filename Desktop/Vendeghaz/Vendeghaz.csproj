@@ -107,6 +107,7 @@
     <Compile Include="Guests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ticket.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="Workers.cs" />
     <EmbeddedResource Include="FormAdoption.resx">
