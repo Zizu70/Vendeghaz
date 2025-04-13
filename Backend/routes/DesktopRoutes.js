@@ -363,7 +363,7 @@ router.put('/guests/:g_Id', async (req, res) => {
 });
 // Vendég törlése nem
 router.delete('/guests/:g_Id', async (req, res) => {
-    const g_Id = req.params.eventId;
+    const g_Id = req.params.g.Id;
     try {
         await db.query(`DELETE FROM guests WHERE g_id = ?`, [g_Id]);
         res.status(200).json({ message: 'Vendég törölve!' });
@@ -392,7 +392,56 @@ router.put("/guests/:g_Id", async (req, res) => {
       res.status(500).json({ message: "Szerverhiba történt a soft delete során." });
     }
   });
-
+/*
+router.put('/guests/:g_id', (req, res) => {
+    const { g_id } = req.params;
+    const {
+      g_name,
+      g_species,
+      g_gender,
+      g_birthdate,
+      g_indate,
+      g_inplace,
+      g_other,
+      g_image,
+      deleted_at // <-- FONTOS!
+    } = req.body;
+  
+    const query = `
+      UPDATE guests SET 
+        g_name = ?, 
+        g_species = ?, 
+        g_gender = ?, 
+        g_birthdate = ?, 
+        g_indate = ?, 
+        g_inplace = ?, 
+        g_other = ?, 
+        g_image = ?, 
+        deleted_at = ? 
+      WHERE g_id = ?
+    `;
+  
+    db.query(query, [
+      g_name,
+      g_species,
+      g_gender,
+      g_birthdate,
+      g_indate,
+      g_inplace,
+      g_other,
+      g_image,
+      deleted_at, // <-- ezt is be kell állítani!
+      id
+    ], (err, results) => {
+      if (err) {
+        console.error('Hiba a frissítés során:', err);
+        res.status(500).send('Hiba a frissítés során');
+      } else {
+        res.status(200).send('Vendég frissítve');
+      }
+    });
+  });
+*/
 //*****Guest end****************************************************************************//
 
 //*****Adaption top - OK   ****************************AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*************//
@@ -499,7 +548,7 @@ router.get('/adoptive/:username', async (req, res) => {
     }
 });
    //**ok**//
-   // Örökbefogadás mentése
+   // Örökbefogadás felvitel
 router.post('/adoption', async (req, res) => {
     const { g_name, g_species, g_gender, g_birthdate, u_name, a_date} = req.body;
     
@@ -558,7 +607,7 @@ router.get('/contract', (req, res) => {
 
 //***** Ticket *************************************//
    //** **//
-   // Összes foglalás
+   // Összes jegyrendelés
 router.get('/tickets', async (req, res) => {
     
     try {
@@ -571,7 +620,7 @@ router.get('/tickets', async (req, res) => {
     }
 });
    //**ok**//
-   // Összes rendelés lekérése comboBoxba
+   // Összes jegyrendelés id lekérése comboBoxba
    router.get('/allTickets', async (req, res) => {
     try {
         const results = await db.query(
@@ -582,9 +631,9 @@ router.get('/tickets', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a jegy rendelések listázásakor!', error });
     }
 });
-   //**  **//
+   //**ok**//
    // Jegyrendelés adatainak lekérése név alapján
-   router.get('/tickets/:ticketid', async (req, res) => {  
+router.get('/tickets/:ticketid', async (req, res) => {  
     const ticketid = req.params.ticketid;
     
     try {
@@ -597,6 +646,50 @@ router.get('/tickets', async (req, res) => {
         res.status(500).json({ message: 'Szerverhiba - Örökbefogadott adatainak letöltése közben!', error });
     }
 });
-//***** Ticket *************************************//
+   //**ok**//
+   // Jegyrendelés felvitel
+router.post('/tickets', async (req, res) => {
+    const { t_name, t_email, t_date, t_time, t_piece, t_amount} = req.body;
+    
+    try {
+        const result = await db.query(
+            `INSERT INTO tickets (t_name, t_email, t_date, t_time, t_piece, t_amount)
+             VALUES ( ?, ?, ?, ?, ?, ?)`, [t_name, t_email, t_date, t_time, t_piece, t_amount] 
+        );
+        res.status(201).json({ message: 'Jegyrendelés rögzítve!', g_Id: result.insertId });
+        console.table(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a jegyrendelés rögzítésekor!', error });
+    }
+});
+   //** **//
+   // Jegyrendelés módosítás
+router.put('/tickets/:t_Id', async (req, res) => {
+    const t_Id = req.params.t_Id;
+    const { t_name, t_email, t_date, t_time, t_piece, t_amount, updated_at} = req.body;
+    try {
+        const result = await db.query(
+            `UPDATE tickets
+             SET t_name = ?, t_email = ?, t_date = ?, t_time = ?, t_piece = ?, t_amount = ?, updated_at = ?
+             WHERE t_id = ?`, [t_name, t_email, t_date, t_time, t_piece, t_amount, updated_at, t_Id]
+        );
+        res.status(200).json({ message: 'Jegyrendelés adatai frissítve!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt jegyrendelés adatainak frissítése közben!', error });
+    }
+});
+   //** **//
+   // Jegyrendelés törlése
+router.delete('/tickets/:g_Id', async (req, res) => {
+    const t_Id = req.params.t_Id;
+    try {
+        await db.query(`DELETE FROM tickets WHERE t_id = ?`, [t_Id]);
+        res.status(200).json({ message: 'Jegyrendelés törölve!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a jegyrendelés törlése közben', error });
+    }
+});
+
+   //***** Ticket *************************************//
 
 module.exports = router;

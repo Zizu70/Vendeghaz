@@ -81,6 +81,7 @@
             this.button_TicketInsert.TabIndex = 14;
             this.button_TicketInsert.Text = "Felvitel";
             this.button_TicketInsert.UseVisualStyleBackColor = false;
+            this.button_TicketInsert.Click += new System.EventHandler(this.button_TicketInsert_Click);
             // 
             // button_TicketUpdate
             // 
@@ -91,6 +92,7 @@
             this.button_TicketUpdate.TabIndex = 4;
             this.button_TicketUpdate.Text = "Módosítás";
             this.button_TicketUpdate.UseVisualStyleBackColor = false;
+            this.button_TicketUpdate.Click += new System.EventHandler(this.button_TicketUpdate_Click);
             // 
             // button_TicketDelete
             // 
@@ -101,6 +103,7 @@
             this.button_TicketDelete.TabIndex = 3;
             this.button_TicketDelete.Text = "Törlés";
             this.button_TicketDelete.UseVisualStyleBackColor = false;
+            this.button_TicketDelete.Click += new System.EventHandler(this.button_TicketDelete_Click);
             // 
             // label1
             // 
@@ -133,9 +136,10 @@
             // 
             // dateTimePicker_TicketDate
             // 
-            this.dateTimePicker_TicketDate.Location = new System.Drawing.Point(179, 271);
+            this.dateTimePicker_TicketDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_TicketDate.Location = new System.Drawing.Point(179, 269);
             this.dateTimePicker_TicketDate.Name = "dateTimePicker_TicketDate";
-            this.dateTimePicker_TicketDate.Size = new System.Drawing.Size(200, 34);
+            this.dateTimePicker_TicketDate.Size = new System.Drawing.Size(164, 34);
             this.dateTimePicker_TicketDate.TabIndex = 15;
             // 
             // label4
@@ -155,7 +159,7 @@
             "b"});
             this.comboBox_TicketTime.Location = new System.Drawing.Point(179, 324);
             this.comboBox_TicketTime.Name = "comboBox_TicketTime";
-            this.comboBox_TicketTime.Size = new System.Drawing.Size(200, 34);
+            this.comboBox_TicketTime.Size = new System.Drawing.Size(164, 34);
             this.comboBox_TicketTime.TabIndex = 20;
             // 
             // label8

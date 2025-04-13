@@ -237,7 +237,7 @@ namespace Vendeghaz
                     url = "http://localhost:3000/desktop/guests/allYard";
                     break;
                 case "checkBox_ChoiceStroking":
-                    url = "http://localhost:3000/desktop/guests/allStroking";
+                    url = "http://localhost:3000/desktop/guests/allStoking";
                     break;
                 default:
                     MessageBox.Show("Ismeretlen CheckBox!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -14,12 +14,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
+using static System.Net.Mime.MediaTypeNames.Application;
 
 namespace Vendeghaz
 {
     
-
     public partial class FormGuest : Form
     {
         private readonly HttpClient client = new HttpClient();
@@ -130,7 +129,7 @@ namespace Vendeghaz
         {
             OpenFileDialog dialog = new OpenFileDialog
             {
-                InitialDirectory = @"C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Guest_Image",
+                // = @"C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Guest_Image",
                 Filter = "Image Files (*.jpg, *.jpeg, *.png, *.gif, *.bmp)|*.jpg; *.jpeg; *.png; *.gif; *.bmp"
             };
 
@@ -177,6 +176,33 @@ namespace Vendeghaz
         {
             if (!validateInputGuest()) return;
 
+            string imageFileName = null;
+
+            if (selectedImage != null)
+            {
+                // Mentési mappa beállítása
+                string imageFolder = Path.Combine(Application.StartupPath, "Guest_Image");
+
+                if (!Directory.Exists(imageFolder))
+                {
+                    Directory.CreateDirectory(imageFolder);
+                }
+
+                // Fájlnév beállítása a vendég neve alapján (pl. Mózes.jpg)
+                imageFileName = $"{textBox_GuestName.Text}.jpg";
+                string imagePath = Path.Combine(imageFolder, imageFileName);
+
+                try
+                {
+                    File.WriteAllBytes(imagePath, selectedImage);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hiba a kép mentésekor: " + ex.Message);
+                    return;
+                }
+            }
+
             var guestData = new
             {
                 g_name = textBox_GuestName.Text,
@@ -186,7 +212,7 @@ namespace Vendeghaz
                 g_indate = dateTimePicker_GuestIndate.Value.ToString("yyyy-MM-dd"),
                 g_inplace = textBox_GuestInplace.Text,
                 g_other = richTextBox_GuestOther.Text,
-                g_image = selectedImage != null ? Convert.ToBase64String(selectedImage) : null
+                g_image = imageFileName// Csak a fájl neve megy az adatbázisba
             };
 
             string json = JsonConvert.SerializeObject(guestData);
@@ -261,8 +287,6 @@ namespace Vendeghaz
             */
         }  
 
-                //guest.Created_at = DateTime.Now;
-                //guest.Updated_at = DateTime.Now;
 
         private async void button_GuestUpdate_Click(object sender, EventArgs e)
         {
@@ -274,6 +298,33 @@ namespace Vendeghaz
 
             if (!validateInputGuest()) return;
 
+            string imageFileName = null;
+
+            if (selectedImage != null)
+            {
+                // Mentési mappa beállítása
+                string imageFolder = Path.Combine(Application.StartupPath, "Guest_Image");
+
+                if (!Directory.Exists(imageFolder))
+                {
+                    Directory.CreateDirectory(imageFolder);
+                }
+
+                // Fájlnév beállítása a vendég neve alapján (pl. Mózes.jpg)
+                imageFileName = $"{textBox_GuestName.Text}.jpg";
+                string imagePath = Path.Combine(imageFolder, imageFileName);
+
+                try
+                {
+                    File.WriteAllBytes(imagePath, selectedImage);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hiba a kép mentésekor: " + ex.Message);
+                    return;
+                }
+            }
+
             var guestUpdateData = new
             {
                 g_name = textBox_GuestName.Text,
@@ -283,6 +334,7 @@ namespace Vendeghaz
                 g_indate = dateTimePicker_GuestIndate.Value.ToString("yyyy-MM-dd"),
                 g_inplace = textBox_GuestInplace.Text,
                 g_other = richTextBox_GuestOther.Text,
+                g_image = imageFileName,// Csak a fájl neve megy az adatbázisba
                 updated_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             };
 
@@ -376,10 +428,38 @@ this.Close();*/
                 MessageBox.Show("Nincs kiválasztott vendég a törléshez!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            
+            var guestData = new
+            {
+                g_name = selectedGuest.G_name,
+                g_species = selectedGuest.G_species,
+                g_gender = selectedGuest.G_gender,
+                g_birthdate = selectedGuest.G_birthdate.ToString("yyyy-MM-dd"),
+                g_indate = selectedGuest.G_indate.ToString("yyyy-MM-dd"),
+                g_inplace = selectedGuest.G_inplace,
+                g_other = selectedGuest.G_other,
+                g_image = selectedGuest.G_image,
+                deleted_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") // soft delete időpont
+            };
+
+           /*
+            // Soft delete dátum beállítása
+            string currentDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            // Csak a soft delete mezőt küldjük el
+            var guestData = new
+            {
+                deleted_at = currentDate
+            };
+           
+            */
+            string json = JsonConvert.SerializeObject(guestData);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
 
             try
             {
-                var content = new StringContent("", Encoding.UTF8, "application/json");
+                //var content = new StringContent("", Encoding.UTF8, "application/json");
                 HttpResponseMessage result = await client.PutAsync($"{guestsURL}/{selectedGuest.G_id}", content);
 
                 if (result.IsSuccessStatusCode)
@@ -445,7 +525,7 @@ this.Close();*/
             {
                 try
                 {
-                    HttpResponseMessage result = await client.DeleteAsync($"{guestsBaseURL}/{textBox_GuestId.Text}");
+                    HttpResponseMessage result = await client.DeleteAsync($"{guestsBaseURL}/{gName}");
 
                     if (result.IsSuccessStatusCode)
                     {
