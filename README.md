@@ -1,4 +1,4 @@
-# 🐾 Vendégház Vadaspark Projekt 🐾
+# <img src="Desktop/Vendeghaz/Resources/logoico.ico" width="100" /> Vendégház Vadaspark Projekt <img src="Desktop/Vendeghaz/Resources/logoico.ico" width="100" />
 
 **Projekt célja:**  
 A Vendégház Vadaspark napi munkájának támogatása webes és asztali alkalmazáson keresztül. Az alkalmazás segíti a látogatókat az örökbefogadásban és tájékozódásban, míg a dolgozók számára lehetővé teszi az állatok adminisztrációját, támogatói örökbefogadási ügyintézését dolgozók adatainak kezelését.
