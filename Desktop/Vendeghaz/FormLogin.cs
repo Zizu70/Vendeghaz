@@ -56,6 +56,11 @@ namespace Vendeghaz
                     FormMain mainForm = new FormMain();
                     mainForm.Show();
 
+                    FormServices formServices = new FormServices (name, password);
+                    formServices.Show();
+
+
+
                     // Jelenlegi form elrejtése (nem zárjuk be azonnal)
                     this.Hide();
                 }

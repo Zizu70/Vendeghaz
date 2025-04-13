@@ -133,11 +133,11 @@ router.post("/checkname", async (req, res) => {
   //**   **//
   // worker felvitel  created_at 
 router.post('/services', async (req, res) => {
-    const { w_name, w_password, w_permission } = req.body;
+    const { w_name, w_password, w_role } = req.body;
     try {
         const result = await db.query(
-            `INSERT INTO workers (w_name, w_password, w_permission)
-             VALUES (?, ?, ?)`, [w_name, w_password, w_permission]
+            `INSERT INTO workers (w_name, w_password, w_role)
+             VALUES (?, ?, ?)`, [w_name, w_password, w_role]
         );
         res.status(201).json({ message: 'Dolgozó hozzáadva!', w_id: result.insertId });
     } catch (error) {
@@ -377,7 +377,7 @@ router.put("/guests/:g_Id", async (req, res) => {
     const currentDateTime = new Date();
   
     try {
-      const [result] = await conn.query(
+      const [result] = await db.query(  //conn
         "UPDATE guests SET deleted_at = ? WHERE g_id = ? AND deleted_at IS NULL",
         [currentDateTime, guestId]
       );
@@ -621,7 +621,7 @@ router.get('/tickets', async (req, res) => {
 });
    //**ok**//
    // Összes jegyrendelés id lekérése comboBoxba
-   router.get('/allTickets', async (req, res) => {
+router.get('/allTickets', async (req, res) => {
     try {
         const results = await db.query(
             `SELECT t_id FROM tickets`   
@@ -632,7 +632,7 @@ router.get('/tickets', async (req, res) => {
     }
 });
    //**ok**//
-   // Jegyrendelés adatainak lekérése név alapján
+   // Jegyrendelés adatainak lekérése név alapján nem
 router.get('/tickets/:ticketid', async (req, res) => {  
     const ticketid = req.params.ticketid;
     
@@ -664,14 +664,14 @@ router.post('/tickets', async (req, res) => {
 });
    //** **//
    // Jegyrendelés módosítás
-router.put('/tickets/:t_Id', async (req, res) => {
+   router.put('/tickets/:t_Id', async (req, res) => {
     const t_Id = req.params.t_Id;
-    const { t_name, t_email, t_date, t_time, t_piece, t_amount, updated_at} = req.body;
+    const { t_name, t_email, t_date, t_time, t_piece, t_amount} = req.body;
     try {
         const result = await db.query(
             `UPDATE tickets
-             SET t_name = ?, t_email = ?, t_date = ?, t_time = ?, t_piece = ?, t_amount = ?, updated_at = ?
-             WHERE t_id = ?`, [t_name, t_email, t_date, t_time, t_piece, t_amount, updated_at, t_Id]
+             SET t_name = ?, t_email = ?, t_date = ?, t_time = ?, t_piece = ?, t_amount = ?
+             WHERE t_id = ?`, [t_name, t_email, t_date, t_time, t_piece, t_amount, t_Id]
         );
         res.status(200).json({ message: 'Jegyrendelés adatai frissítve!' });
     } catch (error) {
@@ -680,7 +680,7 @@ router.put('/tickets/:t_Id', async (req, res) => {
 });
    //** **//
    // Jegyrendelés törlése
-router.delete('/tickets/:g_Id', async (req, res) => {
+/*router.delete('/tickets/:t_Id', async (req, res) => {
     const t_Id = req.params.t_Id;
     try {
         await db.query(`DELETE FROM tickets WHERE t_id = ?`, [t_Id]);
@@ -688,7 +688,28 @@ router.delete('/tickets/:g_Id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a jegyrendelés törlése közben', error });
     }
-});
+});*/
+
+router.put("/softdelete/:t_Id", async (req, res) => {
+    const ticketId = req.params.t_Id;
+    const currentDateTime = new Date();
+  
+    try {
+      const [result] = await db.query(
+        "UPDATE tickets SET deleted_at = ? WHERE t_id = ? AND deleted_at IS NULL",
+        [currentDateTime, ticketId]
+      );
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Nincs ilyen aktív jegyrendelés vagy már törölve lett." });
+      }
+  
+      res.json({ message: "Jegyrendelés törölve (soft delete)", timestamp: currentDateTime });
+    } catch (err) {
+      console.error("Soft delete hiba:", err);
+      res.status(500).json({ message: "Szerverhiba történt a soft delete során." });
+    }
+  });
 
    //***** Ticket *************************************//
 

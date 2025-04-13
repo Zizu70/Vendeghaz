@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Vendeghaz
 {
@@ -19,6 +20,7 @@ namespace Vendeghaz
     {
         private readonly HttpClient client = new HttpClient();
         public string ticketsURL = "http://localhost:3000/desktop/tickets";
+        public string softdeleteURL = "http://localhost:3000/desktop/softdelete";
         public string allTicketURL = "http://localhost:3000/desktop/allTickets";
 
         // A lista deklarálása
@@ -30,8 +32,6 @@ namespace Vendeghaz
         {
             InitializeComponent();
             InitializeAsync();
-
-           
         }
 
         private async void InitializeAsync()
@@ -133,15 +133,9 @@ namespace Vendeghaz
                 }
 
                 await LoadTicketData(selectedIdString);
+                allTickets = await allTicket(); // új adatok  //**
+                uploadingTicketId(); // frissíti az ID listát   //**
             }
-
-
-
-            /*
-            if (comboBox_TicketId.SelectedItem != null)
-            {
-                await LoadTicketData(comboBox_TicketId.SelectedItem.ToString());
-            }*/
         }
 
         private async Task LoadTicketData(string ticketId)
@@ -174,7 +168,7 @@ namespace Vendeghaz
                     textBox_TicketName.Text = ticket.t_name;
                     textBox_TicketEmail.Text = ticket.t_email;
 
-                    dateTimePicker_TicketDate.Text = ticket.t_date.Value.ToString("yyyy-MM-dd");
+                    dateTimePicker_TicketDate.Text = ticket.t_date.Value.AddDays(+1).ToString("yyyy-MM-dd");
                     comboBox_TicketTime.Text = ticket.t_time;
 
                     textBox_TicketPiece.Text = Convert.ToString(ticket.t_piece);
@@ -207,6 +201,9 @@ namespace Vendeghaz
                     var filteredTickets = ticketName.Where(t => t.Deleted_at == null).ToList();
 
                     // Ha ComboBoxot vagy ListBoxot használunk:
+                   // comboBox_TicketTime.DataSource = null;  //**
+                   // comboBox_TicketTime.Items.Clear(); // *** // Ezt is érdemes hozzáadni
+
                     comboBox_TicketTime.DataSource = filteredTickets;
                     comboBox_TicketTime.DisplayMember = "T_time";
                 }
@@ -315,7 +312,7 @@ namespace Vendeghaz
                 t_email = textBox_TicketEmail.Text,
 
                 t_date = dateTimePicker_TicketDate.Value.ToString("yyyy-MM-dd"),
-                t_time = textBox_TicketEmail.Text,
+                t_time = comboBox_TicketTime.Text,
 
                 t_piece = int.Parse(textBox_TicketPiece.Text),
                 t_amount = int.Parse(textBox_TicketAmount.Text),
@@ -356,10 +353,27 @@ namespace Vendeghaz
                 return;
             }
 
+            var ticketData = new
+            {
+                t_name = selectedTicket.T_name,
+                t_email = selectedTicket.T_email,
+
+                t_date = selectedTicket.T_date.ToString("yyyy-MM-dd"),
+                t_time = selectedTicket.T_time,
+
+                t_piece = selectedTicket.T_piece,
+                t_amount = selectedTicket.T_amount,
+
+                deleted_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") // soft delete időpont
+            };
+
+            string json = JsonConvert.SerializeObject(ticketData);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
             try
             {
-                var content = new StringContent("", Encoding.UTF8, "application/json");
-                HttpResponseMessage result = await client.PutAsync($"{ticketsURL}/{selectedTicket.T_id}", content);
+                //var content = new StringContent("", Encoding.UTF8, "application/json");
+                HttpResponseMessage result = await client.PutAsync($"{softdeleteURL}/{selectedTicket.T_id}", content);
 
                 if (result.IsSuccessStatusCode)
                 {
@@ -375,6 +389,23 @@ namespace Vendeghaz
             catch (HttpRequestException ex)
             {
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
+            }
+        }
+
+        private void textBox_TicketPiece_TextChanged(object sender, EventArgs e)
+        {
+            const int szorzo = 1000;
+
+            // Próbáljuk meg átalakítani a beírt szöveget számmá
+            if (int.TryParse(textBox_TicketPiece.Text, out int szam))
+            {
+                int eredmeny = szam * szorzo;
+                textBox_TicketAmount.Text = eredmeny.ToString();
+            }
+            else
+            {
+                // Ha nem szám, akkor töröljük a második mezőt
+                textBox_TicketAmount.Text = "";
             }
         }
     }

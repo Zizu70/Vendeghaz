@@ -74,7 +74,7 @@
             // 
             // button_TicketInsert
             // 
-            this.button_TicketInsert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button_TicketInsert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(250)))), ((int)(((byte)(225)))));
             this.button_TicketInsert.Location = new System.Drawing.Point(23, 497);
             this.button_TicketInsert.Name = "button_TicketInsert";
             this.button_TicketInsert.Size = new System.Drawing.Size(152, 44);
@@ -155,8 +155,14 @@
             // 
             this.comboBox_TicketTime.FormattingEnabled = true;
             this.comboBox_TicketTime.Items.AddRange(new object[] {
-            "a",
-            "b"});
+            "de_9_óra",
+            "de_10_óra",
+            "de_11_óra",
+            "de_12_óra",
+            "du_13_óra",
+            "du_14_óra",
+            "du_15_óra",
+            "du_16_óra"});
             this.comboBox_TicketTime.Location = new System.Drawing.Point(179, 324);
             this.comboBox_TicketTime.Name = "comboBox_TicketTime";
             this.comboBox_TicketTime.Size = new System.Drawing.Size(164, 34);
@@ -234,12 +240,15 @@
             this.textBox_TicketPiece.Name = "textBox_TicketPiece";
             this.textBox_TicketPiece.Size = new System.Drawing.Size(200, 34);
             this.textBox_TicketPiece.TabIndex = 33;
+            this.textBox_TicketPiece.TextChanged += new System.EventHandler(this.textBox_TicketPiece_TextChanged);
             // 
             // textBox_TicketAmount
             // 
+            this.textBox_TicketAmount.Font = new System.Drawing.Font("Segoe Print", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox_TicketAmount.Location = new System.Drawing.Point(179, 436);
             this.textBox_TicketAmount.Name = "textBox_TicketAmount";
-            this.textBox_TicketAmount.Size = new System.Drawing.Size(200, 34);
+            this.textBox_TicketAmount.ReadOnly = true;
+            this.textBox_TicketAmount.Size = new System.Drawing.Size(200, 39);
             this.textBox_TicketAmount.TabIndex = 34;
             // 
             // label9

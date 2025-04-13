@@ -54,7 +54,7 @@ namespace Vendeghaz
             return T_name;
         }
     }
-    public enum T_time {a, b};
+    public enum T_time { de_9_óra, de_10_óra, de_11_óra, de_12_óra, du_13_óra, du_14_óra, du_15_óra, du_16_óra };
 
     internal class T_timeConverter : JsonConverter
     {
@@ -66,10 +66,22 @@ namespace Vendeghaz
             var value = serializer.Deserialize<string>(reader);
             switch (value)
             {
-                case "a":
-                    return T_time.a;
-                case "b":
-                    return T_time.b;
+                case "de_9_óra":
+                    return T_time.de_9_óra;
+                case "de_10_óra":
+                    return T_time.de_10_óra;
+                case "de_11_óra":
+                    return T_time.de_11_óra;
+                case "de_12_óra":
+                    return T_time.de_12_óra;
+                case "du_13_óra":
+                    return T_time.du_13_óra;
+                case "du_14_óra":
+                    return T_time.du_14_óra;
+                case "du_15_óra":
+                    return T_time.du_15_óra;
+                case "du_16_óra":
+                    return T_time.du_16_óra;
             }
             throw new Exception("Cannot unmarshal type Gender");
         }
@@ -84,11 +96,29 @@ namespace Vendeghaz
             var value = (T_time)untypedValue;
             switch (value)
             {
-                case T_time.a:
-                    serializer.Serialize(writer, "a");
+                case T_time.de_9_óra:
+                    serializer.Serialize(writer, "de_9_óra");
                     return;
-                case T_time.b:
-                    serializer.Serialize(writer, "b");
+                case T_time.de_10_óra:
+                    serializer.Serialize(writer, "de_10_óra");
+                    return;
+                case T_time.de_11_óra:
+                    serializer.Serialize(writer, "de_11_óra");
+                    return;
+                case T_time.de_12_óra:
+                    serializer.Serialize(writer, "de_12_óra");
+                    return;
+                case T_time.du_13_óra:
+                    serializer.Serialize(writer, "du_13_óra");
+                    return;
+                case T_time.du_14_óra:
+                    serializer.Serialize(writer, "du_14_óra");
+                    return;
+                case T_time.du_15_óra:
+                    serializer.Serialize(writer, "du_15_óra");
+                    return;
+                case T_time.du_16_óra:
+                    serializer.Serialize(writer, "du_16_óra");
                     return;
             }
             throw new Exception("Cannot marshal type Gender");

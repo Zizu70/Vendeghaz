@@ -1,69 +1,83 @@
-# Szebeni Zita - Vendégház Menedék projekt
+# 🐾 Vendégház Vadaspark Projekt 🐾
 
-A projekt a Vendégház Menedék napi munkájának segítésére szolgál mely mind a webes felhasználókat, mind a dolgzók menhelyi munkáját segíti adminisztráció területén.
+**Projekt célja:**  
+A Vendégház Vadaspark napi munkájának támogatása webes és asztali alkalmazáson keresztül. Az alkalmazás segíti a látogatókat az örökbefogadásban és tájékozódásban, míg a dolgozók számára lehetővé teszi az állatok adminisztrációját, támogatói örökbefogadási ügyintézését dolgozók adatainak kezelését.
 
-# 1. Célok, felhasználók, feladatok
+## 1. Célok, felhasználók, feladatok
 
-    A projekt webes alkalmazásának feladata, hogy a Menedék látogatói és felhasználói a  megismerhessék munkánkat, célkitűzéseinket, megismerhessék "vendégeinket", akiket örökbe is fogadhatnak, segítséget nyújthatnak munkánkban, illetve segítséget kaphassanak tőlünk a talált állatkák chipes beazonosításával az állat gazdájának megtalálásában. Itt nézhető meg a sikertörténetünk is, a már szerető gazdára leltek csapata.
+### Webes alkalmazás célja
 
-    Fentiek alapján az alábbi feladatok ellátását a web alkalmazás teljesíti:
+A látogatók számára lehetőséget biztosítani, hogy:
+- Megismerjék a Vadaspark munkáját és célkitűzéseit
+- Megtekinthessék támogatói örökbefogadás feltételeit
+- Jelentkezzenek támogatónak 
+- Önkéntesként segíthessék munkánkat
 
-    ⦁	Főoldal
-        ⦁	Bemutatkozás
-        ⦁	Segítségnyújtás
-        ⦁	Sikertörténetek
-    ⦁	Vendégeink
-        ⦁	Vendégeink megtekintése és innen az
-            ⦁	Egyén adataihoz
-    ⦁	Örökbefogadás 
-        ⦁	Örökbefogadás feltételek megtekintése, jelentkezés elküldése
-    ⦁	Bejelentkezés vagy regisztráció 
-        ⦁	Bejelentkezés 
-        ⦁	Regisztráció 
-    ⦁	Kapcsolat 
+#### Webes funkciók:
+- **Főoldal**
+  - Bemutatkozás
+  - Vadaspark bemutatása
+  - Jegyvásárlás
+- **Vendégeink**
+  - Vendégeink megtekintése
+- **Támogatói örökbefogadás**
+  - Feltételek megtekintése
+  - Jelentkezési űrlap
+- **Bejelentkezés / Regisztráció**
+- **Kapcsolat**
 
-    A projekt asztali alkalmazásának feladata, hogy a Menedék dolgozói, munkájuk során több területen  kezeljék és feldolgozzák a beérkező adatokat. 
-    Fő feladatunk: Vendégeink, azaz a hozzánk érkező kutyák és cicák adatainak kezelése, feldolgozása, örökbefogadásuk intézése és chipes beazonosításuk.
-     
-    Fentiek alapján az alábbi feladatok ellátását az asztali alkalmazás teljesíti:
+### Asztali alkalmazás célja
 
-    ⦁	Bejelentkezés -  dolgozók, admin részére
-    ⦁	Munkamenet választása 
-    ⦁	Vendégeink
-        innen jutunk el:
-        ⦁	Vendégeink oldalra és innen az
-        ⦁	Egyén adataihoz
-    ⦁	Örökbefogadás 
-        innen jutunk el:
-        ⦁	Örökbefogadás rögzítéséhez, majd innen az
-        ⦁	Örökbefogadói nyilatkozathoz
-    ⦁	Chip keresés 
-        innen jutunk el:
-        ⦁	Chipszám alapján történő tulajdonos beazonosításhoz 
-        ⦁	Chipszámmal kapcsolatban módosítás miatt az egyén adataihoz
+A dolgozók munkáját támogatja az alábbi területeken:
+- Állatok adatainak kezelése
+- Támogatói örökbefogadási folyamat dokumentálása, oklevél készítése
+- Jegyvásárlás kezelése
+- Dolgozók adatainak kezelése
 
-    Az adatok tárolására a vendeghaz.sql adatbázis szolgál.
+#### Asztali funkciók:
+- Bejelentkezés (dolgozói/admin)
+- Munkamenet választása
+- **Vendégeink**
+  - Adatok megtekintése és szerkesztése
+- **Támogatói örökbefogadás**
+  - Támogatói örökbefogadás rögzítés
+  - Örökbefogadói oklévél készítése, mentése
+- **Jegyrendelés kezelése**
+  - Jegyrendelés kezelése
 
-# 2. Felhaszálói felületek
+> **Adatok tárolása:**  
+> Az adatok a `vendeghaz.sql` MySQL adatbázisban kerülnek tárolásra.  
+> A webes és az asztali alkalmazás is aszinkron módon, REST API végpontokon keresztül éri el az adatokat a backend segítségével,  
+> így biztosítva a gyors és megbízható adatkommunikációt.
 
-    A projekt két modulból áll: egy asztali és egy webes alkalmazásből.
-    Mely a backenden keresztül kapcsolódik az adatbázishoz.
+## 2. Felhasználói felületek
 
-    Webes felületen a felhsználó tájkékozódhat 
-        a Menedék életéről, míg bejelentezés után örökbefogadást kezdeményezhet. 
-    Asztali alkalmazás a "vendégeink" adatkezelésével és 
-        az örökbefogadás dokumentációjával foglalkozik.
+A rendszer két modulból áll:
+- **Webes felület** – látogatók számára
+- **Asztali alkalmazás** – dolgozók számára
 
-# 3. Tesztelés, felhasználói betanítás
+Mindkét modul a backend segítségével kapcsolódik az adatbázishoz.
 
-    A különböző folyamatok gyakorlati tesztjei
-    Hibák javítása
-    Optimalizálás
+## 3. Tesztelés és felhasználói betanítás
 
-# 4. Felhasznált technológiák, eszközök
+- Folyamatok gyakorlati tesztelése
+- Hibák feltárása és javítása
+- Optimalizálás
+- Felhasználók betanítása
 
-    Backend: Express, Node.js
-    Frontend: React, HTML - Bootstrap, JavaScript
-    Desktop: C#, .NET Windows Forms
-    Verziókezelés: GitHub
-    Database: MySQL
+## 4. Felhasznált technológiák és eszközök
+
+| Rész             | Technológia                    |
+|------------------|--------------------------------|
+| **Backend**      | Express, Node.js               |
+| **Frontend**     | React, HTML, Bootstrap, JS     |
+| **Desktop App**  | C#, .NET Windows Forms         |
+| **Verziókezelés**| GitHub                         |
+| **Adatbázis**    | MySQL                          |
+
+
+## Projektinformációk
+
+- **Projekt neve:** Vendégház  
+- **Készítő:** Szebeni Zita
+- **2025-ös szakmai vizsgaremek**

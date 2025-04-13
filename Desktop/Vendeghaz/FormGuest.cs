@@ -80,8 +80,8 @@ namespace Vendeghaz
 
             comboBox_GuestSpecies.Text = G_species;
             comboBox_GuestGender.Text = G_gender;
-            dateTimePicker_GuestBirthdate.Value = G_birthdate.DateTime;
-            dateTimePicker_GuestIndate.Value = G_indate.DateTime;
+            dateTimePicker_GuestBirthdate.Value = G_birthdate.DateTime.AddDays(+1);
+            dateTimePicker_GuestIndate.Value = G_indate.DateTime.AddDays(+1);
             textBox_GuestInplace.Text = G_inplace;
             richTextBox_GuestOther.Text = G_other;
 

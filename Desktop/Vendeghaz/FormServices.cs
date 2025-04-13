@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 
 namespace Vendeghaz
@@ -32,6 +33,13 @@ namespace Vendeghaz
         {
             InitializeComponent();
         }
+        public string S_name;
+        public string S_password;
+        public FormServices(string W_name, string W_password)
+        {
+            S_name = W_name;
+            S_password = W_password;
+        }
 
         private void FormServices_Load(object sender, EventArgs e)
         {
@@ -41,11 +49,12 @@ namespace Vendeghaz
         //szervíz belépés clickje     még nem jó
         private async void button_ServicesEntry_Click(object sender, EventArgs e)
         {
+            /*
             if (!validateLoginServices())
                 return;
-
-            string name = textBox_ServicesName.Text.Trim();
-            string password = textBox_ServicesPass.Text.Trim();
+            */
+            string name = S_name;
+            string password = S_password;
 
             var servicesData = new { name, password };
             var json = JsonConvert.SerializeObject(servicesData);
