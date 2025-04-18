@@ -20,6 +20,8 @@ namespace Vendeghaz
         admin,
         dolgozó
     }
+
+
     public partial class FormServices : Form
     {
         private readonly HttpClient client = new HttpClient();
@@ -29,30 +31,60 @@ namespace Vendeghaz
 
         private readonly string workersURL = "http://localhost:3000/desktop/workers";
 
+        private string userName;
+        private string userRole;
+
+
         public FormServices()
         {
             InitializeComponent();
         }
-        public string S_name;
-        public string S_password;
-        public FormServices(string W_name, string W_password)
+
+        public FormServices(string name, string role)
         {
-            S_name = W_name;
-            S_password = W_password;
+            InitializeComponent();
+            // Store the passed data in private variables
+            userName = name;
+            userRole = role;
+
+            MessageBox.Show($"[Form Services] Passed: {userName} / {userRole}");
+            // Optionally: Display the data somewhere (like a label)
+            // This will only work if the label is already initialized
+            label_ServiceInfo.Text = $"Name: {userName}, Role: {userRole}";
         }
 
         private void FormServices_Load(object sender, EventArgs e)
         {
-            comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role)); //törlendő nem???
-        }
+            /*
+            label_ServiceInfo.Text = $"Bejelentkezve: {userName}, -  {userPassword}";
+            */
 
-        //szervíz belépés clickje     még nem jó
+            if (userRole == "admin")
+            {
+                // Engedélyezzük a CRUD gombokat
+                button_ServicesInsert.Enabled = true;
+                button_ServicesUpdate.Enabled = true;
+                button_ServicesDelete.Enabled = true;
+
+                //MessageBox.Show("Nincs admin jogosultságod!", "Jogosultság", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // Csak olvasás engedélyezett
+                button_ServicesInsert.Enabled = false;
+                button_ServicesUpdate.Enabled = false;
+                button_ServicesDelete.Enabled = false;
+
+                //comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role)); //törlendő nem???
+            }
+        }
+            //szervíz belépés clickje     még nem jó
         private async void button_ServicesEntry_Click(object sender, EventArgs e)
         {
             /*
             if (!validateLoginServices())
                 return;
-            */
+            *//*
             string name = S_name;
             string password = S_password;
 
@@ -83,7 +115,7 @@ namespace Vendeghaz
             catch (Exception ex)
             {
                 MessageBox.Show("DSG - Hálózati hiba: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
         }
 
         private void emptyFieldsServices() /// Kiürítjük a mezőket

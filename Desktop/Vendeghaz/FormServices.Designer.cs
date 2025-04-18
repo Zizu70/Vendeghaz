@@ -40,6 +40,7 @@
             this.button_ServicesInsert = new System.Windows.Forms.Button();
             this.button_ServicesUpdate = new System.Windows.Forms.Button();
             this.button_ServicesDelete = new System.Windows.Forms.Button();
+            this.label_ServiceInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,6 +151,14 @@
             this.button_ServicesDelete.UseVisualStyleBackColor = false;
             this.button_ServicesDelete.Click += new System.EventHandler(this.button_ServicesDelete_Click);
             // 
+            // label_ServiceInfo
+            // 
+            this.label_ServiceInfo.AutoSize = true;
+            this.label_ServiceInfo.Location = new System.Drawing.Point(223, 66);
+            this.label_ServiceInfo.Name = "label_ServiceInfo";
+            this.label_ServiceInfo.Size = new System.Drawing.Size(0, 23);
+            this.label_ServiceInfo.TabIndex = 13;
+            // 
             // FormServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 23F);
@@ -157,6 +166,7 @@
             this.BackgroundImage = global::Vendeghaz.Properties.Resources.Login___out;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(638, 544);
+            this.Controls.Add(this.label_ServiceInfo);
             this.Controls.Add(this.button_ServicesDelete);
             this.Controls.Add(this.button_ServicesUpdate);
             this.Controls.Add(this.button_ServicesInsert);
@@ -192,5 +202,6 @@
         private System.Windows.Forms.Button button_ServicesInsert;
         private System.Windows.Forms.Button button_ServicesUpdate;
         private System.Windows.Forms.Button button_ServicesDelete;
+        private System.Windows.Forms.Label label_ServiceInfo;
     }
 }

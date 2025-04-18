@@ -7,22 +7,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Vendeghaz
 {
     public partial class FormMain : Form
     {
 
-        private CheckBox[] checkBoxes_Main;
 
+        private CheckBox[] checkBoxes_Main;
+        
         public FormMain()
         {
             InitializeComponent();
             InitializeCheckBoxes_Main();
         }
 
+
+        public string userName { get; set; }
+        public string userRole { get; set; }
+
+        public FormMain(string name, string role)
+        {
+            InitializeComponent();
+            InitializeCheckBoxes_Main();
+            userName = name;
+            userRole = role;
+
+            //
+            MessageBox.Show($"[Form Main] Passed: {userName} / {userRole}");
+            // Prepare the service form once, with passed data
+
+        }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
+            MessageBox.Show($"[Form Main] Passed: {userName} / {userRole}");
         }
 
         private void InitializeCheckBoxes_Main()
@@ -96,7 +116,7 @@ namespace Vendeghaz
                     formTickets.Show();
                     break;
                 case "checkBox_MainServices":
-                    FormServices formServices = new FormServices();
+                    FormServices formServices = new FormServices(userName, userRole);
                     formServices.Show();
                     break;
             }
