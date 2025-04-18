@@ -463,7 +463,7 @@ router.get('/adoption', async (req, res) => {
 router.get('/allGuests', async (req, res) => {
     try {
         const results = await db.query(
-            `SELECT g_name FROM guests`   // ell.!!!!
+            `SELECT g_name, g_id FROM guests`   // ell.!!!!
         );
         res.status(200).json(results);
     } catch (error) {
@@ -475,7 +475,7 @@ router.get('/allGuests', async (req, res) => {
 router.get('/allUsers', async (req, res) => {
     try {
         const result = await db.query(
-            `SELECT u_name FROM users`   
+            `SELECT u_name, u_id FROM users`   
         );
         res.status(200).json(result);
     } catch (error) {
@@ -512,7 +512,7 @@ router.get('/adopted/:guestname', async (req, res) => {
     
     try {
         const [row] = await db.query(
-           'SELECT g_name, g_species, g_gender, g_birthdate, g_image FROM guests WHERE g_name = ?',
+           'SELECT g_id, g_name, g_species, g_gender, g_birthdate, g_image FROM guests WHERE g_name = ?',
             [guestname]
         );
         res.json(row);
@@ -529,7 +529,7 @@ router.get('/adoptive/:username', async (req, res) => {
 
     try {
         const [rows] = await db.query(
-            `SELECT u_name, u_email FROM users WHERE u_name = ?`,
+            `SELECT u_id, u_name, u_email FROM users WHERE u_name = ?`,
             [u_name]
         );
         res.json(rows);
@@ -550,13 +550,15 @@ router.get('/adoptive/:username', async (req, res) => {
    //**ok**//
    // Örökbefogadás felvitel
 router.post('/adoption', async (req, res) => {
-    const { g_name, g_species, g_gender, g_birthdate, u_name, a_date} = req.body;
+    const { g_id, u_id, a_date} = req.body;
     
     try {
         const result = await db.query(
-            `INSERT INTO adoption (g_name, g_species, g_gender, g_birthdate, u_name, a_date)
-             VALUES ( ?, ?, ?, ?, ?, ?)`, [g_name, g_species, g_gender, g_birthdate, u_name, a_date] 
+            `INSERT INTO adoption (g_id, u_id)
+             VALUES ( ?, ? )`, [g_id, u_id] 
         );
+
+        // 	g_name 	g_species 	g_gender 	g_birthdate 	{g_indate 	g_inplace} 	u_id 	u_name 	
         res.status(201).json({ message: 'Támogatói örökbefogadás rögzítve!', g_Id: result.insertId });
         console.table(result);
     } catch (error) {

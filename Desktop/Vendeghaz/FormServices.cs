@@ -58,29 +58,44 @@ namespace Vendeghaz
             /*
             label_ServiceInfo.Text = $"Bejelentkezve: {userName}, -  {userPassword}";
             */
+            textBox_ServicesName.Hide();
+            textBox_ServicesPass.Hide();
+            comboBox_ServicesRole.Hide();
+            button_ServicesInsert.Hide();
+            button_ServicesUpdate.Hide();
+            button_ServicesDelete.Hide();
 
+        }
+            //szervíz belépés clickje     még nem jó
+        private async void button_ServicesEntry_Click(object sender, EventArgs e)
+        {
             if (userRole == "admin")
             {
-                // Engedélyezzük a CRUD gombokat
-                button_ServicesInsert.Enabled = true;
-                button_ServicesUpdate.Enabled = true;
-                button_ServicesDelete.Enabled = true;
+            // Engedélyezzük a CRUD gombokat
+                label2.Show();
+                textBox_ServicesName.Show();
+                textBox_ServicesPass.Show();
+                comboBox_ServicesRole.Show();
+                button_ServicesInsert.Show();
+                button_ServicesUpdate.Show();
+                button_ServicesDelete.Show();
 
                 //MessageBox.Show("Nincs admin jogosultságod!", "Jogosultság", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 // Csak olvasás engedélyezett
+                textBox_ServicesName.Enabled = false;
+                textBox_ServicesPass.Enabled = false;
+                comboBox_ServicesRole.Enabled = false;
                 button_ServicesInsert.Enabled = false;
                 button_ServicesUpdate.Enabled = false;
                 button_ServicesDelete.Enabled = false;
 
                 //comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role)); //törlendő nem???
             }
-        }
-            //szervíz belépés clickje     még nem jó
-        private async void button_ServicesEntry_Click(object sender, EventArgs e)
-        {
+
+
             /*
             if (!validateLoginServices())
                 return;

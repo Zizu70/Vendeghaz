@@ -14,6 +14,7 @@ using System.IO;
 using System.Data.SqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Xml.Linq;
+using static Vendeghaz.FormAdoption;
 
 namespace Vendeghaz
 {
@@ -70,6 +71,7 @@ namespace Vendeghaz
 
         public class Guest
         {
+            public long G_id { get; set; }
             public string G_name { get; set; }
             public string G_species { get; set; }
             public string G_gender { get; set; }
@@ -79,8 +81,8 @@ namespace Vendeghaz
 
         public class User
         {
+            public long U_id { get; set; }
             public string U_name { get; set; }
-
             public string U_email { get; set; }
         }
 
@@ -200,6 +202,7 @@ namespace Vendeghaz
                     string json = await response.Content.ReadAsStringAsync();
                     dynamic guest = JsonConvert.DeserializeObject(json);
 
+                    label9.Text = guest.g_id;
                     comboBox_AdoptionGName.Text = guest.g_name;
                     textBox_AdoptionSpecies.Text = guest.g_species;
                     textBox_AdoptionGender.Text = guest.g_gender;
@@ -254,6 +257,7 @@ namespace Vendeghaz
                     string json = await response.Content.ReadAsStringAsync();
                     dynamic user = JsonConvert.DeserializeObject(json);
 
+                    label11.Text = user.u_id;
                     comboBox_AdoptionUName.Text = user.u_name;
                     textBox_AdoptionEmail.Text = user.u_email;
                 }
@@ -268,12 +272,12 @@ namespace Vendeghaz
             }
         }
 
-        private async Task InsertAdoption(string G_name, string G_species, string G_gender, string G_birthdate, string U_name, string A_date)
+        private async Task InsertAdoption(string G_id, string U_id)
         {
             try
             {
                 string url = $"http://localhost:3000/desktop/adoption";
-                var content = new StringContent($"{{\"g_name\":\"{G_name}\",\"g_species\":\"{G_species}\",\"g_gender\":\"{G_gender}\",\"g_birthdate\":\"{G_birthdate}\",\"u_name\":\"{U_name}\",\"a_date\":\"{A_date}\"}}", Encoding.UTF8, "application/json");
+                var content = new StringContent($"{{\"g_id\":\"{G_id}\",\"u_id\":\"{U_id}\"}}", Encoding.UTF8, "application/json");
              
                 HttpResponseMessage response = await client.PostAsync(url, content); 
                 
@@ -281,8 +285,8 @@ namespace Vendeghaz
                 {
                     MessageBox.Show("Az örökbefogadás sikeresen rögzítve!", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    FormContract formContract = new FormContract(G_name,  G_species, G_gender, G_birthdate, U_name, A_date);
-                    formContract.Show();
+                    //FormContract formContract = new FormContract(//G_name,  G_species, G_gender, G_birthdate, U_name, A_date);
+                    //formContract.Show();
                 }
                 else
                 {
@@ -297,6 +301,7 @@ namespace Vendeghaz
 
         private async void button_AdoptionInsert_Click(object sender, EventArgs e)
         {
+            
             string G_name = comboBox_AdoptionGName.Text;
             string G_species = textBox_AdoptionSpecies.Text;
             string G_gender = textBox_AdoptionGender.Text;
@@ -304,7 +309,11 @@ namespace Vendeghaz
             string U_name = comboBox_AdoptionUName.Text;
             string A_date = DateTime.Now.ToString("yyyy-MM-dd");
 
-            await InsertAdoption(G_name, G_species, G_gender, G_birthdate, U_name, A_date);
+            string G_id = label9.Text;
+            string U_id = label11.Text;
+
+
+            await InsertAdoption( G_id,U_id);
         }
 
         private void button_AdoptionAgain_Click(object sender, EventArgs e)

@@ -49,6 +49,8 @@
             this.pictureBox_AdoptionImage = new System.Windows.Forms.PictureBox();
             this.textBox_AdoptionBirthdate = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_AdoptionImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -232,6 +234,24 @@
             this.label6.TabIndex = 31;
             this.label6.Text = "Született";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(229, 64);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(51, 23);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "label9";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(168, 333);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(61, 23);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "label11";
+            // 
             // FormAdoption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 23F);
@@ -239,6 +259,8 @@
             this.BackgroundImage = global::Vendeghaz.Properties.Resources.Háttér;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(481, 632);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.textBox_AdoptionBirthdate);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox_AdoptionImage);
@@ -293,5 +315,7 @@
         private System.Windows.Forms.PictureBox pictureBox_AdoptionImage;
         private System.Windows.Forms.TextBox textBox_AdoptionBirthdate;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label11;
     }
 }

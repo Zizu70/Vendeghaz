@@ -85,15 +85,22 @@ namespace Vendeghaz
             textBox_GuestInplace.Text = G_inplace;
             richTextBox_GuestOther.Text = G_other;
 
+            string imageDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Guest_Image");
+            string imagePath = Path.Combine(imageDirectory, G_image);
+
+
+
             // Kép betöltése
-            if (!string.IsNullOrEmpty(G_image) && System.IO.File.Exists(G_image))
+            if (!string.IsNullOrEmpty(G_image) && File.Exists(imagePath))
             {
-                pictureBox_GuestImage.ImageLocation = G_image;
+                pictureBox_GuestImage.ImageLocation = imagePath;
             }
             else
             {
                 pictureBox_GuestImage.Image = null; // Ha nincs kép, töröljük
             }
+
+
 
             selectedGuest = new Guest
             {
@@ -296,23 +303,37 @@ namespace Vendeghaz
                 return;
             }
 
+
+
             if (!validateInputGuest()) return;
 
-            string imageFileName = null;
+
+
+            // Alapból megtartjuk a régi képet
+            string imageFileName = selectedGuest.G_image;
+
+
 
             if (selectedImage != null)
             {
                 // Mentési mappa beállítása
                 string imageFolder = Path.Combine(Application.StartupPath, "Guest_Image");
 
+
+
                 if (!Directory.Exists(imageFolder))
                 {
                     Directory.CreateDirectory(imageFolder);
                 }
 
-                // Fájlnév beállítása a vendég neve alapján (pl. Mózes.jpg)
-                imageFileName = $"{textBox_GuestName.Text}.jpg";
+
+
+                // Fájlnév létrehozása biztonságosan a vendég nevéből
+                string safeFileName = string.Concat(textBox_GuestName.Text.Split(Path.GetInvalidFileNameChars()));
+                imageFileName = $"{safeFileName}.jpg";
                 string imagePath = Path.Combine(imageFolder, imageFileName);
+
+
 
                 try
                 {
@@ -325,6 +346,8 @@ namespace Vendeghaz
                 }
             }
 
+
+
             var guestUpdateData = new
             {
                 g_name = textBox_GuestName.Text,
@@ -334,12 +357,16 @@ namespace Vendeghaz
                 g_indate = dateTimePicker_GuestIndate.Value.ToString("yyyy-MM-dd"),
                 g_inplace = textBox_GuestInplace.Text,
                 g_other = richTextBox_GuestOther.Text,
-                g_image = imageFileName,// Csak a fájl neve megy az adatbázisba
+                g_image = imageFileName, // Meglévő vagy új kép neve
                 updated_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             };
 
+
+
             string json = JsonConvert.SerializeObject(guestUpdateData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+
 
             try
             {
@@ -359,64 +386,6 @@ namespace Vendeghaz
             {
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
-
-
-            /*
-            if (string.IsNullOrWhiteSpace(textBox_GuestName.Text) ||
-                string.IsNullOrWhiteSpace(comboBox_GuestSpecies.Text) ||
-                string.IsNullOrWhiteSpace(comboBox_GuestGender.Text))
-            {
-                MessageBox.Show("Minden mező kitöltése kötelező!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }*/
-            /*if (validateInputGuest()) // Ellenőrizzük, hogy minden kötelező mező kitöltve van-e
-            {
-                if (selectedGuest != null)
-                {
-                    selectedGuest.G_name = textBox_GuestName.Text;
-                    selectedGuest.G_species = comboBox_GuestSpecies.Text;
-                    selectedGuest.G_gender = comboBox_GuestGender.Text;
-                    selectedGuest.G_birthdate = dateTimePicker_GuestBirthdate.Value;
-                    selectedGuest.G_indate = dateTimePicker_GuestIndate.Value;
-                    selectedGuest.G_inplace = textBox_GuestInplace.Text;
-                    selectedGuest.G_species = comboBox_GuestSpecies.Text;
-                    selectedGuest.G_other = richTextBox_GuestOther.Text;
-                    // A módosítás idejét frissítjük
-
-                    selectedGuest.Updated_at = DateTime.Now; // ????
-
-
-                    try
-                    {
-                        var content = new StringContent($"{{\"g_name\":\"{selectedGuest.G_name}\",\"g_species\":\"{selectedGuest.G_species}\",\"g_gender\":\"{selectedGuest.G_gender}\",\"g_birthdate\":\"{selectedGuest.G_birthdate}\",\"g_indatee\":\"{selectedGuest.G_indate}\",\"g_inplace\":\"{selectedGuest.G_inplace}\",\"g_other\":\"{selectedGuest.G_other}\",}}", Encoding.UTF8, "application/json"); // ,\"g_image\":\"{G_image}\"
-
-                        //MessageBox.Show(description);  ???
-                        HttpResponseMessage result = await client.PutAsync($"{guestsBaseURL}/{selectedGuest.G_id}", content);
-
-            */
-            //*** kép kezelés ***/
-            /*if (result.IsSuccessStatusCode)
-            {
-                MessageBox.Show("Sikeres frissítés!");
-                await LoadGuests();
-                emptyFieldsGuest();
-            }
-            else
-            {
-                MessageBox.Show("Hiba a frissítés során!");
-            }
-        }
-        catch (HttpRequestException ex)
-        {
-            MessageBox.Show(ex.Message);
-        }
-    }
-}
-// Vissza a FormChoicera
-FormChoice formChoice = new FormChoice();
-formChoice.Show();
-this.Close();*/
-
         }
 
         //**  **//  //soft delete
