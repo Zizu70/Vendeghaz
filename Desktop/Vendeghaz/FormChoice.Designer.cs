@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormChoice));
             this.button_ChoiceInsert = new System.Windows.Forms.Button();
-            this.button_ChoiceUpdate = new System.Windows.Forms.Button();
-            this.buttonChoiceDelete = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listView_Choice = new System.Windows.Forms.ListView();
@@ -53,7 +51,7 @@
             // button_ChoiceInsert
             // 
             this.button_ChoiceInsert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(250)))), ((int)(((byte)(225)))));
-            this.button_ChoiceInsert.Location = new System.Drawing.Point(127, 77);
+            this.button_ChoiceInsert.Location = new System.Drawing.Point(207, 76);
             this.button_ChoiceInsert.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_ChoiceInsert.Name = "button_ChoiceInsert";
             this.button_ChoiceInsert.Size = new System.Drawing.Size(94, 41);
@@ -62,33 +60,11 @@
             this.button_ChoiceInsert.UseVisualStyleBackColor = false;
             this.button_ChoiceInsert.Click += new System.EventHandler(this.button_ChoiceInsert_Click);
             // 
-            // button_ChoiceUpdate
-            // 
-            this.button_ChoiceUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(165)))), ((int)(((byte)(240)))));
-            this.button_ChoiceUpdate.Location = new System.Drawing.Point(127, 455);
-            this.button_ChoiceUpdate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_ChoiceUpdate.Name = "button_ChoiceUpdate";
-            this.button_ChoiceUpdate.Size = new System.Drawing.Size(94, 41);
-            this.button_ChoiceUpdate.TabIndex = 2;
-            this.button_ChoiceUpdate.Text = "Módosítás";
-            this.button_ChoiceUpdate.UseVisualStyleBackColor = false;
-            // 
-            // buttonChoiceDelete
-            // 
-            this.buttonChoiceDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(110)))), ((int)(((byte)(150)))));
-            this.buttonChoiceDelete.Location = new System.Drawing.Point(127, 504);
-            this.buttonChoiceDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.buttonChoiceDelete.Name = "buttonChoiceDelete";
-            this.buttonChoiceDelete.Size = new System.Drawing.Size(94, 41);
-            this.buttonChoiceDelete.TabIndex = 3;
-            this.buttonChoiceDelete.Text = "Törlés";
-            this.buttonChoiceDelete.UseVisualStyleBackColor = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::Vendeghaz.Properties.Resources.rajzhattyu;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(262, 26);
+            this.pictureBox1.Location = new System.Drawing.Point(339, 27);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(220, 126);
@@ -111,9 +87,9 @@
             this.columnHeader2,
             this.columnHeader3});
             this.listView_Choice.HideSelection = false;
-            this.listView_Choice.Location = new System.Drawing.Point(262, 173);
+            this.listView_Choice.Location = new System.Drawing.Point(339, 176);
             this.listView_Choice.Name = "listView_Choice";
-            this.listView_Choice.Size = new System.Drawing.Size(220, 372);
+            this.listView_Choice.Size = new System.Drawing.Size(220, 264);
             this.listView_Choice.TabIndex = 7;
             this.listView_Choice.UseCompatibleStateImageBehavior = false;
             this.listView_Choice.View = System.Windows.Forms.View.Details;
@@ -209,11 +185,11 @@
             this.groupBox1.Controls.Add(this.checkBox_ChoiceSmall);
             this.groupBox1.Controls.Add(this.button_ChoiceChoice);
             this.groupBox1.Controls.Add(this.checkBox_ChoiceLarge);
-            this.groupBox1.Location = new System.Drawing.Point(36, 164);
+            this.groupBox1.Location = new System.Drawing.Point(36, 204);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(209, 273);
+            this.groupBox1.Size = new System.Drawing.Size(284, 201);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Válasszon csoportot!";
@@ -221,7 +197,7 @@
             // button_ChoicePick
             // 
             this.button_ChoicePick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button_ChoicePick.Location = new System.Drawing.Point(91, 215);
+            this.button_ChoicePick.Location = new System.Drawing.Point(171, 80);
             this.button_ChoicePick.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_ChoicePick.Name = "button_ChoicePick";
             this.button_ChoicePick.Size = new System.Drawing.Size(94, 41);
@@ -236,13 +212,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Vendeghaz.Properties.Resources.Háttér;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(508, 568);
+            this.ClientSize = new System.Drawing.Size(606, 464);
             this.Controls.Add(this.listView_Choice);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.buttonChoiceDelete);
             this.Controls.Add(this.button_ChoiceInsert);
-            this.Controls.Add(this.button_ChoiceUpdate);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Segoe Print", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -260,8 +234,6 @@
 
         #endregion
         private System.Windows.Forms.Button button_ChoiceInsert;
-        private System.Windows.Forms.Button button_ChoiceUpdate;
-        private System.Windows.Forms.Button buttonChoiceDelete;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView listView_Choice;

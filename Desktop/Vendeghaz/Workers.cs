@@ -16,25 +16,7 @@ namespace Vendeghaz
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    /**/
-    public static class Serialize
-    {
-        public static string ToJson(this Workers[] self) => JsonConvert.SerializeObject(self, Vendeghaz.Converter.Settings);
-    }
 
-    internal static class Converter
-    {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-        {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
-            },
-        };
-    }
-    /**/
     public partial class Workers
     {
         [JsonProperty("w_id")]
@@ -49,15 +31,6 @@ namespace Vendeghaz
         [JsonProperty("w_role")]
         public string W_role { get; set; }
 
-        [JsonProperty("created_at")]
-        public DateTimeOffset Created_at { get; set; }
-
-        [JsonProperty("updated_at")]
-        public DateTimeOffset? Updated_at { get; set; }
-
-        [JsonProperty("deleted_at")]
-        public DateTimeOffset? Deleted_at { get; set; }
-
         public override string ToString()
         {
             return W_name;
@@ -66,11 +39,6 @@ namespace Vendeghaz
     }
 
     public enum W_role { admin, dolgozó };
-
-    public partial class Workers
-    {
-        public static Workers[] FromJson(string json) => JsonConvert.DeserializeObject<Workers[]>(json, Vendeghaz.WorkersConverter.Settings);
-    }
 
     internal class W_roleConverter : JsonConverter
     {
@@ -114,8 +82,14 @@ namespace Vendeghaz
     }
 
 
-    /**/
+    public partial class Workers
+    {
+        public static Workers[] FromJson(string json) => JsonConvert.DeserializeObject<Workers[]>(json, Vendeghaz.WorkersConverter.Settings);
+    }
 
+    
+
+    /**/
     public static class WorkersSerialize
     {
         public static string ToJson(this Workers[] self) => JsonConvert.SerializeObject(self, Vendeghaz.WorkersConverter.Settings);

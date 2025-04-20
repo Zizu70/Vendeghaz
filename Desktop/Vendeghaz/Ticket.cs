@@ -12,21 +12,16 @@ namespace Vendeghaz
     using System.Collections.Generic;
 
     using System.Globalization;
-    using System.Xml.Linq;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
-    using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
     public partial class Ticket
     {
         [JsonProperty("t_id")]
         public long T_id { get; set; }
 
-        [JsonProperty("t_name")]
-        public string T_name { get; set; }
-
-        [JsonProperty("t_email")]
-        public string T_email { get; set; }
+        [JsonProperty("u_id")]
+        public long U_id { get; set; }
 
         [JsonProperty("t_date")]
         public DateTimeOffset T_date { get; set; }
@@ -40,20 +35,14 @@ namespace Vendeghaz
         [JsonProperty("t_amount")]
         public long T_amount { get; set; }
 
-        [JsonProperty("created_at")]
-        public DateTimeOffset Created_at { get; set; }
+        [JsonProperty("u_name")]
+        public string U_name { get; set; }
 
-        [JsonProperty("updated_at")]
-        public DateTimeOffset? Updated_at { get; set; }
+        [JsonProperty("u_email")]
+        public string U_email { get; set; }
 
-        [JsonProperty("deleted_at")]
-        public object Deleted_at { get; set; }
-
-        public override string ToString()
-        {
-            return T_name;
-        }
     }
+
     public enum T_time { de_9_óra, de_10_óra, de_11_óra, de_12_óra, du_13_óra, du_14_óra, du_15_óra, du_16_óra };
 
     internal class T_timeConverter : JsonConverter
@@ -150,4 +139,3 @@ namespace Vendeghaz
         };
     }
 }
-

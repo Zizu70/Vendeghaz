@@ -43,12 +43,12 @@ namespace Vendeghaz
                     var guestNames = JsonConvert.DeserializeObject<List<Guest>>(json);
 
                     // Csak azokat töltjük be, amelyek nincsenek törölve
-                    var filteredGuests = guestNames.Where(g => g.Deleted_at == null).ToList();
+//???                var filteredGuests = guestNames.Where(g => g.Deleted_at == null).ToList();
 
                     // Ha ComboBoxot vagy ListBoxot használunk:
-                    comboBox_GuestSpecies.DataSource = filteredGuests;
+ //                   comboBox_GuestSpecies.DataSource = filteredGuests;
                     comboBox_GuestSpecies.DisplayMember = "G_species";
-                    comboBox_GuestGender.DataSource = filteredGuests;
+ //                   comboBox_GuestGender.DataSource = filteredGuests;
                     comboBox_GuestGender.DisplayMember = "G_name";
                 }
                 else
@@ -269,7 +269,9 @@ namespace Vendeghaz
             {
                 Directory.CreateDirectory(debugPath);
             }
-            ///////////*//*
+            ///////////*/
+          
+            /*
             var content = new StringContent($"{{\"g_name\":\"{G_name}\",\"g_species\":\"{G_species}\",\"g_gender\":\"{G_gender}\",\"g_birthdate\":\"{G_birthdate}\",\"g_indate\":\"{G_indate}\",\"g_inplace\":\"{G_inplace}\",\"g_other\":\"{G_other}\"}}", Encoding.UTF8, "application/json");
             // ,\"g_image\":\"{G_image}\"
             try
@@ -358,7 +360,6 @@ namespace Vendeghaz
                 g_inplace = textBox_GuestInplace.Text,
                 g_other = richTextBox_GuestOther.Text,
                 g_image = imageFileName, // Meglévő vagy új kép neve
-                updated_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             };
 
 
@@ -387,8 +388,7 @@ namespace Vendeghaz
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
         }
-
-        //**  **//  //soft delete
+        //ok//
         private async void button_GuestDelete_Click(object sender, EventArgs e)
         {
 
@@ -397,57 +397,31 @@ namespace Vendeghaz
                 MessageBox.Show("Nincs kiválasztott vendég a törléshez!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
-            var guestData = new
+
+            if (MessageBox.Show("Biztosan törölni szeretné a vendéget?", "Törlés", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                g_name = selectedGuest.G_name,
-                g_species = selectedGuest.G_species,
-                g_gender = selectedGuest.G_gender,
-                g_birthdate = selectedGuest.G_birthdate.ToString("yyyy-MM-dd"),
-                g_indate = selectedGuest.G_indate.ToString("yyyy-MM-dd"),
-                g_inplace = selectedGuest.G_inplace,
-                g_other = selectedGuest.G_other,
-                g_image = selectedGuest.G_image,
-                deleted_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") // soft delete időpont
-            };
-
-           /*
-            // Soft delete dátum beállítása
-            string currentDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            // Csak a soft delete mezőt küldjük el
-            var guestData = new
-            {
-                deleted_at = currentDate
-            };
-           
-            */
-            string json = JsonConvert.SerializeObject(guestData);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-
-            try
-            {
-                //var content = new StringContent("", Encoding.UTF8, "application/json");
-                HttpResponseMessage result = await client.PutAsync($"{guestsURL}/{selectedGuest.G_id}", content);
-
-                if (result.IsSuccessStatusCode)
+                try
                 {
-                    MessageBox.Show("Vendég törölve (soft delete)!");
-                    await LoadGuests();
-                    emptyFieldsGuest();
+                    HttpResponseMessage result = await client.DeleteAsync($"{guestsURL}/{selectedGuest.G_id}");
+
+                    if (result.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show($"ID: {selectedGuest.G_id}");
+
+                        MessageBox.Show("Vendég törölve!");
+                        await LoadGuests();
+                        emptyFieldsGuest();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Törlés sikertelen!");
+                    }
                 }
-                else
+                catch (HttpRequestException ex)
                 {
-                    MessageBox.Show("Törlés sikertelen!");
+                    MessageBox.Show("Hálózati hiba: " + ex.Message);
                 }
             }
-            catch (HttpRequestException ex)
-            {
-                MessageBox.Show("Hálózati hiba: " + ex.Message);
-            }
-
-
 
 
 
@@ -513,11 +487,11 @@ namespace Vendeghaz
                 }
             }*/
 
-            /* // Vissza a FormChoicera
+             // Vissza a FormChoicera
              FormChoice formChoice = new FormChoice();
              formChoice.Show();
              this.Close();
-         }*/
+         
         }
     }
 }

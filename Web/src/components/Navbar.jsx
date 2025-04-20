@@ -1,66 +1,109 @@
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPaw, faHeart, faTicketAlt,
+  faSignInAlt, faUserPlus, faInfoCircle, faSignOutAlt
+} from '@fortawesome/free-solid-svg-icons';
 
-import logo from '../assets/logo.png';
-import styles from "../styles/NavbarDesign.css";
 
-function Navbar(props) {
-  const { leftSide, rightSide, rightSideOthers } = props;
+const Navbar = () => {
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user')));
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleLoginChange = () => {
+      setUser(JSON.parse(localStorage.getItem('user')));
+    };
+
+    window.addEventListener('loginChange', handleLoginChange);
+    return () => window.removeEventListener('loginChange', handleLoginChange);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    window.dispatchEvent(new Event('loginChange'));
+    navigate('/');
+  };
+  
+  
+
+
   return (
-    <nav className="navbar navbar-expand-sm bg-info" data-bs-theme="dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
       <div className="container-fluid">
-      <img src={logo} alt="Logo" className={styles['navbar-logo']} />
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
+        <button 
+          className="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav" 
+          aria-expanded="false" 
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {leftSide.map((navItem) => (
-              <li key={navItem.to} className="nav-item">
-                <Link className="nav-link" to={navItem.to}>
-                  {navItem.text}
-                </Link>
-              </li>
-            ))}
-          </ul>
+
+        <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            {rightSide.map((navItem) => (
-              <li key={navItem.to} className="nav-item">
-                <Link className="nav-link" to={navItem.to}>
-                  {navItem.text}
-                </Link>
-              </li>
-            ))}
-            {
-              rightSideOthers.map(item => (
-                <li key={item} className="nav-item">
-                  {item}
+          <li className="nav-item">
+              <NavLink className="nav-link" to="/about">
+                <FontAwesomeIcon icon={faInfoCircle} className="me-2" />
+                Rólunk
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/guests">
+                <FontAwesomeIcon icon={faPaw} className="me-2" />
+                Állatok
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/adoptions">
+                <FontAwesomeIcon icon={faHeart} className="me-2" />
+                Örökbefogadások
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/tickets">
+                <FontAwesomeIcon icon={faTicketAlt} className="me-2" />
+                Jegyek
+              </NavLink>
+            </li>
+
+            {!user && (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/login">
+                    <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
+                    Bejelentkezés
+                  </NavLink>
                 </li>
-              ))
-            }
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/register">
+                    <FontAwesomeIcon icon={faUserPlus} className="me-2" />
+                    Regisztráció
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {user && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="#" onClick={handleLogout}>
+                  <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
+                  Kilépés ({user.user.u_name || user.user.w_name})
+                </NavLink>
+              </li>
+            )}
+
+            
           </ul>
         </div>
       </div>
     </nav>
   );
-}
-
-Navbar.propTypes = {
-  leftSide: PropTypes.array.isRequired,
-  rightSide: PropTypes.array.isRequired,
-  rightSideOthers: PropTypes.array,
 };
-
-Navbar.defaultProps = {
-  rightSideOthers: []
-}
 
 export default Navbar;

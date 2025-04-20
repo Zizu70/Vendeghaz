@@ -1,28 +1,10 @@
-body {
-  background-color: rgba(242, 242, 242, 0.3); /* az utolsó értékkel állítom mennyire legyen erős a háttér kép láthatósága */ 
-  background-image: 
-      linear-gradient(rgba(232, 255, 206, 0.3), rgba(232, 255, 206, 0.3)), 
-      url('../src/assets/mainhatter.png');
-  background-blend-mode: overlay;
-}
-.video-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* háttérben legyen */
-  opacity: 0.5; /*átlátszóság beállítása */
-}
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 
-.video-background video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-/*body {
-  background-color: #f2f2f2; /* Háttérszín beállítása 
-  background-image: url('../src/assets/mainhattaer.png'); /* Háttérkép beállítása 
-  background-blend-mode: overlay; /* A háttérszín és a háttérkép összekeverése 
-}*/

@@ -68,8 +68,8 @@ router.get('/workers', async (req, res) => {
     }
 });*/
    //**ok**//
-   // Szervíz belépés - belépés gomb
-router.post("/services", async (req, res) => {
+   // Szervíz belépés - belépés gomb nem használt
+router.post("/workers", async (req, res) => {
     const { name, password } = req.body;
   
     if (!name || !password) {
@@ -105,19 +105,19 @@ router.post("/services", async (req, res) => {
       res.status(500).json({ success: false, message: "Szerverhiba" });
     }
   });
-
-// Névellenőrzés felvitelhez
+// ok //
+// Névellenőrzés felvitelhez 
 router.post("/checkname", async (req, res) => {
   const { name } = req.body;
 
-  /*if (!name) {
+  if (!name) {
     return res.status(400).json({ success: false, message: "Név hiányzik!" });
-  }*/
+  }
 
   try {
-    const [rows] = await conn.query("SELECT * FROM workers WHERE w_name = ?", [name]);
+    const result = await db.query("SELECT * FROM workers WHERE LOWER(w_name) = LOWER(?)", [name]);
 
-    if (rows.length > 0) {
+    if (result.length > 0) {
       return res.status(200).json({ exists: true, message: "A név már létezik az adatbázisban." });
     } else {
       return res.status(200).json({ exists: false, message: "A név még nem szerepel az adatbázisban." });
@@ -127,13 +127,13 @@ router.post("/checkname", async (req, res) => {
     res.status(500).json({ success: false, message: "Szerverhiba!" });
   }
 });
-
-
-
   //**   **//
-  // worker felvitel  created_at 
+  // worker felvitel 
 router.post('/services', async (req, res) => {
     const { w_name, w_password, w_role } = req.body;
+
+    console.log("Bejövő dolgozó:", req.body);
+
     try {
         const result = await db.query(
             `INSERT INTO workers (w_name, w_password, w_role)
@@ -165,9 +165,10 @@ router.put('/services/:w_name', async (req, res) => {
    //**  **//
    // worker törlés
 router.delete('/services/:w_name', async (req, res) => {
-    const {w_name, delete_at} = req.params.w_name;
+    const {w_name} = req.params.w_name;
     try {
-        await db.query(`DELETE FROM workers WHERE w_name = ?`, [w_name, delete_at]);
+        await db.query(`DELETE FROM workers WHERE w_name = ?`, [w_name]);
+
         res.status(200).json({ message: 'Dolgozó törölve lett!' });
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt dolgozó törlése közben!', error });
@@ -361,9 +362,9 @@ router.put('/guests/:g_Id', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt Vendég adatainak frissítése közben!', error });
     }
 });
-// Vendég törlése nem
+// Vendég törlése // ok //
 router.delete('/guests/:g_Id', async (req, res) => {
-    const g_Id = req.params.g.Id;
+    const g_Id = req.params.g_Id;
     try {
         await db.query(`DELETE FROM guests WHERE g_id = ?`, [g_Id]);
         res.status(200).json({ message: 'Vendég törölve!' });
@@ -371,80 +372,9 @@ router.delete('/guests/:g_Id', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt Vendég törlése közben', error });
     }
 });
-// Vendég törlése soft delete-tel
-router.put("/guests/:g_Id", async (req, res) => {
-    const guestId = req.params.g_Id;
-    const currentDateTime = new Date();
-  
-    try {
-      const [result] = await db.query(  //conn
-        "UPDATE guests SET deleted_at = ? WHERE g_id = ? AND deleted_at IS NULL",
-        [currentDateTime, guestId]
-      );
-  
-      if (result.affectedRows === 0) {
-        return res.status(404).json({ message: "Nincs ilyen aktív vendég vagy már törölve lett." });
-      }
-  
-      res.json({ message: "Vendég törölve (soft delete)", timestamp: currentDateTime });
-    } catch (err) {
-      console.error("Soft delete hiba:", err);
-      res.status(500).json({ message: "Szerverhiba történt a soft delete során." });
-    }
-  });
-/*
-router.put('/guests/:g_id', (req, res) => {
-    const { g_id } = req.params;
-    const {
-      g_name,
-      g_species,
-      g_gender,
-      g_birthdate,
-      g_indate,
-      g_inplace,
-      g_other,
-      g_image,
-      deleted_at // <-- FONTOS!
-    } = req.body;
-  
-    const query = `
-      UPDATE guests SET 
-        g_name = ?, 
-        g_species = ?, 
-        g_gender = ?, 
-        g_birthdate = ?, 
-        g_indate = ?, 
-        g_inplace = ?, 
-        g_other = ?, 
-        g_image = ?, 
-        deleted_at = ? 
-      WHERE g_id = ?
-    `;
-  
-    db.query(query, [
-      g_name,
-      g_species,
-      g_gender,
-      g_birthdate,
-      g_indate,
-      g_inplace,
-      g_other,
-      g_image,
-      deleted_at, // <-- ezt is be kell állítani!
-      id
-    ], (err, results) => {
-      if (err) {
-        console.error('Hiba a frissítés során:', err);
-        res.status(500).send('Hiba a frissítés során');
-      } else {
-        res.status(200).send('Vendég frissítve');
-      }
-    });
-  });
-*/
-//*****Guest end****************************************************************************//
+//***** Guest *****//
 
-//*****Adaption top - OK   ****************************AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*************//
+//***** Adoption *****// 
    //**ok**//
    // Összes örökbefogadás lekérése
 router.get('/adoption', async (req, res) => {
@@ -568,7 +498,7 @@ router.post('/adoption', async (req, res) => {
 
 //*****Adaption end********************************AAAAAAAAAAAAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVVVVVVVV**//
 
-//*****Contract top - OK ********************************CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC*****//
+//***** Contract *****// ok //
 router.get('/contract', (req, res) => {
     const { g_name, u_name, a_date } = req.query;
   
@@ -604,8 +534,7 @@ router.get('/contract', (req, res) => {
       res.json(results); // csak egy rekordra számítunk
     });
   });
-
-//*****Contract top********************************CCCCCCCCCCCCCCCCCCCCCCCCCCVVVVVVVVVVVVVVVVVVVVVVV*****//
+//***** Contract *****//
 
 //***** Ticket *************************************//
    //** **//
@@ -640,8 +569,10 @@ router.get('/tickets/:ticketid', async (req, res) => {
     
     try {
         const [row] = await db.query(
-           'SELECT * FROM tickets WHERE t_id = ?',
-            [ticketid]
+            `SELECT tickets.*, users.u_name, users.u_email
+            FROM tickets
+            JOIN users ON tickets.u_id = users.u_id
+            WHERE tickets.t_id = ?`, [ticketid]
         );
         res.json(row);
     } catch (error) {

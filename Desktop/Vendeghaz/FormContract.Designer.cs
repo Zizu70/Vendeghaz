@@ -83,7 +83,7 @@
             // 
             // panel_Contract
             // 
-            this.panel_Contract.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(245)))), ((int)(((byte)(211)))));
+            this.panel_Contract.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(245)))), ((int)(((byte)(205)))));
             this.panel_Contract.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_Contract.Controls.Add(this.pictureBox8);
             this.panel_Contract.Controls.Add(this.pictureBox7);
@@ -104,7 +104,7 @@
             this.panel_Contract.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.panel_Contract.Location = new System.Drawing.Point(12, 12);
             this.panel_Contract.Name = "panel_Contract";
-            this.panel_Contract.Size = new System.Drawing.Size(816, 856);
+            this.panel_Contract.Size = new System.Drawing.Size(816, 757);
             this.panel_Contract.TabIndex = 0;
             // 
             // pictureBox8
@@ -121,7 +121,7 @@
             // 
             this.pictureBox7.BackgroundImage = global::Vendeghaz.Properties.Resources.atlatszo;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox7.Location = new System.Drawing.Point(4, 644);
+            this.pictureBox7.Location = new System.Drawing.Point(4, 552);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(134, 127);
             this.pictureBox7.TabIndex = 43;
@@ -131,7 +131,7 @@
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox6.Location = new System.Drawing.Point(25, 802);
+            this.pictureBox6.Location = new System.Drawing.Point(25, 724);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(771, 14);
             this.pictureBox6.TabIndex = 42;
@@ -139,12 +139,12 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(245)))), ((int)(((byte)(211)))));
+            this.richTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(245)))), ((int)(((byte)(205)))));
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox2.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.richTextBox2.Location = new System.Drawing.Point(24, 777);
+            this.richTextBox2.Location = new System.Drawing.Point(24, 699);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(758, 19);
+            this.richTextBox2.Size = new System.Drawing.Size(758, 57);
             this.richTextBox2.TabIndex = 41;
             this.richTextBox2.Text = "  www.vendeghazvadaspark.hu                                                      " +
     "                                Támogasson minket adója 1%-val: adószám:11223344" +
@@ -153,7 +153,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(37, 576);
+            this.label11.Location = new System.Drawing.Point(37, 534);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(64, 15);
             this.label11.TabIndex = 40;
@@ -162,7 +162,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(5, 561);
+            this.label12.Location = new System.Drawing.Point(5, 519);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(127, 15);
             this.label12.TabIndex = 39;
@@ -172,7 +172,7 @@
             // 
             this.pictureBox5.BackgroundImage = global::Vendeghaz.Properties.Resources.logoatlatszo;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox5.Location = new System.Drawing.Point(24, 464);
+            this.pictureBox5.Location = new System.Drawing.Point(25, 426);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(90, 90);
             this.pictureBox5.TabIndex = 38;
@@ -182,7 +182,7 @@
             // 
             this.pictureBox4.BackgroundImage = global::Vendeghaz.Properties.Resources.rajzmedve;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox4.Location = new System.Drawing.Point(662, 532);
+            this.pictureBox4.Location = new System.Drawing.Point(662, 426);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(134, 127);
             this.pictureBox4.TabIndex = 37;
@@ -201,12 +201,12 @@
             this.panel2.Controls.Add(this.textBox_ContractBirthdate);
             this.panel2.Location = new System.Drawing.Point(144, 426);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(512, 345);
+            this.panel2.Size = new System.Drawing.Size(512, 253);
             this.panel2.TabIndex = 36;
             // 
             // textBox_ContractGender
             // 
-            this.textBox_ContractGender.Location = new System.Drawing.Point(162, 195);
+            this.textBox_ContractGender.Location = new System.Drawing.Point(162, 145);
             this.textBox_ContractGender.Name = "textBox_ContractGender";
             this.textBox_ContractGender.Size = new System.Drawing.Size(228, 22);
             this.textBox_ContractGender.TabIndex = 34;
@@ -214,7 +214,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(78, 246);
+            this.label3.Location = new System.Drawing.Point(78, 196);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 15);
             this.label3.TabIndex = 32;
@@ -223,7 +223,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(96, 198);
+            this.label4.Location = new System.Drawing.Point(96, 148);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 15);
             this.label4.TabIndex = 31;
@@ -232,7 +232,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(110, 162);
+            this.label5.Location = new System.Drawing.Point(110, 112);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(28, 15);
             this.label5.TabIndex = 30;
@@ -241,7 +241,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(107, 125);
+            this.label6.Location = new System.Drawing.Point(107, 75);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 15);
             this.label6.TabIndex = 29;
@@ -251,7 +251,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe Print", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(170, 35);
+            this.label7.Location = new System.Drawing.Point(170, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(178, 50);
             this.label7.TabIndex = 28;
@@ -259,21 +259,21 @@
             // 
             // textBox_ContractSecGName
             // 
-            this.textBox_ContractSecGName.Location = new System.Drawing.Point(162, 118);
+            this.textBox_ContractSecGName.Location = new System.Drawing.Point(162, 68);
             this.textBox_ContractSecGName.Name = "textBox_ContractSecGName";
             this.textBox_ContractSecGName.Size = new System.Drawing.Size(228, 22);
             this.textBox_ContractSecGName.TabIndex = 18;
             // 
             // textBox_ContractSecSpecies
             // 
-            this.textBox_ContractSecSpecies.Location = new System.Drawing.Point(161, 155);
+            this.textBox_ContractSecSpecies.Location = new System.Drawing.Point(161, 105);
             this.textBox_ContractSecSpecies.Name = "textBox_ContractSecSpecies";
             this.textBox_ContractSecSpecies.Size = new System.Drawing.Size(229, 22);
             this.textBox_ContractSecSpecies.TabIndex = 14;
             // 
             // textBox_ContractBirthdate
             // 
-            this.textBox_ContractBirthdate.Location = new System.Drawing.Point(162, 239);
+            this.textBox_ContractBirthdate.Location = new System.Drawing.Point(162, 189);
             this.textBox_ContractBirthdate.Name = "textBox_ContractBirthdate";
             this.textBox_ContractBirthdate.Size = new System.Drawing.Size(229, 22);
             this.textBox_ContractBirthdate.TabIndex = 15;
@@ -290,16 +290,16 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(245)))), ((int)(((byte)(211)))));
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(245)))), ((int)(((byte)(205)))));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.richTextBox1.Location = new System.Drawing.Point(24, 365);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(758, 19);
+            this.richTextBox1.Size = new System.Drawing.Size(758, 17);
             this.richTextBox1.TabIndex = 33;
             this.richTextBox1.Text = "  www.vendeghazvadaspark.hu                                                      " +
-    "                                Támogasson minket adója 1%-val: adószám:11223344" +
-    "-5-66 ";
+    "                              Támogasson minket adója 1%-val: adószám:11223344-5" +
+    "-66 ";
             // 
             // pictureBox2
             // 
@@ -465,7 +465,7 @@
             // button_ContractJPG
             // 
             this.button_ContractJPG.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.button_ContractJPG.Location = new System.Drawing.Point(318, 874);
+            this.button_ContractJPG.Location = new System.Drawing.Point(318, 775);
             this.button_ContractJPG.Name = "button_ContractJPG";
             this.button_ContractJPG.Size = new System.Drawing.Size(205, 45);
             this.button_ContractJPG.TabIndex = 27;
@@ -477,7 +477,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 925);
+            this.ClientSize = new System.Drawing.Size(847, 826);
             this.Controls.Add(this.button_ContractJPG);
             this.Controls.Add(this.panel_Contract);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

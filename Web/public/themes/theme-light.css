@@ -1,0 +1,68 @@
+:root {
+  --color-bg: #ffffff; /* 121212;
+  --color-text: #212529; /* f5f5f5;
+  --color-navbar: #e3f2fd; /* 1f1f1f;
+  --color-primary: #0d6efd; /* bb86fc;
+  --color-primary-dark: #0a58ca; /* 9b59b6;
+  --color-border: #dee2e6; /* 444;
+  --color-thead-bg: #f1f3f5; /* 2c2c2c;
+  --color-thead-text: #212529; /* cccccc;
+  --color-hover: #f8f9fa; /* 2a2a2a;
+  --color-striped: #f9f9f9; /* 141414;
+  --color-striped-text: #212529; /* dddddd;
+  --color-modal: #ffffff; /* 1e1e1e;
+  --color-input: #ffffff; /* 2a2a2a;
+  --color-link: #0d6efd; /* bb86fc;
+  --color-list-group-border: #dee2e6; /* 333;
+}
+
+body { background-color: var(--color-bg); color: var(--color-text); }
+.navbar { background-color: var(--color-navbar); }
+.navbar-brand { color: var(--color-primary); }
+.navbar-nav .nav-link { color: var(--color-text); }
+.navbar-nav .nav-link:hover { color: var(--color-primary); }
+.navbar-toggler { background-color: var(--color-primary); }
+.navbar-collapse { background-color: var(--color-navbar); }
+.btn-primary {
+  background-color: var(--color-primary);
+  border: none;
+}
+.table {
+  background-color: var(--color-navbar) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-thead-bg);
+}
+.table thead {
+  background-color: var(--color-thead-bg);
+  color: var(--color-thead-text);
+}
+.table-bordered th,
+.table-bordered td {
+  border-color: var(--color-border) !important;
+}
+.table-hover tbody tr:hover {
+  background-color: var(--color-hover);
+  color: #ffffff;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: var(--color-striped);
+  color: var(--color-striped-text);
+}
+.modal-content {
+  background-color: var(--color-modal);
+  color: var(--color-text);
+}
+.form-control,
+.form-select {
+  background-color: var(--color-input);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+a, a:hover {
+  color: var(--color-link);
+}
+.list-group-item {
+  background-color: var(--color-navbar);
+  color: var(--color-text);
+  border-color: var(--color-list-group-border);
+}

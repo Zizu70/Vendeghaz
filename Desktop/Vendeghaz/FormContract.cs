@@ -9,43 +9,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static Vendeghaz.FormAdoption;
 
 namespace Vendeghaz
 {
     public partial class FormContract : Form
-    {
-        private Guest selectedAnimal;
-        private User selectedUser;
-        private FormAdoption.Guest selectedAnimal1;
-
-        public FormContract(Guest selectedAnimal, User selectedUser)
+    {   
+        public string G_name;
+        public string G_species;
+        public string G_gender;
+        public DateTime G_birthdate;
+        public string U_name;
+        public DateTime A_date;
+        public FormContract(string G_name, string G_species, string G_gender, DateTime G_birthdate, string U_name, DateTime A_date)
         {
+
             InitializeComponent();
-            this.selectedAnimal = selectedAnimal;
-            this.selectedUser = selectedUser;
-        }
-
-        public FormContract(FormAdoption.Guest selectedAnimal1, User selectedUser)
-        {
-            this.selectedAnimal1 = selectedAnimal1;
-            this.selectedUser = selectedUser;
+            this.G_name = G_name;
+            this.G_species = G_species;
+            this.G_gender = G_gender;
+            this.G_birthdate = G_birthdate;
+            this.U_name = U_name;
+            this.A_date = A_date;
         }
 
         private void FormContract_Load(object sender, EventArgs e)
-        { 
+        {
+            if (G_name != null && U_name != null)
+            {
+                // Kitöltés a kapott adatokkal
+                textBox_ContractUName.Text = U_name;
+                textBox_ContractGName.Text = G_name;
+                textBox_ContractSpecies.Text = G_species;
+                textBox_ContractGender.Text = G_gender;
+                textBox_ContractBirthdate.Text = G_birthdate.ToString("yyyy-MM-dd");
+                textBox_ContractDate.Text = A_date.ToString();
+
+                // Második szekció is ugyanaz
+                textBox_ContractSecGName.Text = G_name;
+                textBox_ContractSecSpecies.Text = G_species;
+            }
         }
 
         public class Guest
         {
+            public long G_id { get; set; }
             public string G_name { get; set; }
             public string G_species { get; set; }
             public string G_gender { get; set; }
-            public string G_image { get; set; }
-            public string G_inplace { get; set; }
-            public DateTimeOffset G_birthdate { get; set; }
-            public DateTimeOffset G_indate { get; set; }
-
+            public DateTime G_birthdate { get; set; }
         }
 
         public FormContract(string G_name, string G_species, string G_gender, string G_birthdate, string U_name, string A_date)

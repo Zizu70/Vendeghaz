@@ -47,7 +47,7 @@
             // button_ServicesEntry
             // 
             this.button_ServicesEntry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(225)))), ((int)(((byte)(255)))));
-            this.button_ServicesEntry.Location = new System.Drawing.Point(227, 269);
+            this.button_ServicesEntry.Location = new System.Drawing.Point(224, 108);
             this.button_ServicesEntry.Name = "button_ServicesEntry";
             this.button_ServicesEntry.Size = new System.Drawing.Size(200, 30);
             this.button_ServicesEntry.TabIndex = 2;
@@ -69,14 +69,14 @@
             // comboBox_ServicesRole
             // 
             this.comboBox_ServicesRole.FormattingEnabled = true;
-            this.comboBox_ServicesRole.Location = new System.Drawing.Point(227, 220);
+            this.comboBox_ServicesRole.Location = new System.Drawing.Point(224, 247);
             this.comboBox_ServicesRole.Name = "comboBox_ServicesRole";
             this.comboBox_ServicesRole.Size = new System.Drawing.Size(200, 31);
             this.comboBox_ServicesRole.TabIndex = 4;
             // 
             // textBox_ServicesName
             // 
-            this.textBox_ServicesName.Location = new System.Drawing.Point(227, 129);
+            this.textBox_ServicesName.Location = new System.Drawing.Point(224, 156);
             this.textBox_ServicesName.Name = "textBox_ServicesName";
             this.textBox_ServicesName.Size = new System.Drawing.Size(200, 30);
             this.textBox_ServicesName.TabIndex = 6;
@@ -85,7 +85,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(185, 136);
+            this.label2.Location = new System.Drawing.Point(182, 163);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 23);
             this.label2.TabIndex = 5;
@@ -93,7 +93,7 @@
             // 
             // textBox_ServicesPass
             // 
-            this.textBox_ServicesPass.Location = new System.Drawing.Point(227, 172);
+            this.textBox_ServicesPass.Location = new System.Drawing.Point(224, 199);
             this.textBox_ServicesPass.Name = "textBox_ServicesPass";
             this.textBox_ServicesPass.Size = new System.Drawing.Size(200, 30);
             this.textBox_ServicesPass.TabIndex = 8;
@@ -102,7 +102,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(170, 179);
+            this.label3.Location = new System.Drawing.Point(167, 206);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 23);
             this.label3.TabIndex = 7;
@@ -112,7 +112,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(137, 228);
+            this.label4.Location = new System.Drawing.Point(134, 255);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 23);
             this.label4.TabIndex = 9;
@@ -121,7 +121,7 @@
             // button_ServicesInsert
             // 
             this.button_ServicesInsert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(250)))), ((int)(((byte)(225)))));
-            this.button_ServicesInsert.Location = new System.Drawing.Point(189, 315);
+            this.button_ServicesInsert.Location = new System.Drawing.Point(183, 296);
             this.button_ServicesInsert.Name = "button_ServicesInsert";
             this.button_ServicesInsert.Size = new System.Drawing.Size(85, 35);
             this.button_ServicesInsert.TabIndex = 10;
@@ -132,7 +132,7 @@
             // button_ServicesUpdate
             // 
             this.button_ServicesUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(165)))), ((int)(((byte)(240)))));
-            this.button_ServicesUpdate.Location = new System.Drawing.Point(280, 315);
+            this.button_ServicesUpdate.Location = new System.Drawing.Point(274, 296);
             this.button_ServicesUpdate.Name = "button_ServicesUpdate";
             this.button_ServicesUpdate.Size = new System.Drawing.Size(85, 35);
             this.button_ServicesUpdate.TabIndex = 11;
@@ -143,7 +143,7 @@
             // button_ServicesDelete
             // 
             this.button_ServicesDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(110)))), ((int)(((byte)(150)))));
-            this.button_ServicesDelete.Location = new System.Drawing.Point(371, 315);
+            this.button_ServicesDelete.Location = new System.Drawing.Point(365, 296);
             this.button_ServicesDelete.Name = "button_ServicesDelete";
             this.button_ServicesDelete.Size = new System.Drawing.Size(85, 35);
             this.button_ServicesDelete.TabIndex = 12;
@@ -154,7 +154,7 @@
             // label_ServiceInfo
             // 
             this.label_ServiceInfo.AutoSize = true;
-            this.label_ServiceInfo.Location = new System.Drawing.Point(223, 66);
+            this.label_ServiceInfo.Location = new System.Drawing.Point(220, 83);
             this.label_ServiceInfo.Name = "label_ServiceInfo";
             this.label_ServiceInfo.Size = new System.Drawing.Size(0, 23);
             this.label_ServiceInfo.TabIndex = 13;

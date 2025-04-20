@@ -44,9 +44,9 @@ namespace Vendeghaz
         {           
             public long T_id { get; set; }
 
-            public string T_name { get; set; }
+            //public string U_name { get; set; }  // u_id
 
-            public string T_email { get; set; }
+            //public string T_email { get; set; }
 
             public DateTimeOffset T_date { get; set; }
 
@@ -56,11 +56,9 @@ namespace Vendeghaz
 
             public long T_amount { get; set; }
 
-            public DateTimeOffset Created_at { get; set; }
+            public string U_name { get; set; }
 
-            public DateTimeOffset? Updated_at { get; set; }
-
-            public object Deleted_at { get; set; }
+            public string U_email { get; set; }
 
         }
 
@@ -165,8 +163,10 @@ namespace Vendeghaz
                     //Ticket ticket = tickets[0];  // csak az első elem
 
                     //comboBox_TicketId.Text = ticket.T_id.ToString();
-                    textBox_TicketName.Text = ticket.t_name;
-                    textBox_TicketEmail.Text = ticket.t_email;
+
+ /* ?? */           textBox_TicketName.Text = ticket.u_name;
+/* ?? */
+                    textBox_TicketEmail.Text = ticket.u_email;
 
                     dateTimePicker_TicketDate.Text = ticket.t_date.Value.AddDays(+1).ToString("yyyy-MM-dd");
                     comboBox_TicketTime.Text = ticket.t_time;
@@ -198,13 +198,13 @@ namespace Vendeghaz
                     var ticketName = JsonConvert.DeserializeObject<List<Ticket>>(json);
 
                     // Csak azokat töltjük be, amelyek nincsenek törölve
-                    var filteredTickets = ticketName.Where(t => t.Deleted_at == null).ToList();
+         //???           var filteredTickets = ticketName.Where(t => t.Deleted_at == null).ToList();
 
                     // Ha ComboBoxot vagy ListBoxot használunk:
                    // comboBox_TicketTime.DataSource = null;  //**
                    // comboBox_TicketTime.Items.Clear(); // *** // Ezt is érdemes hozzáadni
 
-                    comboBox_TicketTime.DataSource = filteredTickets;
+         //???           comboBox_TicketTime.DataSource = filteredTickets;
                     comboBox_TicketTime.DisplayMember = "T_time";
                 }
                 else
@@ -316,8 +316,6 @@ namespace Vendeghaz
 
                 t_piece = int.Parse(textBox_TicketPiece.Text),
                 t_amount = int.Parse(textBox_TicketAmount.Text),
-
-                updated_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             };
 
            
@@ -355,16 +353,14 @@ namespace Vendeghaz
 
             var ticketData = new
             {
-                t_name = selectedTicket.T_name,
-                t_email = selectedTicket.T_email,
+                t_name = selectedTicket.U_name,
+                t_email = selectedTicket.U_email,
 
                 t_date = selectedTicket.T_date.ToString("yyyy-MM-dd"),
                 t_time = selectedTicket.T_time,
 
                 t_piece = selectedTicket.T_piece,
                 t_amount = selectedTicket.T_amount,
-
-                deleted_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") // soft delete időpont
             };
 
             string json = JsonConvert.SerializeObject(ticketData);

@@ -20,28 +20,19 @@ namespace Vendeghaz
         [JsonProperty("a_id")]
         public long A_id { get; set; }
 
+        [JsonProperty("g_id")]
+        public long G_id { get; set; }
+
+        [JsonProperty("u_id")]
+        public long U_id { get; set; }
+
         [JsonProperty("a_date")]
         public DateTimeOffset A_date { get; set; }
-
-        [JsonProperty("g_name")]
-        public string G_name { get; set; }
-
-        [JsonProperty("u_name")]
-        public string U_name { get; set; }
-
-        [JsonProperty("created_at")]
-        public DateTimeOffset Created_at { get; set; }
-
-        [JsonProperty("update_at")]
-        public DateTimeOffset? Updated_at { get; set; }
-
-        [JsonProperty("deleted_at")]
-        public DateTimeOffset? Deleted_at { get; set; }
     }
 
     public partial class Adoption
     {
-        public static Adoption[] FromJson(string json) => JsonConvert.DeserializeObject<Adoption[]>(json, Vendeghaz.Converter.Settings);
+        public static Adoption[] FromJson(string json) => JsonConvert.DeserializeObject<Adoption[]>(json, Vendeghaz.AdoptionConverter.Settings);
     }
 
     public static class AdoptionSerialize

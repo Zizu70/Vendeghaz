@@ -1,91 +1,39 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.css";  /* npm install react - bootstrap@5 */
-import "bootstrap/dist/js/bootstrap.bundle";  /*npm install react-bootstrap */
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
-import { RouterProvider, createBrowserRouter } from "react-router-dom";   /*npm install react-router-dom */
-import { AuthProvider } from "./context/AuthContext";
-import Layout from "./components/Layout";
-import UserProfilePage from "./website/UserProfilePage";
-
-import HomeSite from "./website/HomeSite"; //
-import UserSite from "./website/UserSite";  //
-import GuestsSite from "./website/GuestsSite"; //
-import AdoptSite from "./website/AdoptSite"; //
-import ContactSite from "./website/ContactSite"; //
-import IndividualSite from "./website/IndividualSite"; //
-
-/*
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Register from './components/Register';
-import Login from './components/Login';
-*/
+import Home from './pages/Home';
+import Guests from './pages/Guests';
+import Adoptions from './pages/Adoptions';
+import Tickets from './pages/Tickets';
+import Login from './pages/Login';
+import Register from './pages/Registration';
+import About from './pages/About';
+import './App.css';
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout/>,
-      children: [
-        {
-          path: "/",
-          element: <HomeSite/>, //
-        },
-        
-        {
-          path: "/user",
-          element: <UserSite/>, 
-        },
-      
-        {
-          path: "/adopt",
-          element: <AdoptSite/>,  
-        },
-
-        {
-          path: "/guests",
-          element: <GuestsSite/>, 
-        },
-
-        {
-          path: "/individual",
-          element: <IndividualSite/>, 
-        },
-       
-        {
-          path: "/contact",
-          element: <ContactSite />,
-        },
-
-        {
-          path: "/contact",
-          element: <ContactSite />,
-        },
-
-        {
-          path: "/user-profile",
-          element: <UserProfilePage />,
-        },
-      ],
-    },
-  ]);
-
- 
-  return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  );
- 
-  /*
   return (
     <Router>
+      <Header />
+      <Navbar />
+      <main className="container my-4">
         <Routes>
-            <Route path="./components/Register.jsx" element={<Register />} />
-            <Route path="./components/Login.jsx" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/guests" element={<Guests />} />
+          <Route path="/adoptions" element={<Adoptions />} />
+          <Route path="/tickets" element={<Tickets />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<h2>404 - Page Not Found</h2>} />
         </Routes>
+      </main>
+      <Footer />
     </Router>
   );
-  */
 }
-
-export default App
+export default App;

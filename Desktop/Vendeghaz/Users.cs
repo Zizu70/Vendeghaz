@@ -28,18 +28,6 @@ namespace Vendeghaz
 
         [JsonProperty("u_password")]
         public string U_password { get; set; }
-
-        [JsonProperty("u_role")]
-        public string U_role { get; set; }
-
-        [JsonProperty("created_at")]
-        public DateTimeOffset Created_at { get; set; }
-
-        [JsonProperty("updated_at")]
-        public DateTimeOffset? Updated_at { get; set; }
-
-        [JsonProperty("deleted_at")]
-        public DateTimeOffset? Deleted_at { get; set; }
     }
 
     public partial class Users

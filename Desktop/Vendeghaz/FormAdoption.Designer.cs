@@ -49,8 +49,8 @@
             this.pictureBox_AdoptionImage = new System.Windows.Forms.PictureBox();
             this.textBox_AdoptionBirthdate = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.label_AdoptionGuestId = new System.Windows.Forms.Label();
+            this.label_AdoptionUserId = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_AdoptionImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -234,23 +234,23 @@
             this.label6.TabIndex = 31;
             this.label6.Text = "Született";
             // 
-            // label9
+            // label_AdoptionGuestId
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(229, 64);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(51, 23);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "label9";
+            this.label_AdoptionGuestId.AutoSize = true;
+            this.label_AdoptionGuestId.Location = new System.Drawing.Point(229, 64);
+            this.label_AdoptionGuestId.Name = "label_AdoptionGuestId";
+            this.label_AdoptionGuestId.Size = new System.Drawing.Size(38, 23);
+            this.label_AdoptionGuestId.TabIndex = 33;
+            this.label_AdoptionGuestId.Text = "G Id";
             // 
-            // label11
+            // label_AdoptionUserId
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(168, 333);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(61, 23);
-            this.label11.TabIndex = 34;
-            this.label11.Text = "label11";
+            this.label_AdoptionUserId.AutoSize = true;
+            this.label_AdoptionUserId.Location = new System.Drawing.Point(168, 335);
+            this.label_AdoptionUserId.Name = "label_AdoptionUserId";
+            this.label_AdoptionUserId.Size = new System.Drawing.Size(38, 23);
+            this.label_AdoptionUserId.TabIndex = 34;
+            this.label_AdoptionUserId.Text = "U Id";
             // 
             // FormAdoption
             // 
@@ -259,8 +259,8 @@
             this.BackgroundImage = global::Vendeghaz.Properties.Resources.Háttér;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(481, 632);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label_AdoptionUserId);
+            this.Controls.Add(this.label_AdoptionGuestId);
             this.Controls.Add(this.textBox_AdoptionBirthdate);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox_AdoptionImage);
@@ -315,7 +315,7 @@
         private System.Windows.Forms.PictureBox pictureBox_AdoptionImage;
         private System.Windows.Forms.TextBox textBox_AdoptionBirthdate;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label_AdoptionGuestId;
+        private System.Windows.Forms.Label label_AdoptionUserId;
     }
 }

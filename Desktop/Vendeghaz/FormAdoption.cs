@@ -20,10 +20,14 @@ namespace Vendeghaz
 {
     public partial class FormAdoption : Form
     {
+        private FormContract contractForm;
+
+
         private readonly HttpClient client = new HttpClient();
         public string adoptionURL = "http://localhost:3000/desktop/adoption";
         public string guestsURL = "http://localhost:3000/desktop/allGuests";
         public string usersURL = "http://localhost:3000/desktop/allUsers";
+
         public string adoptedURL = "http://localhost:3000/desktop/adopted";
         public string adoptiveURL = "http://localhost:3000/desktop/adoptive";
 
@@ -75,8 +79,7 @@ namespace Vendeghaz
             public string G_name { get; set; }
             public string G_species { get; set; }
             public string G_gender { get; set; }
-            public string G_image { get; set; }
-            public string G_inplace { get; set; }
+            public DateTime G_birthdate { get; set; }
         }
 
         public class User
@@ -202,7 +205,7 @@ namespace Vendeghaz
                     string json = await response.Content.ReadAsStringAsync();
                     dynamic guest = JsonConvert.DeserializeObject(json);
 
-                    label9.Text = guest.g_id;
+                    label_AdoptionGuestId.Text = guest.g_id;
                     comboBox_AdoptionGName.Text = guest.g_name;
                     textBox_AdoptionSpecies.Text = guest.g_species;
                     textBox_AdoptionGender.Text = guest.g_gender;
@@ -257,7 +260,7 @@ namespace Vendeghaz
                     string json = await response.Content.ReadAsStringAsync();
                     dynamic user = JsonConvert.DeserializeObject(json);
 
-                    label11.Text = user.u_id;
+                    label_AdoptionUserId.Text = user.u_id;
                     comboBox_AdoptionUName.Text = user.u_name;
                     textBox_AdoptionEmail.Text = user.u_email;
                 }
@@ -285,7 +288,7 @@ namespace Vendeghaz
                 {
                     MessageBox.Show("Az örökbefogadás sikeresen rögzítve!", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    //FormContract formContract = new FormContract(//G_name,  G_species, G_gender, G_birthdate, U_name, A_date);
+                    //FormContract formContract = new FormContract(G_name,  G_species, G_gender, G_birthdate, U_name, A_date);
                     //formContract.Show();
                 }
                 else
@@ -309,12 +312,39 @@ namespace Vendeghaz
             string U_name = comboBox_AdoptionUName.Text;
             string A_date = DateTime.Now.ToString("yyyy-MM-dd");
 
-            string G_id = label9.Text;
-            string U_id = label11.Text;
+            string G_id = label_AdoptionGuestId.Text;
+            string U_id = label_AdoptionUserId.Text;
 
 
-            await InsertAdoption( G_id,U_id);
+            await InsertAdoption(G_id,U_id);
+
+            var selectedAnimal = new Guest
+            {
+                G_id = long.Parse(G_id),
+                G_name = G_name,
+                G_species = G_species,
+                G_gender = G_gender,
+                G_birthdate = DateTime.Parse(G_birthdate)
+            };
+
+            var selectedUser = new User
+            {
+                U_id = long.Parse(U_id),
+                U_name = U_name
+            };
+
+            //var contractForm = new FormContract(selectedAnimal, selectedUser, A_date);
+            contractForm = new FormContract(G_name, G_species, G_gender, DateTime.Parse(G_birthdate), U_name, DateTime.Parse(A_date));
+            /*FormContract contractForm = new FormContract(selectedAnimal, selectedUser, A_date);*/
+
+            contractForm.Show();
+
         }
+
+            
+
+
+
 
         private void button_AdoptionAgain_Click(object sender, EventArgs e)
         {

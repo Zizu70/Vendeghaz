@@ -43,39 +43,8 @@ namespace Vendeghaz
 
         [JsonProperty("g_image")]
         public string G_image { get; set; }
-
-        [JsonProperty("created_at")]
-        public DateTimeOffset Created_at { get; set; }
-
-        [JsonProperty("updated_at")]
-        public DateTimeOffset? Updated_at { get; set; }
-
-        [JsonProperty("deleted_at")]
-        public DateTimeOffset? Deleted_at { get; set; }
     }
-        
-    public partial class Guest
-    {
-        public static Guest[] FromJson(string json) => JsonConvert.DeserializeObject<Guest[]>(json, Vendeghaz.GuestConverter.Settings);
-    }
-
-    public static class GuestSerialize
-    {
-        public static string ToJson(this Guest[] self) => JsonConvert.SerializeObject(self, Vendeghaz.GuestConverter.Settings);
-    }
-
-    internal static class GuestConverter
-    {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-        {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
-            },
-        };
-    }
+   
     /*** enumok ***/
     public enum G_species { medve, farkas, muflon, őz, gímszarvas, róka, vadmacska, hiúz, aranysakál, mosómedve, sas, bagoly, páva, holló, vércse, varjú, ló, szamár, tehén, mangalica, baromfiak, dámszarvas, juh, kecske, nyúl, póniló };
     public enum G_gender { hím, nőstény, ivartalanított };
@@ -287,6 +256,29 @@ namespace Vendeghaz
         }
 
         public static readonly G_genderConverter Singleton = new G_genderConverter();
+    }
+
+    public partial class Guest
+    {
+        public static Guest[] FromJson(string json) => JsonConvert.DeserializeObject<Guest[]>(json, Vendeghaz.GuestConverter.Settings);
+    }
+
+    public static class GuestSerialize
+    {
+        public static string ToJson(this Guest[] self) => JsonConvert.SerializeObject(self, Vendeghaz.GuestConverter.Settings);
+    }
+
+    internal static class GuestConverter
+    {
+        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        {
+            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            DateParseHandling = DateParseHandling.None,
+            Converters =
+            {
+                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
+            },
+        };
     }
 }
 

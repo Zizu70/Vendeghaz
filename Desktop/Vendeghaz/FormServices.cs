@@ -21,7 +21,6 @@ namespace Vendeghaz
         dolgozó
     }
 
-
     public partial class FormServices : Form
     {
         private readonly HttpClient client = new HttpClient();
@@ -50,29 +49,30 @@ namespace Vendeghaz
             MessageBox.Show($"[Form Services] Passed: {userName} / {userRole}");
             // Optionally: Display the data somewhere (like a label)
             // This will only work if the label is already initialized
-            label_ServiceInfo.Text = $"Name: {userName}, Role: {userRole}";
+            label_ServiceInfo.Text = $"Bejelentkezve: {userName} - {userRole}";
         }
 
         private void FormServices_Load(object sender, EventArgs e)
-        {
-            /*
-            label_ServiceInfo.Text = $"Bejelentkezve: {userName}, -  {userPassword}";
-            */
+        {            
+            label2.Hide();
+            label3.Hide();
+            label4.Hide();
             textBox_ServicesName.Hide();
             textBox_ServicesPass.Hide();
             comboBox_ServicesRole.Hide();
             button_ServicesInsert.Hide();
             button_ServicesUpdate.Hide();
             button_ServicesDelete.Hide();
-
         }
-            //szervíz belépés clickje     még nem jó
+
         private async void button_ServicesEntry_Click(object sender, EventArgs e)
         {
             if (userRole == "admin")
             {
             // Engedélyezzük a CRUD gombokat
                 label2.Show();
+                label3.Show();
+                label4.Show();
                 textBox_ServicesName.Show();
                 textBox_ServicesPass.Show();
                 comboBox_ServicesRole.Show();
@@ -80,7 +80,7 @@ namespace Vendeghaz
                 button_ServicesUpdate.Show();
                 button_ServicesDelete.Show();
 
-                //MessageBox.Show("Nincs admin jogosultságod!", "Jogosultság", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role)); //törlendő nem???
             }
             else
             {
@@ -92,14 +92,17 @@ namespace Vendeghaz
                 button_ServicesUpdate.Enabled = false;
                 button_ServicesDelete.Enabled = false;
 
-                //comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role)); //törlendő nem???
+                MessageBox.Show("Nincs admin jogosultságod!", "Jogosultság", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+               
             }
 
 
             /*
             if (!validateLoginServices())
                 return;
-            *//*
+            */
+            /*
             string name = S_name;
             string password = S_password;
 
@@ -205,7 +208,7 @@ namespace Vendeghaz
             return true;
         }
 
-        public async Task<bool> isNameInDatabase(string name)
+        public async Task<bool> chackName(string name)
         {
             /*
             if (string.IsNullOrWhiteSpace(name))
@@ -240,7 +243,7 @@ namespace Vendeghaz
              } 
         }
 
-
+        /*
         private async Task LoadServices()
         {
             try
@@ -252,10 +255,10 @@ namespace Vendeghaz
                     var workerNames = JsonConvert.DeserializeObject<List<Guest>>(json);
 
                     // Csak azokat töltjük be, amelyek nincsenek törölve
-                    var filteredWorkers = workerNames.Where(w => w.Deleted_at == null).ToList();
+//???                    var filteredWorkers = workerNames.Where(w => w.Deleted_at == null).ToList();
 
                     // Ha ComboBoxot vagy ListBoxot használunk:
-                    comboBox_ServicesRole.DataSource = filteredWorkers;
+//??                    comboBox_ServicesRole.DataSource = filteredWorkers;
                     comboBox_ServicesRole.DisplayMember = "W_role";
                 }
                 else
@@ -267,18 +270,18 @@ namespace Vendeghaz
             {
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
-        }
+        }*/
 
         // új dolgozó felvitel
         private async void button_ServicesInsert_Click(object sender, EventArgs e)
         {
-            
             string servicesInsert = textBox_ServicesName.Text;
-            if (await isNameInDatabase(servicesInsert))
+            if (await chackName(servicesInsert.ToLower()))
             {
                 MessageBox.Show("Van már ilyen nevű dolgozó az adtbázisban!", "Ellenőrizze!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textBox_ServicesName.Text = "";
                 this.ActiveControl = textBox_ServicesName;  // fokusz ide!
+                return;
             }
 
             if (!validateInputServices()) return;
@@ -287,27 +290,35 @@ namespace Vendeghaz
             {
                 w_name = textBox_ServicesName.Text,
                 w_password = textBox_ServicesPass.Text,
-                w_role = comboBox_ServicesRole.Text,
-
-                //updated_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-
+                w_role = comboBox_ServicesRole.Text
             };
 
+            
+            
             string json = JsonConvert.SerializeObject(workerData);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            MessageBox.Show(json);
+
+            //var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var content = new StringContent($"{{\"w_name\":\"{textBox_ServicesName.Text}\",\"w_password\":\"{textBox_ServicesPass.Text}\",\"w_role\":\"{comboBox_ServicesRole.Text}\"}}", Encoding.UTF8, "application/json");
 
             try
             {
                 HttpResponseMessage result = await client.PostAsync(servicesURL, content);
                 if (result.IsSuccessStatusCode)
                 {
+                    MessageBox.Show($"elküldött1: {workerData}");
+
                     MessageBox.Show("Sikeres feltöltés!");
-                    await LoadServices();
+                    //await LoadServices();
                     emptyFieldsServices();
                 }
                 else
                 {
-                    MessageBox.Show("Hiba a feltöltés során!");
+                    MessageBox.Show($"elküldött2: {workerData}"); // eddig jól küld
+
+                    MessageBox.Show("Hiba dolgózó felvitele során!");
                 }
             }
             catch (HttpRequestException ex)
@@ -331,8 +342,6 @@ namespace Vendeghaz
                 w_name = textBox_ServicesName.Text,
                 w_password = textBox_ServicesPass.Text,
                 w_role = comboBox_ServicesRole.Text,
-
-                //updated_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             };
 
             string json = JsonConvert.SerializeObject(workerData);
@@ -340,11 +349,11 @@ namespace Vendeghaz
 
             try
             {
-                HttpResponseMessage result = await client.PutAsync($"{workersURL}/{textBox_ServicesName.Text}", content);
+                HttpResponseMessage result = await client.PutAsync($"{servicesURL}/{textBox_ServicesName.Text}", content);
                 if (result.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Sikeres frissítés!");
-                    await LoadServices();
+                    //await LoadServices();
                     emptyFieldsServices();
                 }
                 else
@@ -368,13 +377,15 @@ namespace Vendeghaz
 
             if (MessageBox.Show("Biztosan törölni szeretnéd?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+                MessageBox.Show($"{servicesURL}/{textBox_ServicesName.Text}");
+
                 try
                 {
                     HttpResponseMessage result = await client.DeleteAsync($"{servicesURL}/{textBox_ServicesName.Text}");
                     if (result.IsSuccessStatusCode)
                     {
                         MessageBox.Show("SZ-D - Dolgozó sikeresen törölve!");
-                        await LoadServices();  //csak az olyanokat gyűjti akinek delete_at üres!
+                        //await LoadServices();
                         emptyFieldsServices();
                     }
                     else
