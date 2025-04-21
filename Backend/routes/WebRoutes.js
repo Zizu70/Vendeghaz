@@ -3,210 +3,189 @@ const bcrypt = require('bcrypt');
 const db = require('../db'); 
 const jwt = require('jsonwebtoken');
 const router = express.Router();
+const fs = require('fs');
+const multer = require('multer');
 
 const SECRET_KEY = process.env.JWT_SECRET || "your_secret_key"; // Biztonsági kulcs a JWT-hez
 
 // Feltételezve, hogy az adatbázis kapcsolódás és lekérdezések külön fájlban vannak
 
-//***** Felhasználó regisztráció, bejelentkezás, módosítás, törlés***** */
-router.post('/register', async (req, res) => {
-    const { username, email, password } = req.body;
 
-    try {
-        // Ellenőrizzük, hogy létezik-e már a felhasználó
-        const [existingUser] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-        if (existingUser.length > 0) {
-            return res.status(400).json({ message: 'Ez az e-mail már regisztrálva van!' });
-        }
 
-        // Jelszó hashelése
-        const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Felhasználó hozzáadása
-        const result = await db.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', 
-            [username, email, hashedPassword]);
-
-        res.status(201).json({ message: 'Sikeres regisztráció!', userId: result.insertId });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a regisztráció során!', error });
+//*SSSS************************************************* */
+//***** Belépés User és Worker *****//
+router.post('/auth/user-login', async (req, res) => {
+    const { u_email, u_password } = req.body;
+    const [rows] = await db.query('SELECT * FROM users WHERE u_email = ? AND u_password = ?', [u_email, u_password]);
+    if (rows.length > 0) {
+      res.json({ success: true, user: rows[0], role: 'user' });
+    } else {
+      res.status(401).json({ success: false, message: 'Hibás belépési adatok.' });
     }
+  });
+  
+router.post('/auth/worker-login', async (req, res) => {
+    const { w_name, w_password } = req.body;
+    const [rows] = await db.query('SELECT * FROM workers WHERE w_name = ? AND w_password = ?', [w_name, w_password]);
+    if (rows.length > 0) {
+      res.json({ success: true, user: rows[0], role: rows[0].w_role });
+    } else {
+      res.status(401).json({ success: false, message: 'Hibás dolgozói adatok.' });
+    }
+  });  //auth ????
+
+//***** Belépés User és Worker *****//
+
+//***** Guests *****//
+const uploadDir = '../uploads';
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
+
+// Multer beállítása
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadDir),
+  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname)),
 });
 
-// **2. Bejelentkezés**
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+const upload = multer({ storage });
 
-    try {
-        // Felhasználó keresése
-        const [users] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-        if (users.length === 0) {
-            return res.status(400).json({ message: 'Érvénytelen e-mail vagy jelszó!' });
-        }
-
-        const user = users[0];
-
-        // Jelszó ellenőrzése
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Érvénytelen e-mail vagy jelszó!' });
-        }
-
-        // JWT token generálás
-        const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
-
-        res.status(200).json({ message: 'Sikeres bejelentkezés!', token, userId: user.id });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a bejelentkezés során!', error });
-    }
-});
-
-// **3. Felhasználó módosítása**
-router.put('/update/:id', async (req, res) => {
-    const { id } = req.params;
-    const { username, email, password } = req.body;
-
-    try {
-        let query = 'UPDATE users SET ';
-        const params = [];
-
-        if (username) {
-            query += 'username = ?, ';
-            params.push(username);
-        }
-
-        if (email) {
-            query += 'email = ?, ';
-            params.push(email);
-        }
-
-        if (password) {
-            const hashedPassword = await bcrypt.hash(password, 10);
-            query += 'password = ?, ';
-            params.push(hashedPassword);
-        }
-
-        query = query.slice(0, -2); // Az utolsó vessző eltávolítása
-        query += ' WHERE id = ?';
-        params.push(id);
-
-        await db.query(query, params);
-
-        res.status(200).json({ message: 'Felhasználói adatok frissítve!' });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a módosítás során!', error });
-    }
-});
-
-// **4. Felhasználó törlése**
-router.delete('/delete/:id', async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        await db.query('DELETE FROM users WHERE id = ?', [id]);
-        res.status(200).json({ message: 'Felhasználó törölve!' });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a törlés során!', error });
-    }
-});
-
-//***** Felhasználó regisztráció, bejelentkezás, módosítás, törlés vége***** */
-
-// Vendégek (összes) listázása
 router.get('/guests', async (req, res) => {
-    try {
-        let guests = await db.query(
-            `SELECT g_name, g_species, g_gender, g_other
-             FROM guests`
-        );
-        res.status(200).json(events);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a vendégek listázáskor!', error });
-    }
+  const [rows] = await db.query('SELECT g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other, g_image FROM guests');
+  res.json(rows);
 });
 
-// Egy adott vendég részletes lekérdezése
-router.get('/guests/:g_Id', async (req, res) => {
-    const g_Id = req.params.eventId;
-    try {
-        let guest = await db.query(
-            `SELECT g_name, g_species, g_gender, g_other
-             FROM guests
-             WHERE g_id = ?`, [g_Id]
-        );
-        if (guest.length > 0) {
-            res.status(200).json(guest[0]);
-        } else {
-            res.status(404).json({ message: 'Vendég nem található!' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt Vendég adatainak lekérésekor!', error });
-    }
+router.post('/guests', upload.single('g_image'), async (req, res) => {
+  const {
+    g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other,
+  } = req.body;
+
+  const imagePath = req.file ? req.file.filename : null;
+
+  await db.query(
+    'INSERT INTO guests (g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other, g_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+    [g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other, imagePath]
+  );
+  res.status(201).send('Állat rögzítve.');
 });
 
+// Statikus képek kiszolgálása
+router.use('/guests/images', express.static(uploadDir));
+
+//***** Guests *****//
+
+//***** Tickets *****//
+router.get('/tickets', async (req, res) => {
+    const [rows] = await db.query('SELECT t_date, t_time, t_piece FROM tickets WHERE 1');
+    res.json(rows);
+  });
+  
+  router.post('/tickets', async (req, res) => {
+    const { u_id, t_date, t_time, t_piece, t_amount } = req.body;
+    await db.query('INSERT INTO tickets (u_id, t_date, t_time, t_piece, t_amount) VALUES (?, ?, ?, ?, ?)', [u_id, t_date, t_time, t_piece, t_amount]);
+    res.status(201).send('Jegy rögzítve.');
+  });
+
+//***** Tickets *****//
+
+//***** Users *****//
+router.get('/users', async (req, res) => {
+    const [rows] = await db.query('SELECT * FROM users');
+    res.json(rows);
+  });
+  
+  router.post('/users', async (req, res) => {
+    const { u_name, u_email, u_password } = req.body;
+    await db.query('INSERT INTO users (u_name, u_email, u_password) VALUES (?, ?, ?)', [u_name, u_email, u_password]);
+    res.status(201).send('Felhasználó létrehozva.');
+  });
+
+//***** Users *****//
+
+//***** Workers *****//
+router.get('/workers', async (req, res) => {
+    const [rows] = await db.query('SELECT * FROM workers');
+    res.json(rows);
+  });
+  
+  router.post('/workers', async (req, res) => {
+    const { w_name, w_password, w_role } = req.body;
+    await db.query('INSERT INTO workers (w_name, w_password, w_role) VALUES (?, ?, ?)', [w_name, w_password, w_role]);
+    res.status(201).send('Dolgozó létrehozva.');
+  });
+
+//***** Workers *****//
+
+//***** WorkersGuests *****//
+router.get('/workersGuests', async (req, res) => {
+    const [rows] = await db.query(
+      `SELECT wg.w_id, w.w_name, wg.g_id, g.g_name FROM workers_guests wg
+       JOIN workers w ON wg.w_id = w.w_id
+       JOIN guests g ON wg.g_id = g.g_id`
+    );
+    res.json(rows);
+  });
+  
+  router.post('/workersGuests', async (req, res) => {
+    const { w_id, g_id } = req.body;
+    await db.query('INSERT INTO workers_guests (w_id, g_id) VALUES (?, ?)', [w_id, g_id]);
+    res.status(201).send('Kapcsolat rögzítve.');
+  });
+
+//***** WorkersGuests *****//
 
 
 
 
 
-//**************************************** */
-//**************************************** */
-// Jelentkezés egy eseményre
-router.post('/events/:eventId/register', async (req, res) => {
-    const eventId = req.params.eventId;
-    const customerId = req.body.customer_id;  // A felhasználó ID-ja, amit a bejelentkezés során kaptunk
 
-    try {
-        // Először ellenőrizzük, hogy van-e még hely az eseményen
-        let event = await db.query(
-            `SELECT current_participants, max_participants
-             FROM events
-             WHERE event_id = ?`, [eventId]
-        );
-        
-        if (event.length === 0) {
-            return res.status(404).json({ message: 'Esemény nem található' });
-        }
-        
-        let { current_participants, max_participants } = event[0];
 
-        if (current_participants >= max_participants) {
-            return res.status(400).json({ message: 'Nincs több hely ezen az eseményen' });
-        }
 
-        // Hozzáadjuk a felhasználót a jelentkezési táblához
-        await db.query(
-            `INSERT INTO registrations (event_id, customer_id)
-             VALUES (?, ?)`, [eventId, customerId]
-        );
 
-        // Frissítjük az események résztvevőinek számát
-        await db.query(
-            `UPDATE events
-             SET current_participants = current_participants + 1
-             WHERE event_id = ?`, [eventId]
-        );
 
-        res.status(201).json({ message: 'Sikeresen jelentkezett az eseményre' });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a jelentkezés során', error });
-    }
-});
 
-// A felhasználó által jelentkezett események listázása
-router.get('/events/my-events', async (req, res) => {
-    const customerId = req.user.id;  // Feltételezve, hogy a felhasználó ID-ja a bejelentkezés után elérhető
 
-    try {
-        let registrations = await db.query(
-            `SELECT e.event_name, e.event_date, e.event_description
-             FROM registrations r
-             JOIN events e ON r.event_id = e.event_id
-             WHERE r.customer_id = ?`, [customerId]
-        );
-        res.status(200).json(registrations);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a jelentkezett események lekérése közben', error });
-    }
-});
+
+
+
+
+
+
+
+router.get('/adoption', async (req, res) => {
+    const [rows] = await db.query('SELECT * FROM adoption_view');
+    res.json(rows);
+  });
+
+
+router.get('/adoption/check', async (req, res) => {
+    const { u_id, g_id } = req.query;
+    const [rows] = await db.query(
+      'SELECT * FROM adoption WHERE u_id = ? AND g_id = ?',
+      [u_id, g_id]
+    );
+    res.json({ adopted: rows.length > 0 });
+  });
+  
+  router.post('/adoption', async (req, res) => {
+    const { g_id, u_id } = req.body;
+    await db.query('INSERT INTO adoption (g_id, u_id) VALUES (?, ?)', [g_id, u_id]);
+    res.status(201).send('Örökbefogadás rögzítve.');
+  });
+  
+  router.delete('/adoption', async (req, res) => {
+    const { g_id, u_id } = req.body;
+    await db.query('DELETE FROM adoption WHERE g_id = ? AND u_id = ?', [g_id, u_id]);
+    res.send('Örökbefogadás törölve.');
+  });
+  
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

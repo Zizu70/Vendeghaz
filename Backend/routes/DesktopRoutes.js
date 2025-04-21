@@ -144,7 +144,6 @@ router.post('/services', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a dolgozó hozzáadásakor!', error });
     }
 });
-
    //** **//
    // worker frissítése
 router.put('/services/:w_name', async (req, res) => {
@@ -161,11 +160,11 @@ router.put('/services/:w_name', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt dolgozó frissítésekor!', error });
     }
 });
-
    //**  **//
    // worker törlés
 router.delete('/services/:w_name', async (req, res) => {
-    const {w_name} = req.params.w_name;
+    const w_name = req.params.w_name;
+
     try {
         await db.query(`DELETE FROM workers WHERE w_name = ?`, [w_name]);
 
@@ -255,7 +254,7 @@ router.get('/workers', async (req, res) => {
 
 
 
-//*****Choice Start*******************************************//
+//***** Choice *****//
 
 // Csoport választás kezelése
 // Választott csoport listázása 
@@ -368,6 +367,7 @@ router.put('/guests/:g_Id', async (req, res) => {
    // Vendég törlése // 
 router.delete('/guests/:g_Id', async (req, res) => {
     const g_Id = req.params.g_Id;
+
     try {
         await db.query(`DELETE FROM guests WHERE g_id = ?`, [g_Id]);
         res.status(200).json({ message: 'Vendég törölve!' });
@@ -567,6 +567,18 @@ router.get('/allTickets', async (req, res) => {
     }
 });
    //**ok**//
+   // Összes felhasználó lekérése jegyrendelésekhez lekérése comboBoxba
+router.get('/allTicketsUser', async (req, res) => {
+    try {
+        const results = await db.query(
+            `SELECT * FROM users`   
+        );
+        res.status(200).json(results);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a jegyrendelők listázása közben!', error });
+    }
+});
+   //**ok**//
    // Jegyrendelés adatainak lekérése 
 router.get('/tickets/:ticketid', async (req, res) => {  
     const ticketid = req.params.ticketid;
@@ -583,6 +595,8 @@ router.get('/tickets/:ticketid', async (req, res) => {
         res.status(500).json({ message: 'Szerverhiba - Örökbefogadott adatainak letöltése közben!', error });
     }
 });
+
+
    //**ok**//
    // Jegyrendelés felvitel
 /*router.post('/tickets', async (req, res) => {
@@ -603,39 +617,30 @@ router.post('/tickets', async (req, res) => {
     const { u_name, u_email, u_password, t_date, t_time, t_piece, t_amount } = req.body;
 
     try {
-        let userId;
-
-        // 1. Ellenőrizd, létezik-e a felhasználó
-        const [existingUser] = await db.query(
-            `SELECT u_id FROM users WHERE u_name = ? AND u_email = ?`,
+        // 1. Meglévő felhasználó u_id lekérdezése
+        const [rows] = await db.query(
+            `SELECT u_id FROM users WHERE u_name = ? AND u_email = ? `,
             [u_name, u_email]
         );
 
-        if (existingUser.length > 0) {
-            // 2. Ha létezik, használd a meglévő u_id-t
-            userId = existingUser[0].u_id;
-        } else {
-            // 3. Ha nem létezik, szúrjuk be egy alapértelmezett jelszóval (pl. "1234")
-            const alapJelszo = "1234";
-            const [insertUserResult] = await db.query(
-                `INSERT INTO users (u_name, u_email, u_password) VALUES (?, ?, ?)`,
-                [u_name, u_email, alapJelszo]
-            );
-            userId = insertUserResult.insertId;
+        if (rows.length === 0) {
+            return res.status(400).json({ message: 'Nincs ilyen felhasználó!' });
         }
 
-        // 4. Ezután beszúrod a tickets rekordot a userId-vel
+        const u_id = rows[0].u_id;
+
+        // 2. Jegy beszúrás
         await db.query(
             `INSERT INTO tickets (u_id, t_date, t_time, t_piece, t_amount) VALUES (?, ?, ?, ?, ?)`,
-            [userId, t_date, t_time, t_piece, t_amount]
+            [u_id, t_date, t_time, t_piece, t_amount]
         );
 
-        res.status(201).json({ message: 'Jegyfelvétel sikeres!', u_id: userId });
+        res.status(201).json({ message: 'Jegy sikeresen rögzítve.' });
     } catch (error) {
         console.error('Hiba a jegy rögzítésekor:', error);
-        res.status(500).json({ message: 'Hiba történt a jegy felvitele során!', error });
+        res.status(500).json({ message: 'Hiba a jegy mentésekor', error });
     }
-});
+});  // lehet nem lesz
    //**ok**//
    // Jegyrendelés módosítás
    router.put('/tickets/:t_Id', async (req, res) => {

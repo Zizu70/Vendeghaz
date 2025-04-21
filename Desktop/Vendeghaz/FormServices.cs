@@ -65,7 +65,7 @@ namespace Vendeghaz
             button_ServicesDelete.Hide();
         }
 
-        private async void button_ServicesEntry_Click(object sender, EventArgs e)
+        private void button_ServicesEntry_Click(object sender, EventArgs e)
         {
             if (userRole == "admin")
             {
@@ -80,7 +80,7 @@ namespace Vendeghaz
                 button_ServicesUpdate.Show();
                 button_ServicesDelete.Show();
 
-                comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role)); //törlendő nem???
+                comboBox_ServicesRole.DataSource = Enum.GetValues(typeof(W_Role)); 
             }
             else
             {
@@ -93,47 +93,7 @@ namespace Vendeghaz
                 button_ServicesDelete.Enabled = false;
 
                 MessageBox.Show("Nincs admin jogosultságod!", "Jogosultság", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-               
             }
-
-
-            /*
-            if (!validateLoginServices())
-                return;
-            */
-            /*
-            string name = S_name;
-            string password = S_password;
-
-            var servicesData = new { name, password };
-            var json = JsonConvert.SerializeObject(servicesData);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            MessageBox.Show(name + "  " + password);
-            try
-            {
-                HttpResponseMessage response = await client.PostAsync(servicesURL, content);
-                string responseString = await response.Content.ReadAsStringAsync();
-                dynamic result = JsonConvert.DeserializeObject(responseString);
-
-                if (response.IsSuccessStatusCode && result.success == true)
-                {
-                    MessageBox.Show("Sikeres bejelentkezés!", "Üdv a szervíz ágban!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    emptyFieldsServices();
-                }
-                else
-                {  /// még 
-                    string errorMessage = result?.message != null ? result.message.ToString() : "Ismeretlen hiba történt!";
-                    MessageBox.Show($"S-bt_S_Entry - Sikertelen bejelentkezés:\n{errorMessage}", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    //MessageBox.Show("S-bt_S_Entry - Nincs megfelelő jogosultságod!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("DSG - Hálózati hiba: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
         }
 
         private void emptyFieldsServices() /// Kiürítjük a mezőket
@@ -326,7 +286,7 @@ namespace Vendeghaz
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
         }
-        // még nem
+        // dolgozó módosítása
         private async void button_ServicesUpdate_Click(object sender, EventArgs e)
         {
             if (textBox_ServicesName.Text == null)
@@ -366,7 +326,7 @@ namespace Vendeghaz
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
         }
-            
+        // dolgozó törlése
         private async void button_ServicesDelete_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBox_ServicesName.Text))

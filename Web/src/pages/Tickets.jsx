@@ -8,7 +8,7 @@ const Tickets = () => {
   const [formData, setFormData] = useState({
     t_date: '',
     t_time: '',
-    t_piece: 1
+    t_piece: 1,
   });
 
   const user = JSON.parse(localStorage.getItem('user'));

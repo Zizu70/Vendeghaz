@@ -21,11 +21,6 @@ app.use(bodyParser.json()); // JSON formátumú kérés feldolgozása
 // tURL-enkódolt adatok */
 app.use(cors());  // Ha szükséges, CORS engedélyezése
 
-
-
-
-
-
 // Alapértelmezett route, ha valaki nem talál semmit
 app.get('/', (req, res) => {
     res.send('Vendeghaz API működik!');
@@ -38,10 +33,10 @@ app.use('/web', WebRoutes);
 app.use('/desktop', DesktopRoutes);
 
 // Bejelentkezés végpont használata
-app.use('/login', LoginRoutes);
+//app.use('/login', LoginRoutes);
 
 // Szervíz végpont használata
-app.use('/services', ServiceRoutes); 
+//app.use('/services', ServiceRoutes); 
 
 
 // Hiba kezelő middleware

@@ -21,11 +21,14 @@ namespace Vendeghaz
         private readonly HttpClient client = new HttpClient();
         public string ticketsURL = "http://localhost:3000/desktop/tickets";
         public string allTicketURL = "http://localhost:3000/desktop/allTickets";
+        public string allUserURL = "http://localhost:3000/desktop/allUsers";  //
 
         // A lista deklarálása
         private List<Ticket> allTickets;
+        //private List<User> allUser;  //
 
         private Ticket selectedTicket;
+        //private User selectedUser; //
 
         public FormTickets()
         {
@@ -33,24 +36,49 @@ namespace Vendeghaz
             InitializeAsync();
         }
 
+        private void FormTickets_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private async void InitializeAsync()
         {
             allTickets = await allTicket();
+           // allUsers = await allUser();  //
             uploadingTicketId();
+            //uploadingUserId();  //
         }
 
-        public class User
+        public partial class Ticket
+        {
+            public long T_id { get; set; }
+
+            public DateTimeOffset T_date { get; set; }
+
+            public string T_time { get; set; }
+
+            public long T_piece { get; set; }
+
+            public long T_amount { get; set; }
+
+            public string U_name { get; set; }
+
+            public string U_email { get; set; }
+
+        }
+
+        /*public class User
         {
             public int u_id { get; set; }
             public string u_name { get; set; }
             public string u_email { get; set; }
-        }
+        } //u_name és u_email felt.hez
 
-        private async void LoadUserComboboxes()
+        private async void LoadUserComboboxes() //u_name és u_email felt.hez
         {
             using (HttpClient client = new HttpClient())
             {
-                string url = "http://localhost:3000/desktop/users"; // saját IP/port ha szükséges
+                string url = $"{allUserURL}"; // saját IP/port ha szükséges
                 HttpResponseMessage response = await client.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
@@ -72,34 +100,8 @@ namespace Vendeghaz
                     MessageBox.Show("Nem sikerült betölteni a felhasználókat.");
                 }
             }
-        }
+        }*/
 
-        public partial class Ticket
-        {           
-            public long T_id { get; set; }
-
-            //public string U_name { get; set; }  // u_id
-
-            //public string T_email { get; set; }
-
-            public DateTimeOffset T_date { get; set; }
-
-            public string T_time { get; set; }
-
-            public long T_piece { get; set; }
-
-            public long T_amount { get; set; }
-
-            public string U_name { get; set; }
-
-            public string U_email { get; set; }
-
-        }
-
-        private void FormTickets_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void uploadingTicketId()
         {
@@ -120,6 +122,26 @@ namespace Vendeghaz
             }
         }
 
+/*
+        private void uploadingUserId()
+        {
+            if (comboBox_TicketName.Items.Count > 0)
+                comboBox_TicketName.Items.Clear();
+
+            if (allTickets != null && allTickets.Count > 0)
+            {
+                foreach (User user in allUsers)
+                {
+                    if (!string.IsNullOrWhiteSpace(user.T_name.ToString()))  //id
+                        comboBox_TicketId.Items.Add(user.T_id.ToString()); // 
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nincs elérhető user adat a jegyrendeléshez.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+*/
         private async Task<List<Ticket>> allTicket()
         {
             List<Ticket> tickets = new List<Ticket>();
@@ -128,8 +150,9 @@ namespace Vendeghaz
             {
                 try
                 {
-                    string url = $"http://localhost:3000/desktop/allTickets";
+                    string url = $"{allTicketURL}";
                     HttpResponseMessage response = await client.GetAsync(url);
+
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -141,7 +164,7 @@ namespace Vendeghaz
                     }
                     else
                     {
-                        MessageBox.Show("Nem sikerült meghívni a vendégeket.");
+                        MessageBox.Show("Nem sikerült meghívni a jegyrendeléseket.");
                     }
                 }
                 catch (Exception ex)
@@ -151,6 +174,38 @@ namespace Vendeghaz
             }
             return tickets;
         }
+        /*
+        private async Task<List<User>> allUser()
+        {
+            List<User> users = new List<User>();
+
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    string url = $"{allUserURL}";
+                    HttpResponseMessage response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+
+                        MessageBox.Show(responseBody); // ← ideiglenesen!
+
+                        users = JsonConvert.DeserializeObject<List<User>>(responseBody);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nem sikerült meghívni a felhasználókat.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            return users;
+        }*/
 
         private async void comboBox_TicketId_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -174,31 +229,14 @@ namespace Vendeghaz
         {
             try
             {
-                string url = $"http://localhost:3000/desktop/tickets/{Uri.EscapeDataString(ticketId)}";
+                string url = $"{ticketsURL}/{Uri.EscapeDataString(ticketId)}";
                 HttpResponseMessage response = await client.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
                     dynamic ticket = JsonConvert.DeserializeObject(json);
-                    /*
-                    //
-                    if (ticket == null ) //(ticket == null)
-                    {
-                        MessageBox.Show("A válaszban nem érkezett vissza jegy adat (null).", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    Console.WriteLine("Kapott válasz JSON:");
-                    Console.WriteLine(json);
-                    //
-                    */
-
-                    //Ticket ticket = tickets[0];  // csak az első elem
-
-                    //comboBox_TicketId.Text = ticket.T_id.ToString();
-
-                    /* ?? */
+                
                     comboBox_TicketName.Text = ticket.u_name;
                     comboBox_TicketEmail.Text = ticket.u_email;
 
@@ -232,7 +270,7 @@ namespace Vendeghaz
                 if (response.IsSuccessStatusCode)
                 {
                     string json = await response.Content.ReadAsStringAsync();
-                    var ticketName = JsonConvert.DeserializeObject<List<Ticket>>(json);
+                    var ticketName =         JsonConvert.DeserializeObject<List<Ticket>>(json);   //???
 
                 }
                 else
@@ -283,7 +321,7 @@ namespace Vendeghaz
         private async void button_TicketInsert_Click(object sender, EventArgs e)
         {
             if (!validateInputTicket()) return;
-
+            MessageBox.Show($"ticketsURL = {ticketsURL}");
             var insertTicketData = new
             {
                 u_name = comboBox_TicketName.Text,
