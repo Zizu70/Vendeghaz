@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTickets));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox_TicketName = new System.Windows.Forms.TextBox();
             this.button_TicketInsert = new System.Windows.Forms.Button();
             this.button_TicketUpdate = new System.Windows.Forms.Button();
             this.button_TicketDelete = new System.Windows.Forms.Button();
@@ -41,7 +40,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox_TicketTime = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox_TicketEmail = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -51,6 +49,8 @@
             this.textBox_TicketAmount = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox_TicketId = new System.Windows.Forms.ComboBox();
+            this.comboBox_TicketName = new System.Windows.Forms.ComboBox();
+            this.comboBox_TicketEmail = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,13 +64,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(183, 127);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // textBox_TicketName
-            // 
-            this.textBox_TicketName.Location = new System.Drawing.Point(110, 158);
-            this.textBox_TicketName.Name = "textBox_TicketName";
-            this.textBox_TicketName.Size = new System.Drawing.Size(361, 34);
-            this.textBox_TicketName.TabIndex = 5;
             // 
             // button_TicketInsert
             // 
@@ -177,13 +170,6 @@
             this.label8.TabIndex = 25;
             this.label8.Text = "Email cím";
             // 
-            // textBox_TicketEmail
-            // 
-            this.textBox_TicketEmail.Location = new System.Drawing.Point(110, 214);
-            this.textBox_TicketEmail.Name = "textBox_TicketEmail";
-            this.textBox_TicketEmail.Size = new System.Drawing.Size(361, 34);
-            this.textBox_TicketEmail.TabIndex = 24;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -269,6 +255,22 @@
             this.comboBox_TicketId.TabIndex = 37;
             this.comboBox_TicketId.SelectedIndexChanged += new System.EventHandler(this.comboBox_TicketId_SelectedIndexChanged);
             // 
+            // comboBox_TicketName
+            // 
+            this.comboBox_TicketName.FormattingEnabled = true;
+            this.comboBox_TicketName.Location = new System.Drawing.Point(110, 163);
+            this.comboBox_TicketName.Name = "comboBox_TicketName";
+            this.comboBox_TicketName.Size = new System.Drawing.Size(352, 34);
+            this.comboBox_TicketName.TabIndex = 38;
+            // 
+            // comboBox_TicketEmail
+            // 
+            this.comboBox_TicketEmail.FormattingEnabled = true;
+            this.comboBox_TicketEmail.Location = new System.Drawing.Point(110, 214);
+            this.comboBox_TicketEmail.Name = "comboBox_TicketEmail";
+            this.comboBox_TicketEmail.Size = new System.Drawing.Size(352, 34);
+            this.comboBox_TicketEmail.TabIndex = 39;
+            // 
             // FormTickets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 26F);
@@ -276,6 +278,8 @@
             this.BackgroundImage = global::Vendeghaz.Properties.Resources.Háttér;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(559, 559);
+            this.Controls.Add(this.comboBox_TicketEmail);
+            this.Controls.Add(this.comboBox_TicketName);
             this.Controls.Add(this.comboBox_TicketId);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBox_TicketAmount);
@@ -286,7 +290,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox_TicketEmail);
             this.Controls.Add(this.comboBox_TicketTime);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dateTimePicker_TicketDate);
@@ -296,7 +299,6 @@
             this.Controls.Add(this.button_TicketDelete);
             this.Controls.Add(this.button_TicketUpdate);
             this.Controls.Add(this.button_TicketInsert);
-            this.Controls.Add(this.textBox_TicketName);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -313,7 +315,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox_TicketName;
         private System.Windows.Forms.Button button_TicketInsert;
         private System.Windows.Forms.Button button_TicketUpdate;
         private System.Windows.Forms.Button button_TicketDelete;
@@ -324,7 +325,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox_TicketTime;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox_TicketEmail;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -334,5 +334,7 @@
         private System.Windows.Forms.TextBox textBox_TicketAmount;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBox_TicketId;
+        private System.Windows.Forms.ComboBox comboBox_TicketName;
+        private System.Windows.Forms.ComboBox comboBox_TicketEmail;
     }
 }

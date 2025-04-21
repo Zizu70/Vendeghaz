@@ -20,7 +20,6 @@ namespace Vendeghaz
     {
         private readonly HttpClient client = new HttpClient();
         public string ticketsURL = "http://localhost:3000/desktop/tickets";
-        public string softdeleteURL = "http://localhost:3000/desktop/softdelete";
         public string allTicketURL = "http://localhost:3000/desktop/allTickets";
 
         // A lista deklarálása
@@ -38,6 +37,41 @@ namespace Vendeghaz
         {
             allTickets = await allTicket();
             uploadingTicketId();
+        }
+
+        public class User
+        {
+            public int u_id { get; set; }
+            public string u_name { get; set; }
+            public string u_email { get; set; }
+        }
+
+        private async void LoadUserComboboxes()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string url = "http://localhost:3000/desktop/users"; // saját IP/port ha szükséges
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    var users = JsonConvert.DeserializeObject<List<User>>(result);
+
+                    comboBox_TicketName.Items.Clear();
+                    comboBox_TicketEmail.Items.Clear();
+
+                    foreach (var user in users)
+                    {
+                        comboBox_TicketName.Items.Add(user.u_name);
+                        comboBox_TicketEmail.Items.Add(user.u_email);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Nem sikerült betölteni a felhasználókat.");
+                }
+            }
         }
 
         public partial class Ticket
@@ -164,9 +198,12 @@ namespace Vendeghaz
 
                     //comboBox_TicketId.Text = ticket.T_id.ToString();
 
- /* ?? */           textBox_TicketName.Text = ticket.u_name;
-/* ?? */
-                    textBox_TicketEmail.Text = ticket.u_email;
+                    /* ?? */
+                    comboBox_TicketName.Text = ticket.u_name;
+                    comboBox_TicketEmail.Text = ticket.u_email;
+
+                    //comboBox_TicketName.ReadOnly = true;
+                    //comboBox_TicketEmail.ReadOnly = true;
 
                     dateTimePicker_TicketDate.Text = ticket.t_date.Value.AddDays(+1).ToString("yyyy-MM-dd");
                     comboBox_TicketTime.Text = ticket.t_time;
@@ -197,15 +234,6 @@ namespace Vendeghaz
                     string json = await response.Content.ReadAsStringAsync();
                     var ticketName = JsonConvert.DeserializeObject<List<Ticket>>(json);
 
-                    // Csak azokat töltjük be, amelyek nincsenek törölve
-         //???           var filteredTickets = ticketName.Where(t => t.Deleted_at == null).ToList();
-
-                    // Ha ComboBoxot vagy ListBoxot használunk:
-                   // comboBox_TicketTime.DataSource = null;  //**
-                   // comboBox_TicketTime.Items.Clear(); // *** // Ezt is érdemes hozzáadni
-
-         //???           comboBox_TicketTime.DataSource = filteredTickets;
-                    comboBox_TicketTime.DisplayMember = "T_time";
                 }
                 else
                 {
@@ -220,8 +248,8 @@ namespace Vendeghaz
 
         private bool validateInputTicket() //inserthez + üres konstruktor guestben!
         {
-            if (string.IsNullOrEmpty(textBox_TicketName.Text) ||
-                string.IsNullOrEmpty(textBox_TicketEmail.Text) ||
+            if (string.IsNullOrEmpty(comboBox_TicketName.Text) ||
+                string.IsNullOrEmpty(comboBox_TicketEmail.Text) ||
                 string.IsNullOrEmpty(dateTimePicker_TicketDate.Text) ||
                 string.IsNullOrEmpty(comboBox_TicketTime.Text) ||
                 string.IsNullOrEmpty(textBox_TicketPiece.Text) ||
@@ -229,7 +257,7 @@ namespace Vendeghaz
             {
                 MessageBox.Show("Kérjük, töltse ki az összes kötelező mezőt!", "Hiányzó adatok", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                this.ActiveControl = textBox_TicketName;  // fokusz ide!
+                this.ActiveControl = comboBox_TicketName;  // fokusz ide!
 
                 return false;
             }
@@ -240,8 +268,8 @@ namespace Vendeghaz
         {
             comboBox_TicketId.Text = "";
 
-            textBox_TicketName.Text = "";
-            textBox_TicketEmail.Text = "";
+            comboBox_TicketName.Text = "";
+            comboBox_TicketEmail.Text = "";
 
             dateTimePicker_TicketDate.Value = DateTime.Now; 
             comboBox_TicketTime.Text = "";
@@ -256,41 +284,36 @@ namespace Vendeghaz
         {
             if (!validateInputTicket()) return;
 
-            var ticketData = new
+            var insertTicketData = new
             {
-                t_name = textBox_TicketName.Text,
-                t_email = textBox_TicketEmail.Text,
+                u_name = comboBox_TicketName.Text,
+                u_email = comboBox_TicketEmail.Text,
 
                 t_date = dateTimePicker_TicketDate.Value.ToString("yyyy-MM-dd"),
                 t_time = comboBox_TicketTime.Text,
+
                 t_piece = int.Parse(textBox_TicketPiece.Text),
                 t_amount = int.Parse(textBox_TicketAmount.Text),
             };
 
-            string json = JsonConvert.SerializeObject(ticketData);
+            string json = JsonConvert.SerializeObject(insertTicketData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            try
-            {
-                HttpResponseMessage result = await client.PostAsync(ticketsURL, content);
+            
+            HttpResponseMessage result = await client.PostAsync(ticketsURL, content);
 
-                if (result.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Sikeres feltöltés!");
-                    await LoadTickets();
-                    //cgj await InitializeAsync();
-                    emptyFieldsTicket();
-                    uploadingTicketId(); //nem tolti fel a idt az ujjal
-                    InitializeAsync();
-                }
-                else
-                {
-                    MessageBox.Show("Hiba a feltöltés során!");
-                }
-            }
-            catch (HttpRequestException ex)
+            if (result.IsSuccessStatusCode)
             {
-                MessageBox.Show("Hálózati hiba: " + ex.Message);
+                MessageBox.Show("Sikeres feltöltés!");
+                await LoadTickets();
+                    //cgj await InitializeAsync();
+                emptyFieldsTicket();
+                uploadingTicketId(); //nem tolti fel a idt az ujjal
+                InitializeAsync();
+            }
+            else
+            {
+                MessageBox.Show("Hiba a feltöltés során!");
             }
         }
 
@@ -306,11 +329,10 @@ namespace Vendeghaz
 
             if (!validateInputTicket()) return;
 
-            var guestTicketData = new
-            {
-                t_name = textBox_TicketName.Text,
-                t_email = textBox_TicketEmail.Text,
 
+
+            var updateTicketData = new
+            {
                 t_date = dateTimePicker_TicketDate.Value.ToString("yyyy-MM-dd"),
                 t_time = comboBox_TicketTime.Text,
 
@@ -320,28 +342,22 @@ namespace Vendeghaz
 
            
 
-            string json = JsonConvert.SerializeObject(guestTicketData);
+            string json = JsonConvert.SerializeObject(updateTicketData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            try
+            HttpResponseMessage result = await client.PutAsync($"{ticketsURL}/{selectedTicket.T_id}", content);
+            if (result.IsSuccessStatusCode)
             {
-                HttpResponseMessage result = await client.PutAsync($"{ticketsURL}/{selectedTicket.T_id}", content);
-                if (result.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Sikeres frissítés!");
+                MessageBox.Show("Sikeres frissítés!");
                     await LoadTickets();
                     emptyFieldsTicket();
-                }
-                else
-                {
-                    MessageBox.Show("Hiba a frissítés során!");
-                }
             }
-            catch (HttpRequestException ex)
+            else
             {
-                MessageBox.Show("Hálózati hiba: " + ex.Message);
+                MessageBox.Show("Hiba a frissítés során!");
             }
         }
+     
 
         private async void button_TicketDelete_Click(object sender, EventArgs e)
         {
@@ -350,41 +366,37 @@ namespace Vendeghaz
                 MessageBox.Show("Nincs kiválasztott jegy a törléshez!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            var ticketData = new
+            if (MessageBox.Show("Biztosan törölni szeretnéd?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                t_name = selectedTicket.U_name,
-                t_email = selectedTicket.U_email,
+                //var ticketId = selectedTicket.T_id;
+           
 
-                t_date = selectedTicket.T_date.ToString("yyyy-MM-dd"),
-                t_time = selectedTicket.T_time,
 
-                t_piece = selectedTicket.T_piece,
-                t_amount = selectedTicket.T_amount,
-            };
+            
 
-            string json = JsonConvert.SerializeObject(ticketData);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                /*string json = JsonConvert.SerializeObject(selectedTicket.T_id);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");*/
 
-            try
-            {
+                try
+                {
                 //var content = new StringContent("", Encoding.UTF8, "application/json");
-                HttpResponseMessage result = await client.PutAsync($"{softdeleteURL}/{selectedTicket.T_id}", content);
+                HttpResponseMessage result = await client.DeleteAsync($"{ticketsURL}/{selectedTicket.T_id}");
 
-                if (result.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Jegyrendelés törölve (soft delete)!");
-                    await LoadTickets();
-                    emptyFieldsTicket();
+                    if (result.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Jegyrendelés törölve!");
+                        await LoadTickets();
+                        emptyFieldsTicket();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Törlés sikertelen!");
+                    }
                 }
-                else
+                catch (HttpRequestException ex)
                 {
-                    MessageBox.Show("Törlés sikertelen!");
+                    MessageBox.Show("Hálózati hiba: " + ex.Message);
                 }
-            }
-            catch (HttpRequestException ex)
-            {
-                MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
         }
 
