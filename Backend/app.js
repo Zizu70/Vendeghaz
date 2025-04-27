@@ -9,7 +9,13 @@ const ServiceRoutes = require('./routes/ServiceRoutes'); // Szervízhez Admin ú
 
 //dotenv.config(); cg
 
-
+const usersRoutes = require('./routes/users');
+const guestsRoutes = require('./routes/guests');
+const workersRoutes = require('./routes/workers');
+const adoptionRoutes = require('./routes/adoption');
+const ticketsRoutes = require('./routes/tickets');
+const workersGuestsRoutes = require('./routes/workersGuests');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 //const port = 3000; cg kell-e
@@ -37,6 +43,13 @@ app.use('/desktop', DesktopRoutes);
 
 // Szervíz végpont használata
 //app.use('/services', ServiceRoutes); 
+app.use('/api/auth', authRoutes); // Auth route for login and registration
+app.use('/api/users', usersRoutes);
+app.use('/api/guests', guestsRoutes);
+app.use('/api/workers', workersRoutes);
+app.use('/api/adoption', adoptionRoutes);
+app.use('/api/tickets', ticketsRoutes);
+app.use('/api/workers-guests', workersGuestsRoutes);
 
 
 // Hiba kezelő middleware
