@@ -70,7 +70,7 @@ const Navbar = () => {
                 <FontAwesomeIcon icon={faTicketAlt} className="me-2" />
                 Jegyek
               </NavLink>
-            </li>
+            </li>           
 
             {!user && (
               <>
@@ -98,7 +98,6 @@ const Navbar = () => {
               </li>
             )}
 
-            
           </ul>
         </div>
       </div>

@@ -18,9 +18,12 @@ const Login = () => {
 
     try {
       const res = await api.post(endpoint, payload);
+
+       // Ha sikeres, elmentjük a választ a localStorage-ba
       localStorage.setItem('user', JSON.stringify(res.data));
       window.dispatchEvent(new Event('loginChange'));
       setError(''); // töröljük a hibát, ha sikeres a bejelentkezés
+      
       // navigálás a főoldalra vagy a dashboard-ra
       navigate('/'); // vagy külön dashboard
     } catch (err) {
