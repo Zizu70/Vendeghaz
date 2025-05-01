@@ -61,8 +61,6 @@ namespace Vendeghaz
             public string G_image { get; set; }
         }
 
-
-
          private async Task LoadGuestsIntoListView(string url)
          {
              try
@@ -101,7 +99,6 @@ namespace Vendeghaz
              }
          }
 
-        //**jó**//
         private void checkBox_CheckedChangedChoice(object sender, EventArgs e)
         {
             var clickedCheckBox = (CheckBox)sender;
@@ -116,14 +113,7 @@ namespace Vendeghaz
                     }
                 }
             }
-            /*CheckBox selectedCheckBox = sender as CheckBox;
-            if (selectedCheckBox != null)
-            {
-                Debug.WriteLine($"Kiválasztott CheckBox: {selectedCheckBox.Text}, Állapot: {selectedCheckBox.Checked}");
-            }*/
         }
-
-
 
         private void listView_Choice_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -138,51 +128,19 @@ namespace Vendeghaz
                 string selectedGender = listViewItem.SubItems[3].Text;
                 string selectedInplace = listViewItem.SubItems[4].Text;
                 string selectedOther = listViewItem.SubItems[5].Text;
-                /*string selectedImage = listViewItem.SubItems[6].Text;*/
-
+                
                 DateTimeOffset selectedIndate = DateTimeOffset.Parse(listViewItem.SubItems[6].Text);
                 DateTimeOffset selectedBirthdate = DateTimeOffset.Parse(listViewItem.SubItems[7].Text);
 
                 string selectedImage = listViewItem.SubItems[8].Text;
-
-                /*Debug.WriteLine($"BirthDate érték: {listViewItem.SubItems[8].Text}");
-
-                  Debug.WriteLine($"ID: {selectedId}, Név: {selectedName}, Faj: {selectedSpecies}, Nem: {selectedGender}, Érkezés: {selectedInDate}, Születés: {selectedBirthDate}, Helyszín: {selectedInplace}, Egyéb: {selectedOther}, Kép: {selectedImage}");
-
-          
-                DateTimeOffset selectedInDate;
-                DateTimeOffset selectedBirthDate;
-
-                // Érkezési dátum konvertálása
-                if (!DateTimeOffset.TryParse(listViewItem.SubItems[7].Text, out selectedInDate))
-                {
-                    MessageBox.Show("Hibás érkezési dátum formátum!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Születési dátum konvertálása
-                if (!DateTimeOffset.TryParse(listViewItem.SubItems[8].Text, out selectedBirthDate))
-                {
-                    MessageBox.Show("Hibás születési dátum formátum!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                Debug.WriteLine($"Id: {selectedId}, Név {selectedName}, Faj: {selectedSpecies}");
-
-                Debug.WriteLine($"Születési dátum a ListView-ban: '{listViewItem.SubItems[8].Text}'");
-                */
 
                 // FormGuest példány létrehozása és adatok átadása
                 //Módosítás, törléshez átlépés Formguestbe
                 FormGuest formGuest = new FormGuest(selectedId, selectedName, selectedSpecies, selectedGender,  selectedInplace, selectedOther, selectedImage, selectedIndate, selectedBirthdate);
                 formGuest.Show();
 
-               
-
                 // Jelenlegi form elrejtése (nem zárjuk be azonnal)
                 this.Hide();
-
-                //emptyFieldsChoice();
 
             }
             else
@@ -208,7 +166,6 @@ namespace Vendeghaz
                         MessageBox.Show("Kérlek válassz ki csak egy CheckBox-ot!");
                         return;
                     }
-
                     anyChecked = true;
                     selectedCheckBox = checkBox;
                 }
@@ -264,7 +221,6 @@ namespace Vendeghaz
         private void emptyFieldsChoice()  // ok m
         {
             // Kiürítjük a mezőket
-
             checkBox_ChoiceLarge.Checked = false;
             checkBox_ChoiceSmall.Checked = false;
             checkBox_ChoiceBird.Checked = false;
@@ -273,18 +229,16 @@ namespace Vendeghaz
 
             listView_Choice.Items.Clear();
             //CheckBox selectedCheckBox = null;
-
         }
 
 
         private void button_ChoiceInsert_Click(object sender, EventArgs e)
         {
-
             //Új vendég hozzáadása
             FormGuest formGuest = new FormGuest();
             formGuest.Show();
 
             emptyFieldsChoice();
-        }
+        }       
     } 
 }

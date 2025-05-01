@@ -67,6 +67,7 @@
             this.button_ExitYes.TabIndex = 2;
             this.button_ExitYes.Text = "Igen";
             this.button_ExitYes.UseVisualStyleBackColor = false;
+            this.button_ExitYes.Click += new System.EventHandler(this.button_ExitYes_Click);
             // 
             // button_ExitNo
             // 
@@ -77,6 +78,7 @@
             this.button_ExitNo.TabIndex = 3;
             this.button_ExitNo.Text = "Nem";
             this.button_ExitNo.UseVisualStyleBackColor = false;
+            this.button_ExitNo.Click += new System.EventHandler(this.button_ExitNo_Click);
             // 
             // FormExit
             // 

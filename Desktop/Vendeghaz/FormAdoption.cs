@@ -54,7 +54,7 @@ namespace Vendeghaz
             placeholderAdoption(); //  "Kérem válasszon!"
         }
 
-        private void placeholderAdoption()   //mező szöveg kérem várjon!
+        private void placeholderAdoption()   //mező szöveg: kérem válasszon!
         {
             comboBox_AdoptionGName.Text = "Kérem válasszon!";
             comboBox_AdoptionUName.Text = "Kérem válasszon!";
@@ -98,8 +98,8 @@ namespace Vendeghaz
             {
                 foreach (Guest animal in allAnimals)
                 {
-                    if (!string.IsNullOrWhiteSpace(animal.G_name))  //Name
-                        comboBox_AdoptionGName.Items.Add(animal.G_name); // Változtasd meg az állatok nevének megfelelő tulajdonságra
+                    if (!string.IsNullOrWhiteSpace(animal.G_name))  
+                        comboBox_AdoptionGName.Items.Add(animal.G_name); 
                 }
             }
             else
@@ -287,9 +287,6 @@ namespace Vendeghaz
                 if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Az örökbefogadás sikeresen rögzítve!", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    //FormContract formContract = new FormContract(G_name,  G_species, G_gender, G_birthdate, U_name, A_date);
-                    //formContract.Show();
                 }
                 else
                 {
@@ -300,6 +297,7 @@ namespace Vendeghaz
             {
                 MessageBox.Show($"Hiba történt az adatok betöltésekor: {ex.Message}", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         private async void button_AdoptionInsert_Click(object sender, EventArgs e)
@@ -333,23 +331,28 @@ namespace Vendeghaz
                 U_name = U_name
             };
 
-            //var contractForm = new FormContract(selectedAnimal, selectedUser, A_date);
             contractForm = new FormContract(G_name, G_species, G_gender, DateTime.Parse(G_birthdate), U_name, DateTime.Parse(A_date));
-            /*FormContract contractForm = new FormContract(selectedAnimal, selectedUser, A_date);*/
 
             contractForm.Show();
-
+            this.Close();
         }
-
-            
-
-
-
 
         private void button_AdoptionAgain_Click(object sender, EventArgs e)
         {
             emptyFieldsAdoption();
             placeholderAdoption();
+        }
+
+        private void FormAdoption_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Ellenőrzöm, hogy az 'X' gombbal be akarták-e zárni az ablakot
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                FormMain formMain = new FormMain();
+                formMain.Show();
+
+                this.Hide();
+            }
         }
     }
 }

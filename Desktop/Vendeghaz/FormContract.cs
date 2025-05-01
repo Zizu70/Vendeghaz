@@ -99,9 +99,21 @@ namespace Vendeghaz
 
             MessageBox.Show("Az oklevél sikeresen el lett mentve: " + imagePath);
 
-//Kell
-            //System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "/Guest_Image" //guestimages elerese
-            //C:\Users\Zita\Desktop\VendégHáz\Vendeghaz\Desktop\Vendeghaz\bin\Debug\Contract
+            // Vissza a FormAdoptionra
+            FormAdoption formAdoption = new FormAdoption();
+            formAdoption.Show();
+            this.Close();
+        }
+        private void FormContract_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Ellenőrzöm, hogy az 'X' gombbal be akarták-e zárni az ablakot
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                FormAdoption formAdoption = new FormAdoption();
+                formAdoption.Show();
+
+                this.Hide();
+            }
         }
     }
 }

@@ -310,7 +310,7 @@ router.get('/guests/allYard', async (req, res) => {
 router.get('/guests/allStoking', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT * FROM guests WHERE g_species IN ('dámszarvas','juh','kecske','nyúl','póniló')`,   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('dámszarvas','juh','kecske','nyúl','póniló', 'vaddisznó')`,   // ell.!!!!
         );
         res.status(200).json(guests);
     } catch (error) {

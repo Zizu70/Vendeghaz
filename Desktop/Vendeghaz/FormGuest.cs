@@ -26,10 +26,11 @@ namespace Vendeghaz
         private Guest selectedGuest;
         private byte[] selectedImage;
 
-
         public FormGuest()
         {
             InitializeComponent();
+            button_GuestUpdate.Hide();
+            button_GuestDelete.Hide();
         }
 
         private async Task LoadGuests()
@@ -41,15 +42,6 @@ namespace Vendeghaz
                 {
                     string json = await response.Content.ReadAsStringAsync();
                     var guestNames = JsonConvert.DeserializeObject<List<Guest>>(json);
-
-                    // Csak azokat töltjük be, amelyek nincsenek törölve
-//???                var filteredGuests = guestNames.Where(g => g.Deleted_at == null).ToList();
-
-                    // Ha ComboBoxot vagy ListBoxot használunk:
- //                   comboBox_GuestSpecies.DataSource = filteredGuests;
-                    comboBox_GuestSpecies.DisplayMember = "G_species";
- //                   comboBox_GuestGender.DataSource = filteredGuests;
-                    comboBox_GuestGender.DisplayMember = "G_name";
                 }
                 else
                 {
@@ -62,13 +54,9 @@ namespace Vendeghaz
             }
         }
 
-        //cgjav
         private void FormGuest_Load(object sender, EventArgs e)
         {
-            //comboBox_GuestSpecies.DataSource = Enum.GetValues(typeof(G_species));
-            //comboBox_GuestSpecies.SelectedIndex = -1; // Ne legyen előre kiválasztott érték
         }
-
 
         public FormGuest(int G_id, string G_name, string G_species, string G_gender, string G_inplace, string G_other, string G_image, DateTimeOffset G_indate, DateTimeOffset G_birthdate)
         {
@@ -88,8 +76,6 @@ namespace Vendeghaz
             string imageDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Guest_Image");
             string imagePath = Path.Combine(imageDirectory, G_image);
 
-
-
             // Kép betöltése
             if (!string.IsNullOrEmpty(G_image) && File.Exists(imagePath))
             {
@@ -99,8 +85,6 @@ namespace Vendeghaz
             {
                 pictureBox_GuestImage.Image = null; // Ha nincs kép, töröljük
             }
-
-
 
             selectedGuest = new Guest
             {
@@ -114,21 +98,7 @@ namespace Vendeghaz
                 G_indate = G_indate,
                 G_birthdate = G_birthdate
             };
-            /*
-            // Kép elérési útjának összeállítása
-            string basePath = @"C:\Users\Zita\Desktop\VendegHaz\Vendeghaz\Desktop\Guest_Image\";  
-            string fullPath = Path.Combine(basePath, (string)G_image);
-
-            // Kép betöltése
-            if (!string.IsNullOrEmpty(fullPath) && File.Exists(fullPath))
-            {
-                pictureBox_GuestImage.Image = Image.FromFile(fullPath);
-            }
-            else
-            {
-                pictureBox_GuestImage.Image = null; // Ha nincs kép, töröljük az előzőt
-                MessageBox.Show("A GUEST kép nem található!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }*/
+            button_GuestInsert.Hide();
         }
 
         //** kép kiválasztása pictureboxban **/
@@ -147,7 +117,7 @@ namespace Vendeghaz
             }
         }
 
-        private bool validateInputGuest() //inserthez + üres konstruktor guestben!
+        private bool validateInputGuest() 
         {
             if (string.IsNullOrEmpty(textBox_GuestName.Text) ||
                 string.IsNullOrEmpty(comboBox_GuestSpecies.Text) ||
@@ -163,7 +133,7 @@ namespace Vendeghaz
             return true;
         }
 
-        private void emptyFieldsGuest()  // mezők kiürítése kell-e??
+        private void emptyFieldsGuest()  // mezők kiürítése
         {
             textBox_GuestName.Text = "";
             comboBox_GuestSpecies.Text = "";
@@ -177,10 +147,8 @@ namespace Vendeghaz
             pictureBox_GuestImage.Image = null;
         }
 
-
-
         private async void button_GuestInsert_Click(object sender, EventArgs e)
-        {
+        {        
             if (!validateInputGuest()) return;
 
             string imageFileName = null;
@@ -243,59 +211,11 @@ namespace Vendeghaz
             {
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
-
-
-            /*
-            if (string.IsNullOrWhiteSpace(textBox_GuestName.Text) ||
-                string.IsNullOrWhiteSpace(comboBox_GuestSpecies.Text) ||
-                string.IsNullOrWhiteSpace(comboBox_GuestGender.Text))
-            {
-                MessageBox.Show("Minden mező kitöltése kötelező!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            string G_name = textBox_GuestName.Text;
-            string G_species = comboBox_GuestSpecies.Text;
-            string G_gender = comboBox_GuestGender.Text;
-            DateTimeOffset G_birthdate = dateTimePicker_GuestBirthdate.Value;
-            DateTimeOffset G_indate = dateTimePicker_GuestIndate.Value;
-            string G_inplace = textBox_GuestInplace.Text;
-            string G_other = richTextBox_GuestOther.Text;
-
-            string G_image = selectedImage != null ? Convert.ToBase64String(selectedImage) : null;
-            /**********
-            string debugPath = Path.Combine(System.Windows.Forms.Application.StartupPath, "Guest_Images");
-            if (!Directory.Exists(debugPath))
-            {
-                Directory.CreateDirectory(debugPath);
-            }
-            ///////////*/
-          
-            /*
-            var content = new StringContent($"{{\"g_name\":\"{G_name}\",\"g_species\":\"{G_species}\",\"g_gender\":\"{G_gender}\",\"g_birthdate\":\"{G_birthdate}\",\"g_indate\":\"{G_indate}\",\"g_inplace\":\"{G_inplace}\",\"g_other\":\"{G_other}\"}}", Encoding.UTF8, "application/json");
-            // ,\"g_image\":\"{G_image}\"
-            try
-            {
-                HttpResponseMessage result = await client.PostAsync(guestsBaseURL, content);
-                if (result.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Sikeres feltöltés!");
-                    await LoadGuests();
-                    emptyFieldsGuest();
-                }
-                else
-                {
-                    MessageBox.Show("Hiba a feltöltés során!");
-                }
-            }
-            catch (HttpRequestException ex)
-            {
-                MessageBox.Show(ex.Message);
-                throw;
-            }
-            */
-        }  
-
+            // Vissza a FormChoicera
+            FormChoice formChoice = new FormChoice();
+            formChoice.Show();
+            this.Close();
+        }
 
         private async void button_GuestUpdate_Click(object sender, EventArgs e)
         {
@@ -304,38 +224,25 @@ namespace Vendeghaz
                 MessageBox.Show("Nincs kiválasztott vendég a frissítéshez!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-
-
             if (!validateInputGuest()) return;
-
-
 
             // Alapból megtartjuk a régi képet
             string imageFileName = selectedGuest.G_image;
-
-
 
             if (selectedImage != null)
             {
                 // Mentési mappa beállítása
                 string imageFolder = Path.Combine(Application.StartupPath, "Guest_Image");
 
-
-
                 if (!Directory.Exists(imageFolder))
                 {
                     Directory.CreateDirectory(imageFolder);
                 }
 
-
-
                 // Fájlnév létrehozása biztonságosan a vendég nevéből
                 string safeFileName = string.Concat(textBox_GuestName.Text.Split(Path.GetInvalidFileNameChars()));
                 imageFileName = $"{safeFileName}.jpg";
                 string imagePath = Path.Combine(imageFolder, imageFileName);
-
-
 
                 try
                 {
@@ -347,8 +254,6 @@ namespace Vendeghaz
                     return;
                 }
             }
-
-
 
             var guestUpdateData = new
             {
@@ -362,12 +267,8 @@ namespace Vendeghaz
                 g_image = imageFileName, // Meglévő vagy új kép neve
             };
 
-
-
             string json = JsonConvert.SerializeObject(guestUpdateData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-
 
             try
             {
@@ -387,11 +288,14 @@ namespace Vendeghaz
             {
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
+            // Vissza a FormChoicera
+            FormChoice formChoice = new FormChoice();
+            formChoice.Show();
+            this.Close();
         }
-        //ok//
+
         private async void button_GuestDelete_Click(object sender, EventArgs e)
         {
-
             if (selectedGuest == null)
             {
                 MessageBox.Show("Nincs kiválasztott vendég a törléshez!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -406,8 +310,6 @@ namespace Vendeghaz
 
                     if (result.IsSuccessStatusCode)
                     {
-                        MessageBox.Show($"ID: {selectedGuest.G_id}");
-
                         MessageBox.Show("Vendég törölve!");
                         await LoadGuests();
                         emptyFieldsGuest();
@@ -422,76 +324,22 @@ namespace Vendeghaz
                     MessageBox.Show("Hálózati hiba: " + ex.Message);
                 }
             }
-
-
-
-
-
-
-            /*if (string.IsNullOrWhiteSpace(textBox_GuestId.Text))
-            {
-                MessageBox.Show("Nincs kiválasztott vendég!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (MessageBox.Show("Biztosan törölni szeretnéd?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                try
-                {
-                    HttpResponseMessage result = await client.DeleteAsync($"{guestsURL}/{textBox_GuestId.Text}");
-                    if (result.IsSuccessStatusCode)
-                    {
-                        deleted_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        MessageBox.Show("Vendég sikeresen törölve!");
-                        await LoadGuests();
-                        emptyFieldsGuest();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Hiba a törlés során!");
-                    }
-                }
-                catch (HttpRequestException ex)
-                {
-                    MessageBox.Show("Hálózati hiba: " + ex.Message);
-                }*/
-
-            /*
-            //MessageBox.Show($"{textBox_GuestId.Text}");
-            if (Convert.ToInt32(textBox_GuestId.Text) == 0)
-            {
-                MessageBox.Show("Nincs kiválasztott vendég!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (MessageBox.Show("Biztosan törölni szeretnéd?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                try
-                {
-                    HttpResponseMessage result = await client.DeleteAsync($"{guestsBaseURL}/{gName}");
-
-                    if (result.IsSuccessStatusCode)
-                    {
-                        MessageBox.Show("Vendég sikeresen törölve!");
-                        await LoadGuests();
-                        emptyFieldsGuest();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Hiba a törlés során!");
-                    }
-                }
-                catch (HttpRequestException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }*/
-
              // Vissza a FormChoicera
              FormChoice formChoice = new FormChoice();
              formChoice.Show();
-             this.Close();
-         
+             this.Close();         
+        }
+       
+        private void FormContract_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Ellenőrzöm, hogy az 'X' gombbal be akarták-e zárni az ablakot
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                FormChoice formChoice = new FormChoice();
+                formChoice.Show();
+
+                this.Hide();
+            }
         }
     }
 }

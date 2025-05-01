@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Vendeghaz
-{                  // átállítani s c
+{                  
     internal static class Program
     {
         /// <summary>

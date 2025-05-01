@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormContract));
             this.panel_Contract = new System.Windows.Forms.Panel();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -69,6 +71,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button_ContractJPG = new System.Windows.Forms.Button();
             this.panel_Contract.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -85,6 +89,8 @@
             // 
             this.panel_Contract.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(245)))), ((int)(((byte)(205)))));
             this.panel_Contract.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_Contract.Controls.Add(this.pictureBox10);
+            this.panel_Contract.Controls.Add(this.pictureBox9);
             this.panel_Contract.Controls.Add(this.pictureBox8);
             this.panel_Contract.Controls.Add(this.pictureBox7);
             this.panel_Contract.Controls.Add(this.pictureBox6);
@@ -107,13 +113,33 @@
             this.panel_Contract.Size = new System.Drawing.Size(816, 757);
             this.panel_Contract.TabIndex = 0;
             // 
+            // pictureBox10
+            // 
+            this.pictureBox10.BackgroundImage = global::Vendeghaz.Properties.Resources.rajzfarkas;
+            this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox10.Location = new System.Drawing.Point(673, 579);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox10.TabIndex = 46;
+            this.pictureBox10.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.BackgroundImage = global::Vendeghaz.Properties.Resources.rajzfarkas;
+            this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox9.Location = new System.Drawing.Point(673, 232);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox9.TabIndex = 45;
+            this.pictureBox9.TabStop = false;
+            // 
             // pictureBox8
             // 
             this.pictureBox8.BackgroundImage = global::Vendeghaz.Properties.Resources.atlatszo;
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox8.Location = new System.Drawing.Point(4, 232);
+            this.pictureBox8.Location = new System.Drawing.Point(25, 230);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(134, 127);
+            this.pictureBox8.Size = new System.Drawing.Size(100, 100);
             this.pictureBox8.TabIndex = 44;
             this.pictureBox8.TabStop = false;
             // 
@@ -121,9 +147,9 @@
             // 
             this.pictureBox7.BackgroundImage = global::Vendeghaz.Properties.Resources.atlatszo;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox7.Location = new System.Drawing.Point(4, 552);
+            this.pictureBox7.Location = new System.Drawing.Point(25, 579);
             this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(134, 127);
+            this.pictureBox7.Size = new System.Drawing.Size(100, 100);
             this.pictureBox7.TabIndex = 43;
             this.pictureBox7.TabStop = false;
             // 
@@ -153,7 +179,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(37, 534);
+            this.label11.Location = new System.Drawing.Point(37, 549);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(64, 15);
             this.label11.TabIndex = 40;
@@ -162,7 +188,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(5, 519);
+            this.label12.Location = new System.Drawing.Point(5, 534);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(127, 15);
             this.label12.TabIndex = 39;
@@ -174,7 +200,7 @@
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox5.Location = new System.Drawing.Point(25, 426);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox5.Size = new System.Drawing.Size(100, 100);
             this.pictureBox5.TabIndex = 38;
             this.pictureBox5.TabStop = false;
             // 
@@ -182,9 +208,9 @@
             // 
             this.pictureBox4.BackgroundImage = global::Vendeghaz.Properties.Resources.rajzmedve;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox4.Location = new System.Drawing.Point(662, 426);
+            this.pictureBox4.Location = new System.Drawing.Point(673, 426);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(134, 127);
+            this.pictureBox4.Size = new System.Drawing.Size(100, 100);
             this.pictureBox4.TabIndex = 37;
             this.pictureBox4.TabStop = false;
             // 
@@ -298,23 +324,23 @@
             this.richTextBox1.Size = new System.Drawing.Size(758, 17);
             this.richTextBox1.TabIndex = 33;
             this.richTextBox1.Text = "  www.vendeghazvadaspark.hu                                                      " +
-    "                              Támogasson minket adója 1%-val: adószám:11223344-5" +
-    "-66 ";
+    "                            Támogasson minket adója 1%-val: adószám:11223344-5-6" +
+    "6 ";
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = global::Vendeghaz.Properties.Resources.rajzmedve;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(662, 120);
+            this.pictureBox2.Location = new System.Drawing.Point(673, 47);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(134, 127);
+            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.TabIndex = 32;
             this.pictureBox2.TabStop = false;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(37, 165);
+            this.label19.Location = new System.Drawing.Point(37, 177);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(64, 15);
             this.label19.TabIndex = 31;
@@ -323,7 +349,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(5, 150);
+            this.label18.Location = new System.Drawing.Point(11, 162);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(127, 15);
             this.label18.TabIndex = 30;
@@ -456,9 +482,9 @@
             // 
             this.pictureBox1.BackgroundImage = global::Vendeghaz.Properties.Resources.logoatlatszo;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(24, 52);
+            this.pictureBox1.Location = new System.Drawing.Point(25, 47);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
             // 
@@ -483,9 +509,12 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormContract";
             this.Text = "Vendégház Vadaspark";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormContract_FormClosing);
             this.Load += new System.EventHandler(this.FormContract_Load);
             this.panel_Contract.ResumeLayout(false);
             this.panel_Contract.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -543,5 +572,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox pictureBox9;
     }
 }

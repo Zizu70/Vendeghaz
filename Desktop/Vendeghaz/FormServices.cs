@@ -27,12 +27,10 @@ namespace Vendeghaz
 
         private readonly string servicesURL = "http://localhost:3000/desktop/services";
         private readonly string checknameURL = "http://localhost:3000/desktop/checkname";
-
         private readonly string workersURL = "http://localhost:3000/desktop/workers";
 
         private string userName;
         private string userRole;
-
 
         public FormServices()
         {
@@ -42,13 +40,10 @@ namespace Vendeghaz
         public FormServices(string name, string role)
         {
             InitializeComponent();
-            // Store the passed data in private variables
             userName = name;
             userRole = role;
 
-            MessageBox.Show($"[Form Services] Passed: {userName} / {userRole}");
-            // Optionally: Display the data somewhere (like a label)
-            // This will only work if the label is already initialized
+            // Cimkében jelenítjük meg a bejelentkezett személy nevét és jogosultságát:
             label_ServiceInfo.Text = $"Bejelentkezve: {userName} - {userRole}";
         }
 
@@ -103,39 +98,6 @@ namespace Vendeghaz
             comboBox_ServicesRole.Text = "";
         }
 
-        // adatellenőrzés
-        public bool validateLoginServices()
-        {
-            // -- adatellenőrzés: Név
-            if (string.IsNullOrWhiteSpace(textBox_ServicesName.Text))
-            {
-                MessageBox.Show("Kérjük, adja meg a nevét!", "Hiányzó adatok", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBox_ServicesName.Focus();
-                return false;
-            }
-
-            // -- adatellenőrzés: Jelszó: hosszellenőrzés + regex előírás
-            var password = textBox_ServicesPass.Text;
-
-            if (password.Length < 3 || password.Length > 10)
-            {
-                MessageBox.Show("A jelszónak legalább 3 és legfeljebb 10 karakter hosszúnak kell lennie.", "Hibás jelszó", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBox_ServicesPass.Focus();
-                return false;
-            }
-
-            // Regex: kisbetű, nagybetű, szám kötelező, case-sensitive
-            var regex = new Regex(@"^(?=.*[a-záéíóöőúüű])(?=.*[A-ZÁÉÍÓÖŐÚÜŰ])(?=.*\d)[\S]{3,10}$");
-
-            if (!regex.IsMatch(password))
-            {
-                MessageBox.Show("A jelszónak tartalmaznia kell legalább egy kisbetűt, egy nagybetűt és egy számot!\n(Az ékezetes betűk is támogatottak.)", "Érvénytelen jelszó", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBox_ServicesPass.Focus();
-                return false;
-            }
-            return true;
-        } //kell-e kettő
-
         public bool validateInputServices()
         {
             // -- adatellenőrzés: Név
@@ -170,17 +132,10 @@ namespace Vendeghaz
 
         public async Task<bool> chackName(string name)
         {
-            /*
-            if (string.IsNullOrWhiteSpace(name))
-                return false;
-
-            var response = await client.GetAsync(checknameURL);
-            return response.IsSuccessStatusCode && bool.Parse(await response.Content.ReadAsStringAsync());
-            */
             string url = "http://localhost:3000/desktop/checkname";
 
             if (string.IsNullOrWhiteSpace(name))
-            return false;  // vagy dobhatunk kivételt is
+            return false; 
 
              using (HttpClient client = new HttpClient())
              {
@@ -203,36 +158,6 @@ namespace Vendeghaz
              } 
         }
 
-        /*
-        private async Task LoadServices()
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(servicesURL);
-                if (response.IsSuccessStatusCode)
-                {
-                    string json = await response.Content.ReadAsStringAsync();
-                    var workerNames = JsonConvert.DeserializeObject<List<Guest>>(json);
-
-                    // Csak azokat töltjük be, amelyek nincsenek törölve
-//???                    var filteredWorkers = workerNames.Where(w => w.Deleted_at == null).ToList();
-
-                    // Ha ComboBoxot vagy ListBoxot használunk:
-//??                    comboBox_ServicesRole.DataSource = filteredWorkers;
-                    comboBox_ServicesRole.DisplayMember = "W_role";
-                }
-                else
-                {
-                    MessageBox.Show("LoadS -Hiba a dolgozók lekérésekor!");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Hálózati hiba: " + ex.Message);
-            }
-        }*/
-
-        // új dolgozó felvitel
         private async void button_ServicesInsert_Click(object sender, EventArgs e)
         {
             string servicesInsert = textBox_ServicesName.Text;
@@ -252,14 +177,10 @@ namespace Vendeghaz
                 w_password = textBox_ServicesPass.Text,
                 w_role = comboBox_ServicesRole.Text
             };
-
-            
             
             string json = JsonConvert.SerializeObject(workerData);
 
             MessageBox.Show(json);
-
-            //var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var content = new StringContent($"{{\"w_name\":\"{textBox_ServicesName.Text}\",\"w_password\":\"{textBox_ServicesPass.Text}\",\"w_role\":\"{comboBox_ServicesRole.Text}\"}}", Encoding.UTF8, "application/json");
 
@@ -268,16 +189,11 @@ namespace Vendeghaz
                 HttpResponseMessage result = await client.PostAsync(servicesURL, content);
                 if (result.IsSuccessStatusCode)
                 {
-                    MessageBox.Show($"elküldött1: {workerData}");
-
                     MessageBox.Show("Sikeres feltöltés!");
-                    //await LoadServices();
                     emptyFieldsServices();
                 }
                 else
                 {
-                    MessageBox.Show($"elküldött2: {workerData}"); // eddig jól küld
-
                     MessageBox.Show("Hiba dolgózó felvitele során!");
                 }
             }
@@ -286,7 +202,7 @@ namespace Vendeghaz
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
         }
-        // dolgozó módosítása
+
         private async void button_ServicesUpdate_Click(object sender, EventArgs e)
         {
             if (textBox_ServicesName.Text == null)
@@ -313,7 +229,6 @@ namespace Vendeghaz
                 if (result.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Sikeres frissítés!");
-                    //await LoadServices();
                     emptyFieldsServices();
                 }
                 else
@@ -326,7 +241,7 @@ namespace Vendeghaz
                 MessageBox.Show("Hálózati hiba: " + ex.Message);
             }
         }
-        // dolgozó törlése
+
         private async void button_ServicesDelete_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBox_ServicesName.Text))
@@ -345,7 +260,6 @@ namespace Vendeghaz
                     if (result.IsSuccessStatusCode)
                     {
                         MessageBox.Show("SZ-D - Dolgozó sikeresen törölve!");
-                        //await LoadServices();
                         emptyFieldsServices();
                     }
                     else
@@ -359,26 +273,5 @@ namespace Vendeghaz
                 }
             }
         }
-
-
-
-  // kell
-  /*
-        private void FormServices_FormClosing(object sender, FormClosingEventArgs e)
-        {
-                // Ellenőrzöm, hogy az 'X' gombbal be akarták-e zárni az ablakot
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                FormExit formExit = new FormExit();
-                formExit.Show();
-
-                    // Add meg a kívánt viselkedést az ablak bezárásához
-                    // Például:
-                    //e.Cancel = true; // Megakadályozza az ablak bezárását
-                    // vagy:
-                    //this.Hide(); // Rejtse el az ablakot
-                }
-        } */
-        
     }
 }

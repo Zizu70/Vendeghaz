@@ -31,16 +31,13 @@ namespace Vendeghaz
         }
 
         private FormMain menu;
-
-        //belépés gomb klikkje
+               
         private async void button_Login_Click(object sender, EventArgs e)
         {
             string name = textBox_LoginName.Text.Trim();
             string password = textBox_LoginPass.Text.Trim();
 
-            // Pass data but don't show the form yet
-
-            if (!validateInputLogin()) return;  // új return
+            if (!validateInputLogin()) return;  
 
             var loginData = new { name, password };
             var json = JsonConvert.SerializeObject(loginData);
@@ -54,22 +51,14 @@ namespace Vendeghaz
 
                 if (response.IsSuccessStatusCode && result.success == true)
                 {
-                    MessageBox.Show("Sikeres bejelentkezés!", "Üdv", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Sikeres bejelentkezés!", "Üdvözöljük!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Új form megnyitása
                     string role = result.user.w_role;
-                    //FormMain mainForm = new FormMain();
-                    //mainForm.Show();
 
                     menu = new FormMain(name, role);
-                    MessageBox.Show($"[Form Login] Passed: {name} / {role}");
                     menu.Show();
 
-                    //formServices.Show();
-
-
-
-                    // Jelenlegi form elrejtése (nem zárjuk be azonnal)
                     this.Hide();
                 }
                 else
@@ -79,74 +68,12 @@ namespace Vendeghaz
             }
             catch (Exception ex)
             {
-                MessageBox.Show("FL BL Hálózati hiba: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hálózati hiba: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
-                /*
-                if (response.IsSuccessStatusCode)
-            {
-                dynamic result = JsonConvert.DeserializeObject(responseString);
-                string role = result.userRole;
-
-                MessageBox.Show("Sikeres bejelentkezés!", "Üdv", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Új form megnyitása a szerepkörrel együtt
-                FormServices formServices = new FormServices(name, password, role);
-                formServices.Show();
-
-                this.Hide(); // jelenlegi form elrejtése
-            }
-            else
-            {
-                dynamic result = JsonConvert.DeserializeObject(responseString);
-                MessageBox.Show(result.message.ToString(), "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Hálózati hiba: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-*/
-
-
-                /*
-                if (response.IsSuccessStatusCode && result.success == true)
-                {
-                    MessageBox.Show("Sikeres bejelentkezés!", "Üdv", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Új form megnyitása
-                    FormMain mainForm = new FormMain();
-                    mainForm.Show();
-
-                    //FormServices formServices = new FormServices (name, password);
-                    //formServices.Show();
-
-                    bool isAdmin = result.user.admin; // vagy is_admin helyett admin, ha így jön vissza
-
-                    FormServices formServices = new FormServices(name, isAdmin);
-                    formServices.Show();
-
-
-
-                    // Jelenlegi form elrejtése (nem zárjuk be azonnal)
-                    this.Hide();
-
-
-            }
-        else
-        {
-            MessageBox.Show(result.message.ToString(), "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show("Hálózati hiba: " + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }*/
-
-
-                // adatellenőrzés
-                private bool validateInputLogin() 
+            
+        private bool validateInputLogin() 
         { 
             // -- adatellenőrzés: Név
             if (string.IsNullOrWhiteSpace(textBox_LoginName.Text))

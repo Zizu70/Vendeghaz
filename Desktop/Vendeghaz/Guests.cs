@@ -46,7 +46,7 @@ namespace Vendeghaz
     }
    
     /*** enumok ***/
-    public enum G_species { medve, farkas, muflon, őz, gímszarvas, róka, vadmacska, hiúz, aranysakál, mosómedve, sas, bagoly, páva, holló, vércse, varjú, ló, szamár, tehén, mangalica, baromfiak, dámszarvas, juh, kecske, nyúl, póniló };
+    public enum G_species { medve, farkas, muflon, őz, gímszarvas, vaddisznó, róka, vadmacska, hiúz, aranysakál, mosómedve, sas, bagoly, páva, holló, vércse, varjú, ló, szamár, tehén, mangalica, baromfiak, dámszarvas, juh, kecske, nyúl, póniló };
     public enum G_gender { hím, nőstény, ivartalanított };
 
     internal class G_speciesConverter : JsonConverter
@@ -69,6 +69,8 @@ namespace Vendeghaz
                     return G_species.őz;
                 case "gímszarvas":
                     return G_species.gímszarvas;
+                case "vaddisznó":
+                    return G_species.vaddisznó;
                 case "róka":
                     return G_species.róka;
                 case "vadmacska":
@@ -137,9 +139,12 @@ namespace Vendeghaz
                     return;
                 case G_species.őz:
                     serializer.Serialize(writer, "őz");
-                    return;
+                    return;                
                 case G_species.gímszarvas:
                     serializer.Serialize(writer, "gímszarvas");
+                    return;
+                case G_species.vaddisznó:
+                    serializer.Serialize(writer, "vaddisznó");
                     return;
                 case G_species.róka:
                     serializer.Serialize(writer, "róka");

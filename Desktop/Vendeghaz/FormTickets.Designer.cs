@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTickets));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button_TicketInsert = new System.Windows.Forms.Button();
             this.button_TicketUpdate = new System.Windows.Forms.Button();
             this.button_TicketDelete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,8 +48,8 @@
             this.textBox_TicketAmount = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox_TicketId = new System.Windows.Forms.ComboBox();
-            this.comboBox_TicketName = new System.Windows.Forms.ComboBox();
-            this.comboBox_TicketEmail = new System.Windows.Forms.ComboBox();
+            this.textBox_TicketEmail = new System.Windows.Forms.TextBox();
+            this.textBox_TicketName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,21 +64,10 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // button_TicketInsert
-            // 
-            this.button_TicketInsert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(250)))), ((int)(((byte)(225)))));
-            this.button_TicketInsert.Location = new System.Drawing.Point(23, 497);
-            this.button_TicketInsert.Name = "button_TicketInsert";
-            this.button_TicketInsert.Size = new System.Drawing.Size(152, 44);
-            this.button_TicketInsert.TabIndex = 14;
-            this.button_TicketInsert.Text = "Felvitel";
-            this.button_TicketInsert.UseVisualStyleBackColor = false;
-            this.button_TicketInsert.Click += new System.EventHandler(this.button_TicketInsert_Click);
-            // 
             // button_TicketUpdate
             // 
             this.button_TicketUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(165)))), ((int)(((byte)(240)))));
-            this.button_TicketUpdate.Location = new System.Drawing.Point(196, 497);
+            this.button_TicketUpdate.Location = new System.Drawing.Point(78, 497);
             this.button_TicketUpdate.Name = "button_TicketUpdate";
             this.button_TicketUpdate.Size = new System.Drawing.Size(152, 44);
             this.button_TicketUpdate.TabIndex = 4;
@@ -90,7 +78,7 @@
             // button_TicketDelete
             // 
             this.button_TicketDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(110)))), ((int)(((byte)(150)))));
-            this.button_TicketDelete.Location = new System.Drawing.Point(364, 497);
+            this.button_TicketDelete.Location = new System.Drawing.Point(265, 497);
             this.button_TicketDelete.Name = "button_TicketDelete";
             this.button_TicketDelete.Size = new System.Drawing.Size(152, 44);
             this.button_TicketDelete.TabIndex = 3;
@@ -251,25 +239,25 @@
             this.comboBox_TicketId.FormattingEnabled = true;
             this.comboBox_TicketId.Location = new System.Drawing.Point(110, 104);
             this.comboBox_TicketId.Name = "comboBox_TicketId";
-            this.comboBox_TicketId.Size = new System.Drawing.Size(104, 34);
+            this.comboBox_TicketId.Size = new System.Drawing.Size(147, 34);
             this.comboBox_TicketId.TabIndex = 37;
             this.comboBox_TicketId.SelectedIndexChanged += new System.EventHandler(this.comboBox_TicketId_SelectedIndexChanged);
             // 
-            // comboBox_TicketName
+            // textBox_TicketEmail
             // 
-            this.comboBox_TicketName.FormattingEnabled = true;
-            this.comboBox_TicketName.Location = new System.Drawing.Point(110, 163);
-            this.comboBox_TicketName.Name = "comboBox_TicketName";
-            this.comboBox_TicketName.Size = new System.Drawing.Size(352, 34);
-            this.comboBox_TicketName.TabIndex = 38;
+            this.textBox_TicketEmail.Location = new System.Drawing.Point(110, 222);
+            this.textBox_TicketEmail.Name = "textBox_TicketEmail";
+            this.textBox_TicketEmail.ReadOnly = true;
+            this.textBox_TicketEmail.Size = new System.Drawing.Size(352, 34);
+            this.textBox_TicketEmail.TabIndex = 40;
             // 
-            // comboBox_TicketEmail
+            // textBox_TicketName
             // 
-            this.comboBox_TicketEmail.FormattingEnabled = true;
-            this.comboBox_TicketEmail.Location = new System.Drawing.Point(110, 214);
-            this.comboBox_TicketEmail.Name = "comboBox_TicketEmail";
-            this.comboBox_TicketEmail.Size = new System.Drawing.Size(352, 34);
-            this.comboBox_TicketEmail.TabIndex = 39;
+            this.textBox_TicketName.Location = new System.Drawing.Point(110, 166);
+            this.textBox_TicketName.Name = "textBox_TicketName";
+            this.textBox_TicketName.ReadOnly = true;
+            this.textBox_TicketName.Size = new System.Drawing.Size(352, 34);
+            this.textBox_TicketName.TabIndex = 41;
             // 
             // FormTickets
             // 
@@ -277,9 +265,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Vendeghaz.Properties.Resources.Háttér;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(559, 559);
-            this.Controls.Add(this.comboBox_TicketEmail);
-            this.Controls.Add(this.comboBox_TicketName);
+            this.ClientSize = new System.Drawing.Size(495, 559);
+            this.Controls.Add(this.textBox_TicketName);
+            this.Controls.Add(this.textBox_TicketEmail);
             this.Controls.Add(this.comboBox_TicketId);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBox_TicketAmount);
@@ -298,7 +286,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_TicketDelete);
             this.Controls.Add(this.button_TicketUpdate);
-            this.Controls.Add(this.button_TicketInsert);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -315,7 +302,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button_TicketInsert;
         private System.Windows.Forms.Button button_TicketUpdate;
         private System.Windows.Forms.Button button_TicketDelete;
         private System.Windows.Forms.Label label1;
@@ -334,7 +320,7 @@
         private System.Windows.Forms.TextBox textBox_TicketAmount;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBox_TicketId;
-        private System.Windows.Forms.ComboBox comboBox_TicketName;
-        private System.Windows.Forms.ComboBox comboBox_TicketEmail;
+        private System.Windows.Forms.TextBox textBox_TicketEmail;
+        private System.Windows.Forms.TextBox textBox_TicketName;
     }
 }

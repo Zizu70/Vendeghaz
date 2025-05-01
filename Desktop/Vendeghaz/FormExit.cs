@@ -12,13 +12,15 @@ namespace Vendeghaz
 {
     public partial class FormExit : Form
     {
+        private FormMain mainForm; //**//
         private Timer timer;
 
-        public FormExit()
+        public FormExit(FormMain mainForm)  
         {
             InitializeComponent();
             // a Controlbox elrejtése (ne legyen close button!)
             this.ControlBox = false;
+            this.mainForm = mainForm; //**
         }
 
         private void FormExit_Load(object sender, EventArgs e)
@@ -42,19 +44,20 @@ namespace Vendeghaz
 
             // Létrehozzuk és beállítjuk az időzítőt
             timer = new Timer();
-            timer.Interval = 500; // 3 másodperc 3000
-            timer.Tick += Timer;
+            timer.Interval = 3000; // 3 másodperc 3000
+            timer.Tick += Timer; //timer.Tick += Timer;
             timer.Start();
         }
 
         private void button_ExitNo_Click(object sender, EventArgs e)
         {
-            FormMain formMain = new FormMain();
-            /*formMain.FormClosed += (obj, args) =>
-            {
-                this.Show();
-            };*/
-            formMain.Show();
+            this.Close(); // bezárjuk az Exit ablakot
+            mainForm.Show(); // visszahozzuk a főformot
+           
+
+
+            //FormMain formMain = new FormMain();     
+            //formMain.Show();
         }
     }
 }

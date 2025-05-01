@@ -13,8 +13,6 @@ namespace Vendeghaz
 {
     public partial class FormMain : Form
     {
-
-
         private CheckBox[] checkBoxes_Main;
         
         public FormMain()
@@ -22,7 +20,6 @@ namespace Vendeghaz
             InitializeComponent();
             InitializeCheckBoxes_Main();
         }
-
 
         public string userName { get; set; }
         public string userRole { get; set; }
@@ -33,16 +30,10 @@ namespace Vendeghaz
             InitializeCheckBoxes_Main();
             userName = name;
             userRole = role;
-
-            //
-            MessageBox.Show($"[Form Main] Passed: {userName} / {userRole}");
-            // Prepare the service form once, with passed data
-
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            MessageBox.Show($"[Form Main] Passed: {userName} / {userRole}");
         }
 
         private void InitializeCheckBoxes_Main()
@@ -57,7 +48,7 @@ namespace Vendeghaz
         }
 
         private void checkBox_CheckedChanged(object sender, EventArgs e)
-        {   //cg
+        {  
             if (!(sender is CheckBox clickedCheckBox)) return;
 
             if (clickedCheckBox.Checked)
@@ -66,7 +57,6 @@ namespace Vendeghaz
                 {
                     if (checkBox != clickedCheckBox)
                     {
-                        // Esemény kikapcsolása, hogy ne fusson feleslegesen
                         checkBox.CheckedChanged -= checkBox_CheckedChanged;
                         checkBox.Checked = false;
                         checkBox.CheckedChanged += checkBox_CheckedChanged;
@@ -77,7 +67,6 @@ namespace Vendeghaz
 
         private void button_Main_Click(object sender, EventArgs e)
         {
-            // Ellenőrizzük, hogy van-e kiválasztott CheckBox
             bool anyChecked = false;
             CheckBox selectedCheckBox = null;
 
@@ -87,10 +76,9 @@ namespace Vendeghaz
                 {
                     if (anyChecked)
                     {
-                        MessageBox.Show("Kérlek válassz ki csak egy CheckBox-ot!");
+                        MessageBox.Show("Kérem csak egy CheckBox-ot  válasszon ki!");
                         return;
                     }
-
                     anyChecked = true;
                     selectedCheckBox = checkBox;
                 }
@@ -119,6 +107,21 @@ namespace Vendeghaz
                     FormServices formServices = new FormServices(userName, userRole);
                     formServices.Show();
                     break;
+            }
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Ellenőrzöm, hogy az 'X' gombbal be akarták-e zárni az ablakot
+            if (e.CloseReason == CloseReason.UserClosing)
+            {                
+                // Megakadályozzuk a bezárást
+                e.Cancel = true;
+
+                FormExit formExit = new FormExit(this);
+                formExit.Show();
+
+                this.Hide();
             }
         }
     }
