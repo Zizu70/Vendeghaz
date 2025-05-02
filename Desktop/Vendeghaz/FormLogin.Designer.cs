@@ -59,7 +59,7 @@
             this.label1.Location = new System.Drawing.Point(167, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(184, 49);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 4;
             this.label1.Text = "Üdvözöljük!";
             // 
             // textBox_LoginName
@@ -105,7 +105,7 @@
             this.button_Login.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.button_Login.Name = "button_Login";
             this.button_Login.Size = new System.Drawing.Size(180, 36);
-            this.button_Login.TabIndex = 4;
+            this.button_Login.TabIndex = 3;
             this.button_Login.Text = "Belépés";
             this.button_Login.UseVisualStyleBackColor = false;
             this.button_Login.Click += new System.EventHandler(this.button_Login_Click);
@@ -126,8 +126,10 @@
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Segoe Print", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(30, 30);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Vendégház Vadaspark";
             this.Load += new System.EventHandler(this.FormLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

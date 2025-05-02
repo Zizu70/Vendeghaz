@@ -18,7 +18,6 @@ const Login = () => {
 
     try {
       const res = await api.post(endpoint, payload);
-
        // Ha sikeres, elmentjük a választ a localStorage-ba
       localStorage.setItem('user', JSON.stringify(res.data));
       window.dispatchEvent(new Event('loginChange'));

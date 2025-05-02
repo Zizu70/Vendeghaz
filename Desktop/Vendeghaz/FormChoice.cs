@@ -218,7 +218,7 @@ namespace Vendeghaz
         }
 
 
-        private void emptyFieldsChoice()  // ok m
+        private void emptyFieldsChoice()  
         {
             // Kiürítjük a mezőket
             checkBox_ChoiceLarge.Checked = false;
@@ -228,7 +228,6 @@ namespace Vendeghaz
             checkBox_ChoiceStroking.Checked = false;
 
             listView_Choice.Items.Clear();
-            //CheckBox selectedCheckBox = null;
         }
 
 
@@ -237,7 +236,7 @@ namespace Vendeghaz
             //Új vendég hozzáadása
             FormGuest formGuest = new FormGuest();
             formGuest.Show();
-
+            this.Close();
             emptyFieldsChoice();
         }       
     } 

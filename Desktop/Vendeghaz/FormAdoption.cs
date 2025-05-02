@@ -16,6 +16,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Xml.Linq;
 using static Vendeghaz.FormAdoption;
 
+
 namespace Vendeghaz
 {
     public partial class FormAdoption : Form
@@ -280,8 +281,9 @@ namespace Vendeghaz
             try
             {
                 string url = $"http://localhost:3000/desktop/adoption";
-                var content = new StringContent($"{{\"g_id\":\"{G_id}\",\"u_id\":\"{U_id}\"}}", Encoding.UTF8, "application/json");
-             
+              
+                 var content = new StringContent($"{{\"g_id\":\"{G_id}\",\"u_id\":\"{U_id}\"}}", Encoding.UTF8, "application/json");
+
                 HttpResponseMessage response = await client.PostAsync(url, content); 
                 
                 if (response.IsSuccessStatusCode)
@@ -290,7 +292,7 @@ namespace Vendeghaz
                 }
                 else
                 {
-                    MessageBox.Show($"InsertAdoption Nem sikerült rögzíteni az örökbefogadást!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Nem sikerült rögzíteni az örökbefogadást!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -302,7 +304,13 @@ namespace Vendeghaz
 
         private async void button_AdoptionInsert_Click(object sender, EventArgs e)
         {
-            
+            // Ellenőrzés: comboboxokban történt-e érvényes választás
+            if (comboBox_AdoptionGName.SelectedIndex <= 0 || comboBox_AdoptionUName.SelectedIndex <= 0)
+            {
+                MessageBox.Show("Kérlek válassz állatot és felhasználót az örökbefogadáshoz!", "Hiányzó választás", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string G_name = comboBox_AdoptionGName.Text;
             string G_species = textBox_AdoptionSpecies.Text;
             string G_gender = textBox_AdoptionGender.Text;
@@ -332,9 +340,8 @@ namespace Vendeghaz
             };
 
             contractForm = new FormContract(G_name, G_species, G_gender, DateTime.Parse(G_birthdate), U_name, DateTime.Parse(A_date));
-
             contractForm.Show();
-            this.Close();
+            this.Hide(); 
         }
 
         private void button_AdoptionAgain_Click(object sender, EventArgs e)
@@ -350,8 +357,7 @@ namespace Vendeghaz
             {
                 FormMain formMain = new FormMain();
                 formMain.Show();
-
-                this.Hide();
+                this.Hide(); 
             }
         }
     }

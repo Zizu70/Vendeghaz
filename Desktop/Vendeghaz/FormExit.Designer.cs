@@ -43,7 +43,7 @@
             this.label_ExitQuestion.Location = new System.Drawing.Point(103, 24);
             this.label_ExitQuestion.Name = "label_ExitQuestion";
             this.label_ExitQuestion.Size = new System.Drawing.Size(238, 30);
-            this.label_ExitQuestion.TabIndex = 0;
+            this.label_ExitQuestion.TabIndex = 3;
             this.label_ExitQuestion.Text = "Valóban ki szeretne lépni?";
             // 
             // label_ExitBye
@@ -54,7 +54,7 @@
             this.label_ExitBye.Location = new System.Drawing.Point(99, 54);
             this.label_ExitBye.Name = "label_ExitBye";
             this.label_ExitBye.Size = new System.Drawing.Size(239, 49);
-            this.label_ExitBye.TabIndex = 1;
+            this.label_ExitBye.TabIndex = 4;
             this.label_ExitBye.Text = "Viszont látásra!";
             this.label_ExitBye.Visible = false;
             // 
@@ -64,7 +64,7 @@
             this.button_ExitYes.Location = new System.Drawing.Point(108, 96);
             this.button_ExitYes.Name = "button_ExitYes";
             this.button_ExitYes.Size = new System.Drawing.Size(101, 33);
-            this.button_ExitYes.TabIndex = 2;
+            this.button_ExitYes.TabIndex = 1;
             this.button_ExitYes.Text = "Igen";
             this.button_ExitYes.UseVisualStyleBackColor = false;
             this.button_ExitYes.Click += new System.EventHandler(this.button_ExitYes_Click);
@@ -75,7 +75,7 @@
             this.button_ExitNo.Location = new System.Drawing.Point(225, 96);
             this.button_ExitNo.Name = "button_ExitNo";
             this.button_ExitNo.Size = new System.Drawing.Size(101, 33);
-            this.button_ExitNo.TabIndex = 3;
+            this.button_ExitNo.TabIndex = 2;
             this.button_ExitNo.Text = "Nem";
             this.button_ExitNo.UseVisualStyleBackColor = false;
             this.button_ExitNo.Click += new System.EventHandler(this.button_ExitNo_Click);
@@ -93,8 +93,10 @@
             this.Controls.Add(this.label_ExitQuestion);
             this.Font = new System.Drawing.Font("Segoe Print", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(130, 130);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormExit";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Vendégház Vadaspark";
             this.Load += new System.EventHandler(this.FormExit_Load);
             this.ResumeLayout(false);

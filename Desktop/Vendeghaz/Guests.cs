@@ -46,7 +46,7 @@ namespace Vendeghaz
     }
    
     /*** enumok ***/
-    public enum G_species { medve, farkas, muflon, őz, gímszarvas, vaddisznó, róka, vadmacska, hiúz, aranysakál, mosómedve, sas, bagoly, páva, holló, vércse, varjú, ló, szamár, tehén, mangalica, baromfiak, dámszarvas, juh, kecske, nyúl, póniló };
+    public enum G_species { medve, farkas, muflon, őz, gím_szarvas, vaddisznó, róka, vadmacska, hiúz, aranysakál, mosómedve, sas, bagoly, páva, holló, vércse, varjú, ló, szamár, tehén, mangalica, baromfiak, dám_szarvas, juh, kecske, nyúl, póniló };
     public enum G_gender { hím, nőstény, ivartalanított };
 
     internal class G_speciesConverter : JsonConverter
@@ -68,7 +68,7 @@ namespace Vendeghaz
                 case "őz":
                     return G_species.őz;
                 case "gímszarvas":
-                    return G_species.gímszarvas;
+                    return G_species.gím_szarvas;
                 case "vaddisznó":
                     return G_species.vaddisznó;
                 case "róka":
@@ -104,7 +104,7 @@ namespace Vendeghaz
                 case "baromfiak":
                     return G_species.baromfiak;
                 case "dámszarvas":
-                    return G_species.dámszarvas;
+                    return G_species.dám_szarvas;
                 case "juh":
                     return G_species.juh;
                 case "kecske":
@@ -140,8 +140,8 @@ namespace Vendeghaz
                 case G_species.őz:
                     serializer.Serialize(writer, "őz");
                     return;                
-                case G_species.gímszarvas:
-                    serializer.Serialize(writer, "gímszarvas");
+                case G_species.gím_szarvas:
+                    serializer.Serialize(writer, "gím_szarvas");
                     return;
                 case G_species.vaddisznó:
                     serializer.Serialize(writer, "vaddisznó");
@@ -194,8 +194,8 @@ namespace Vendeghaz
                 case G_species.baromfiak:
                     serializer.Serialize(writer, "baromfiak");
                     return;
-                case G_species.dámszarvas:
-                    serializer.Serialize(writer, "dámszarvas");
+                case G_species.dám_szarvas:
+                    serializer.Serialize(writer, "dám_szarvas");
                     return;
                 case G_species.juh:
                     serializer.Serialize(writer, "juh");

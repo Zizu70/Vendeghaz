@@ -214,7 +214,7 @@ namespace Vendeghaz
             // Vissza a FormChoicera
             FormChoice formChoice = new FormChoice();
             formChoice.Show();
-            this.Close();
+            this.Hide(); 
         }
 
         private async void button_GuestUpdate_Click(object sender, EventArgs e)
@@ -291,7 +291,7 @@ namespace Vendeghaz
             // Vissza a FormChoicera
             FormChoice formChoice = new FormChoice();
             formChoice.Show();
-            this.Close();
+            this.Hide(); 
         }
 
         private async void button_GuestDelete_Click(object sender, EventArgs e)
@@ -327,7 +327,7 @@ namespace Vendeghaz
              // Vissza a FormChoicera
              FormChoice formChoice = new FormChoice();
              formChoice.Show();
-             this.Close();         
+            this.Hide();   
         }
        
         private void FormContract_FormClosing(object sender, FormClosingEventArgs e)
@@ -337,7 +337,6 @@ namespace Vendeghaz
             {
                 FormChoice formChoice = new FormChoice();
                 formChoice.Show();
-
                 this.Hide();
             }
         }

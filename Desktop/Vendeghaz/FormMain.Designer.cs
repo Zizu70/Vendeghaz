@@ -54,7 +54,7 @@
             this.groupBox_Main.Name = "groupBox_Main";
             this.groupBox_Main.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox_Main.Size = new System.Drawing.Size(292, 251);
-            this.groupBox_Main.TabIndex = 0;
+            this.groupBox_Main.TabIndex = 6;
             this.groupBox_Main.TabStop = false;
             this.groupBox_Main.Text = "Kérem válasszon!";
             // 
@@ -65,7 +65,7 @@
             this.checkBox_MainServices.Location = new System.Drawing.Point(75, 155);
             this.checkBox_MainServices.Name = "checkBox_MainServices";
             this.checkBox_MainServices.Size = new System.Drawing.Size(88, 30);
-            this.checkBox_MainServices.TabIndex = 5;
+            this.checkBox_MainServices.TabIndex = 4;
             this.checkBox_MainServices.Text = "Szervíz";
             this.checkBox_MainServices.UseVisualStyleBackColor = false;
             // 
@@ -75,7 +75,7 @@
             this.button_Main.Location = new System.Drawing.Point(120, 195);
             this.button_Main.Name = "button_Main";
             this.button_Main.Size = new System.Drawing.Size(154, 35);
-            this.button_Main.TabIndex = 4;
+            this.button_Main.TabIndex = 5;
             this.button_Main.Text = "Választ";
             this.button_Main.UseVisualStyleBackColor = false;
             this.button_Main.Click += new System.EventHandler(this.button_Main_Click);
@@ -87,7 +87,7 @@
             this.checkBox_MainTickets.Location = new System.Drawing.Point(75, 115);
             this.checkBox_MainTickets.Name = "checkBox_MainTickets";
             this.checkBox_MainTickets.Size = new System.Drawing.Size(131, 30);
-            this.checkBox_MainTickets.TabIndex = 2;
+            this.checkBox_MainTickets.TabIndex = 3;
             this.checkBox_MainTickets.Text = "Jegyrendelés";
             this.checkBox_MainTickets.UseVisualStyleBackColor = false;
             // 
@@ -98,7 +98,7 @@
             this.checkBox_MainAdoption.Location = new System.Drawing.Point(75, 75);
             this.checkBox_MainAdoption.Name = "checkBox_MainAdoption";
             this.checkBox_MainAdoption.Size = new System.Drawing.Size(145, 30);
-            this.checkBox_MainAdoption.TabIndex = 1;
+            this.checkBox_MainAdoption.TabIndex = 2;
             this.checkBox_MainAdoption.Text = "Örökbefogadás";
             this.checkBox_MainAdoption.UseVisualStyleBackColor = false;
             // 
@@ -109,7 +109,7 @@
             this.checkBox_MainChoice.Location = new System.Drawing.Point(75, 35);
             this.checkBox_MainChoice.Name = "checkBox_MainChoice";
             this.checkBox_MainChoice.Size = new System.Drawing.Size(121, 30);
-            this.checkBox_MainChoice.TabIndex = 0;
+            this.checkBox_MainChoice.TabIndex = 1;
             this.checkBox_MainChoice.Text = "Vendégeink";
             this.checkBox_MainChoice.UseVisualStyleBackColor = false;
             // 
@@ -134,8 +134,10 @@
             this.Controls.Add(this.groupBox_Main);
             this.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(60, 30);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Vendégház Vadaspark";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);

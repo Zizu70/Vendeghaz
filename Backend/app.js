@@ -25,7 +25,9 @@ const app = express();
 app.use(bodyParser.json()); // JSON formátumú kérés feldolgozása
 /*app.use(bodyParser.urlencoded({ extended: true })); // Nem udom kell-e 
 // tURL-enkódolt adatok */
+
 app.use(cors());  // Ha szükséges, CORS engedélyezése
+
 
 // Alapértelmezett route, ha valaki nem talál semmit
 app.get('/', (req, res) => {

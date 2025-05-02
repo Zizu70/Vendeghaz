@@ -50,7 +50,7 @@
             this.button_ServicesEntry.Location = new System.Drawing.Point(224, 108);
             this.button_ServicesEntry.Name = "button_ServicesEntry";
             this.button_ServicesEntry.Size = new System.Drawing.Size(200, 30);
-            this.button_ServicesEntry.TabIndex = 2;
+            this.button_ServicesEntry.TabIndex = 1;
             this.button_ServicesEntry.Text = "Szervíz belépés";
             this.button_ServicesEntry.UseVisualStyleBackColor = false;
             this.button_ServicesEntry.Click += new System.EventHandler(this.button_ServicesEntry_Click);
@@ -79,7 +79,7 @@
             this.textBox_ServicesName.Location = new System.Drawing.Point(224, 156);
             this.textBox_ServicesName.Name = "textBox_ServicesName";
             this.textBox_ServicesName.Size = new System.Drawing.Size(200, 30);
-            this.textBox_ServicesName.TabIndex = 6;
+            this.textBox_ServicesName.TabIndex = 2;
             // 
             // label2
             // 
@@ -88,7 +88,7 @@
             this.label2.Location = new System.Drawing.Point(182, 163);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 23);
-            this.label2.TabIndex = 5;
+            this.label2.TabIndex = 8;
             this.label2.Text = "Név";
             // 
             // textBox_ServicesPass
@@ -96,7 +96,7 @@
             this.textBox_ServicesPass.Location = new System.Drawing.Point(224, 199);
             this.textBox_ServicesPass.Name = "textBox_ServicesPass";
             this.textBox_ServicesPass.Size = new System.Drawing.Size(200, 30);
-            this.textBox_ServicesPass.TabIndex = 8;
+            this.textBox_ServicesPass.TabIndex = 3;
             // 
             // label3
             // 
@@ -105,7 +105,7 @@
             this.label3.Location = new System.Drawing.Point(167, 206);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 23);
-            this.label3.TabIndex = 7;
+            this.label3.TabIndex = 9;
             this.label3.Text = "Jelszó";
             // 
             // label4
@@ -115,7 +115,7 @@
             this.label4.Location = new System.Drawing.Point(134, 255);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 23);
-            this.label4.TabIndex = 9;
+            this.label4.TabIndex = 10;
             this.label4.Text = "Jogosultság";
             // 
             // button_ServicesInsert
@@ -124,7 +124,7 @@
             this.button_ServicesInsert.Location = new System.Drawing.Point(183, 296);
             this.button_ServicesInsert.Name = "button_ServicesInsert";
             this.button_ServicesInsert.Size = new System.Drawing.Size(85, 35);
-            this.button_ServicesInsert.TabIndex = 10;
+            this.button_ServicesInsert.TabIndex = 5;
             this.button_ServicesInsert.Text = "Felvitel";
             this.button_ServicesInsert.UseVisualStyleBackColor = false;
             this.button_ServicesInsert.Click += new System.EventHandler(this.button_ServicesInsert_Click);
@@ -135,7 +135,7 @@
             this.button_ServicesUpdate.Location = new System.Drawing.Point(274, 296);
             this.button_ServicesUpdate.Name = "button_ServicesUpdate";
             this.button_ServicesUpdate.Size = new System.Drawing.Size(85, 35);
-            this.button_ServicesUpdate.TabIndex = 11;
+            this.button_ServicesUpdate.TabIndex = 6;
             this.button_ServicesUpdate.Text = "Módosítás";
             this.button_ServicesUpdate.UseVisualStyleBackColor = false;
             this.button_ServicesUpdate.Click += new System.EventHandler(this.button_ServicesUpdate_Click);
@@ -146,7 +146,7 @@
             this.button_ServicesDelete.Location = new System.Drawing.Point(365, 296);
             this.button_ServicesDelete.Name = "button_ServicesDelete";
             this.button_ServicesDelete.Size = new System.Drawing.Size(85, 35);
-            this.button_ServicesDelete.TabIndex = 12;
+            this.button_ServicesDelete.TabIndex = 7;
             this.button_ServicesDelete.Text = "Törlés";
             this.button_ServicesDelete.UseVisualStyleBackColor = false;
             this.button_ServicesDelete.Click += new System.EventHandler(this.button_ServicesDelete_Click);
@@ -180,8 +180,10 @@
             this.Controls.Add(this.button_ServicesEntry);
             this.Font = new System.Drawing.Font("Segoe Print", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(90, 30);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormServices";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Vendégház Vadaspark";
             this.Load += new System.EventHandler(this.FormServices_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

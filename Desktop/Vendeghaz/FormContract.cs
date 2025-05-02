@@ -102,7 +102,7 @@ namespace Vendeghaz
             // Vissza a FormAdoptionra
             FormAdoption formAdoption = new FormAdoption();
             formAdoption.Show();
-            this.Close();
+            this.Hide();
         }
         private void FormContract_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -111,7 +111,6 @@ namespace Vendeghaz
             {
                 FormAdoption formAdoption = new FormAdoption();
                 formAdoption.Show();
-
                 this.Hide();
             }
         }

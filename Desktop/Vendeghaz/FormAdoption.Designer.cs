@@ -61,7 +61,7 @@
             this.label1.Location = new System.Drawing.Point(133, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(208, 26);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 10;
             this.label1.Text = "Támogatói Örökbefogadás";
             // 
             // label2
@@ -71,7 +71,7 @@
             this.label2.Location = new System.Drawing.Point(36, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 26);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 11;
             this.label2.Text = "Örökbefogadott";
             // 
             // label3
@@ -108,7 +108,7 @@
             this.label7.Location = new System.Drawing.Point(37, 333);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(116, 26);
-            this.label7.TabIndex = 7;
+            this.label7.TabIndex = 13;
             this.label7.Text = "Örökbefogadó";
             // 
             // label8
@@ -117,7 +117,7 @@
             this.label8.Location = new System.Drawing.Point(60, 376);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 23);
-            this.label8.TabIndex = 8;
+            this.label8.TabIndex = 15;
             this.label8.Text = "Neve";
             // 
             // label10
@@ -126,7 +126,7 @@
             this.label10.Location = new System.Drawing.Point(37, 423);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 23);
-            this.label10.TabIndex = 10;
+            this.label10.TabIndex = 16;
             this.label10.Text = "E-mail:";
             // 
             // label12
@@ -135,7 +135,7 @@
             this.label12.Location = new System.Drawing.Point(37, 480);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(183, 23);
-            this.label12.TabIndex = 12;
+            this.label12.TabIndex = 17;
             this.label12.Text = "Az örökbefogadás dátuma";
             // 
             // dateTimePicker_AdoptionDate
@@ -144,7 +144,7 @@
             this.dateTimePicker_AdoptionDate.Location = new System.Drawing.Point(41, 512);
             this.dateTimePicker_AdoptionDate.Name = "dateTimePicker_AdoptionDate";
             this.dateTimePicker_AdoptionDate.Size = new System.Drawing.Size(147, 30);
-            this.dateTimePicker_AdoptionDate.TabIndex = 13;
+            this.dateTimePicker_AdoptionDate.TabIndex = 7;
             // 
             // button_AdoptionInsert
             // 
@@ -152,7 +152,7 @@
             this.button_AdoptionInsert.Location = new System.Drawing.Point(274, 467);
             this.button_AdoptionInsert.Name = "button_AdoptionInsert";
             this.button_AdoptionInsert.Size = new System.Drawing.Size(122, 36);
-            this.button_AdoptionInsert.TabIndex = 26;
+            this.button_AdoptionInsert.TabIndex = 8;
             this.button_AdoptionInsert.Text = "Rögzítés";
             this.button_AdoptionInsert.UseVisualStyleBackColor = false;
             this.button_AdoptionInsert.Click += new System.EventHandler(this.button_AdoptionInsert_Click);
@@ -163,7 +163,7 @@
             this.button_AdoptionAgain.Location = new System.Drawing.Point(274, 515);
             this.button_AdoptionAgain.Name = "button_AdoptionAgain";
             this.button_AdoptionAgain.Size = new System.Drawing.Size(122, 36);
-            this.button_AdoptionAgain.TabIndex = 29;
+            this.button_AdoptionAgain.TabIndex = 9;
             this.button_AdoptionAgain.Text = "Újra";
             this.button_AdoptionAgain.UseVisualStyleBackColor = false;
             this.button_AdoptionAgain.Click += new System.EventHandler(this.button_AdoptionAgain_Click);
@@ -174,7 +174,7 @@
             this.comboBox_AdoptionGName.Location = new System.Drawing.Point(275, 92);
             this.comboBox_AdoptionGName.Name = "comboBox_AdoptionGName";
             this.comboBox_AdoptionGName.Size = new System.Drawing.Size(121, 31);
-            this.comboBox_AdoptionGName.TabIndex = 24;
+            this.comboBox_AdoptionGName.TabIndex = 1;
             this.comboBox_AdoptionGName.SelectedIndexChanged += new System.EventHandler(this.comboBox_AdoptionGName_SelectedIndexChanged);
             // 
             // comboBox_AdoptionUName
@@ -183,7 +183,7 @@
             this.comboBox_AdoptionUName.Location = new System.Drawing.Point(109, 368);
             this.comboBox_AdoptionUName.Name = "comboBox_AdoptionUName";
             this.comboBox_AdoptionUName.Size = new System.Drawing.Size(287, 31);
-            this.comboBox_AdoptionUName.TabIndex = 25;
+            this.comboBox_AdoptionUName.TabIndex = 5;
             this.comboBox_AdoptionUName.SelectedIndexChanged += new System.EventHandler(this.comboBox_AdoptionUName_SelectedIndexChanged);
             // 
             // textBox_AdoptionSpecies
@@ -191,21 +191,21 @@
             this.textBox_AdoptionSpecies.Location = new System.Drawing.Point(275, 136);
             this.textBox_AdoptionSpecies.Name = "textBox_AdoptionSpecies";
             this.textBox_AdoptionSpecies.Size = new System.Drawing.Size(121, 30);
-            this.textBox_AdoptionSpecies.TabIndex = 15;
+            this.textBox_AdoptionSpecies.TabIndex = 2;
             // 
             // textBox_AdoptionGender
             // 
             this.textBox_AdoptionGender.Location = new System.Drawing.Point(275, 176);
             this.textBox_AdoptionGender.Name = "textBox_AdoptionGender";
             this.textBox_AdoptionGender.Size = new System.Drawing.Size(121, 30);
-            this.textBox_AdoptionGender.TabIndex = 16;
+            this.textBox_AdoptionGender.TabIndex = 3;
             // 
             // textBox_AdoptionEmail
             // 
             this.textBox_AdoptionEmail.Location = new System.Drawing.Point(109, 416);
             this.textBox_AdoptionEmail.Name = "textBox_AdoptionEmail";
             this.textBox_AdoptionEmail.Size = new System.Drawing.Size(287, 30);
-            this.textBox_AdoptionEmail.TabIndex = 20;
+            this.textBox_AdoptionEmail.TabIndex = 6;
             // 
             // pictureBox_AdoptionImage
             // 
@@ -223,7 +223,7 @@
             this.textBox_AdoptionBirthdate.Location = new System.Drawing.Point(274, 224);
             this.textBox_AdoptionBirthdate.Name = "textBox_AdoptionBirthdate";
             this.textBox_AdoptionBirthdate.Size = new System.Drawing.Size(121, 30);
-            this.textBox_AdoptionBirthdate.TabIndex = 32;
+            this.textBox_AdoptionBirthdate.TabIndex = 4;
             // 
             // label6
             // 
@@ -240,7 +240,7 @@
             this.label_AdoptionGuestId.Location = new System.Drawing.Point(229, 64);
             this.label_AdoptionGuestId.Name = "label_AdoptionGuestId";
             this.label_AdoptionGuestId.Size = new System.Drawing.Size(38, 23);
-            this.label_AdoptionGuestId.TabIndex = 33;
+            this.label_AdoptionGuestId.TabIndex = 12;
             this.label_AdoptionGuestId.Text = "G Id";
             // 
             // label_AdoptionUserId
@@ -249,7 +249,7 @@
             this.label_AdoptionUserId.Location = new System.Drawing.Point(168, 335);
             this.label_AdoptionUserId.Name = "label_AdoptionUserId";
             this.label_AdoptionUserId.Size = new System.Drawing.Size(38, 23);
-            this.label_AdoptionUserId.TabIndex = 34;
+            this.label_AdoptionUserId.TabIndex = 14;
             this.label_AdoptionUserId.Text = "U Id";
             // 
             // FormAdoption
@@ -283,8 +283,10 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe Print", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(90, 30);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormAdoption";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Vendégház Vadaspark";
             this.Load += new System.EventHandler(this.FormAdoption_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_AdoptionImage)).EndInit();

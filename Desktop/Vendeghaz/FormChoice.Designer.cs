@@ -77,7 +77,7 @@
             this.label1.Location = new System.Drawing.Point(32, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(135, 23);
-            this.label1.TabIndex = 6;
+            this.label1.TabIndex = 9;
             this.label1.Text = "Új vendég felvitele:";
             // 
             // listView_Choice
@@ -90,7 +90,7 @@
             this.listView_Choice.Location = new System.Drawing.Point(339, 176);
             this.listView_Choice.Name = "listView_Choice";
             this.listView_Choice.Size = new System.Drawing.Size(220, 264);
-            this.listView_Choice.TabIndex = 7;
+            this.listView_Choice.TabIndex = 8;
             this.listView_Choice.UseCompatibleStateImageBehavior = false;
             this.listView_Choice.View = System.Windows.Forms.View.Details;
             this.listView_Choice.SelectedIndexChanged += new System.EventHandler(this.listView_Choice_SelectedIndexChanged);
@@ -117,7 +117,7 @@
             this.checkBox_ChoiceLarge.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox_ChoiceLarge.Name = "checkBox_ChoiceLarge";
             this.checkBox_ChoiceLarge.Size = new System.Drawing.Size(104, 27);
-            this.checkBox_ChoiceLarge.TabIndex = 5;
+            this.checkBox_ChoiceLarge.TabIndex = 2;
             this.checkBox_ChoiceLarge.Text = "nagyvadak";
             this.checkBox_ChoiceLarge.UseVisualStyleBackColor = true;
             // 
@@ -139,7 +139,7 @@
             this.checkBox_ChoiceSmall.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox_ChoiceSmall.Name = "checkBox_ChoiceSmall";
             this.checkBox_ChoiceSmall.Size = new System.Drawing.Size(102, 27);
-            this.checkBox_ChoiceSmall.TabIndex = 6;
+            this.checkBox_ChoiceSmall.TabIndex = 3;
             this.checkBox_ChoiceSmall.Text = "apróvadak";
             this.checkBox_ChoiceSmall.UseVisualStyleBackColor = true;
             // 
@@ -150,7 +150,7 @@
             this.checkBox_ChoiceStroking.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox_ChoiceStroking.Name = "checkBox_ChoiceStroking";
             this.checkBox_ChoiceStroking.Size = new System.Drawing.Size(90, 27);
-            this.checkBox_ChoiceStroking.TabIndex = 8;
+            this.checkBox_ChoiceStroking.TabIndex = 6;
             this.checkBox_ChoiceStroking.Text = "simogató";
             this.checkBox_ChoiceStroking.UseVisualStyleBackColor = true;
             // 
@@ -161,7 +161,7 @@
             this.checkBox_ChoiceYard.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox_ChoiceYard.Name = "checkBox_ChoiceYard";
             this.checkBox_ChoiceYard.Size = new System.Drawing.Size(126, 27);
-            this.checkBox_ChoiceYard.TabIndex = 10;
+            this.checkBox_ChoiceYard.TabIndex = 5;
             this.checkBox_ChoiceYard.Text = "paraszt udvar";
             this.checkBox_ChoiceYard.UseVisualStyleBackColor = true;
             // 
@@ -172,7 +172,7 @@
             this.checkBox_ChoiceBird.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox_ChoiceBird.Name = "checkBox_ChoiceBird";
             this.checkBox_ChoiceBird.Size = new System.Drawing.Size(93, 27);
-            this.checkBox_ChoiceBird.TabIndex = 12;
+            this.checkBox_ChoiceBird.TabIndex = 4;
             this.checkBox_ChoiceBird.Text = "madarak";
             this.checkBox_ChoiceBird.UseVisualStyleBackColor = true;
             // 
@@ -190,7 +190,7 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Size = new System.Drawing.Size(284, 201);
-            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Válasszon csoportot!";
             // 
@@ -201,7 +201,7 @@
             this.button_ChoicePick.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_ChoicePick.Name = "button_ChoicePick";
             this.button_ChoicePick.Size = new System.Drawing.Size(94, 41);
-            this.button_ChoicePick.TabIndex = 13;
+            this.button_ChoicePick.TabIndex = 7;
             this.button_ChoicePick.Text = "Választás";
             this.button_ChoicePick.UseVisualStyleBackColor = false;
             this.button_ChoicePick.Click += new System.EventHandler(this.button_ChoicePick_Click);
@@ -220,8 +220,10 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Segoe Print", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(90, 30);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormChoice";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Vendégház Vadaspark";
             this.Load += new System.EventHandler(this.FormChoice_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

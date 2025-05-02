@@ -70,7 +70,7 @@
             this.button_TicketUpdate.Location = new System.Drawing.Point(78, 497);
             this.button_TicketUpdate.Name = "button_TicketUpdate";
             this.button_TicketUpdate.Size = new System.Drawing.Size(152, 44);
-            this.button_TicketUpdate.TabIndex = 4;
+            this.button_TicketUpdate.TabIndex = 5;
             this.button_TicketUpdate.Text = "Módosítás";
             this.button_TicketUpdate.UseVisualStyleBackColor = false;
             this.button_TicketUpdate.Click += new System.EventHandler(this.button_TicketUpdate_Click);
@@ -81,7 +81,7 @@
             this.button_TicketDelete.Location = new System.Drawing.Point(265, 497);
             this.button_TicketDelete.Name = "button_TicketDelete";
             this.button_TicketDelete.Size = new System.Drawing.Size(152, 44);
-            this.button_TicketDelete.TabIndex = 3;
+            this.button_TicketDelete.TabIndex = 6;
             this.button_TicketDelete.Text = "Törlés";
             this.button_TicketDelete.UseVisualStyleBackColor = false;
             this.button_TicketDelete.Click += new System.EventHandler(this.button_TicketDelete_Click);
@@ -92,7 +92,7 @@
             this.label1.Location = new System.Drawing.Point(59, 166);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 26);
-            this.label1.TabIndex = 6;
+            this.label1.TabIndex = 12;
             this.label1.Text = "Név";
             // 
             // label2
@@ -102,7 +102,7 @@
             this.label2.Location = new System.Drawing.Point(52, 36);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 31);
-            this.label2.TabIndex = 7;
+            this.label2.TabIndex = 10;
             this.label2.Text = "Jegyrendelés";
             // 
             // label3
@@ -112,7 +112,7 @@
             this.label3.Location = new System.Drawing.Point(125, 332);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 26);
-            this.label3.TabIndex = 8;
+            this.label3.TabIndex = 15;
             this.label3.Text = "Óra";
             // 
             // dateTimePicker_TicketDate
@@ -121,7 +121,7 @@
             this.dateTimePicker_TicketDate.Location = new System.Drawing.Point(179, 269);
             this.dateTimePicker_TicketDate.Name = "dateTimePicker_TicketDate";
             this.dateTimePicker_TicketDate.Size = new System.Drawing.Size(164, 34);
-            this.dateTimePicker_TicketDate.TabIndex = 15;
+            this.dateTimePicker_TicketDate.TabIndex = 2;
             // 
             // label4
             // 
@@ -147,7 +147,7 @@
             this.comboBox_TicketTime.Location = new System.Drawing.Point(179, 324);
             this.comboBox_TicketTime.Name = "comboBox_TicketTime";
             this.comboBox_TicketTime.Size = new System.Drawing.Size(164, 34);
-            this.comboBox_TicketTime.TabIndex = 20;
+            this.comboBox_TicketTime.TabIndex = 3;
             // 
             // label8
             // 
@@ -155,7 +155,7 @@
             this.label8.Location = new System.Drawing.Point(12, 222);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 26);
-            this.label8.TabIndex = 25;
+            this.label8.TabIndex = 13;
             this.label8.Text = "Email cím";
             // 
             // label5
@@ -165,7 +165,7 @@
             this.label5.Location = new System.Drawing.Point(386, 444);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 26);
-            this.label5.TabIndex = 27;
+            this.label5.TabIndex = 19;
             this.label5.Text = "HUF";
             // 
             // label6
@@ -175,7 +175,7 @@
             this.label6.Location = new System.Drawing.Point(386, 386);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 26);
-            this.label6.TabIndex = 28;
+            this.label6.TabIndex = 17;
             this.label6.Text = "darab";
             // 
             // label7
@@ -185,7 +185,7 @@
             this.label7.Location = new System.Drawing.Point(82, 444);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(84, 26);
-            this.label7.TabIndex = 29;
+            this.label7.TabIndex = 18;
             this.label7.Text = "Fizetendő";
             // 
             // label10
@@ -195,7 +195,7 @@
             this.label10.Location = new System.Drawing.Point(49, 386);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(117, 26);
-            this.label10.TabIndex = 30;
+            this.label10.TabIndex = 16;
             this.label10.Text = "Jegyek száma";
             // 
             // label12
@@ -205,7 +205,7 @@
             this.label12.Location = new System.Drawing.Point(105, 277);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(64, 26);
-            this.label12.TabIndex = 32;
+            this.label12.TabIndex = 14;
             this.label12.Text = "Dátum";
             // 
             // textBox_TicketPiece
@@ -213,7 +213,7 @@
             this.textBox_TicketPiece.Location = new System.Drawing.Point(179, 378);
             this.textBox_TicketPiece.Name = "textBox_TicketPiece";
             this.textBox_TicketPiece.Size = new System.Drawing.Size(200, 34);
-            this.textBox_TicketPiece.TabIndex = 33;
+            this.textBox_TicketPiece.TabIndex = 4;
             this.textBox_TicketPiece.TextChanged += new System.EventHandler(this.textBox_TicketPiece_TextChanged);
             // 
             // textBox_TicketAmount
@@ -223,7 +223,7 @@
             this.textBox_TicketAmount.Name = "textBox_TicketAmount";
             this.textBox_TicketAmount.ReadOnly = true;
             this.textBox_TicketAmount.Size = new System.Drawing.Size(200, 39);
-            this.textBox_TicketAmount.TabIndex = 34;
+            this.textBox_TicketAmount.TabIndex = 9;
             // 
             // label9
             // 
@@ -231,7 +231,7 @@
             this.label9.Location = new System.Drawing.Point(59, 112);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(27, 26);
-            this.label9.TabIndex = 36;
+            this.label9.TabIndex = 11;
             this.label9.Text = "Id";
             // 
             // comboBox_TicketId
@@ -240,7 +240,7 @@
             this.comboBox_TicketId.Location = new System.Drawing.Point(110, 104);
             this.comboBox_TicketId.Name = "comboBox_TicketId";
             this.comboBox_TicketId.Size = new System.Drawing.Size(147, 34);
-            this.comboBox_TicketId.TabIndex = 37;
+            this.comboBox_TicketId.TabIndex = 1;
             this.comboBox_TicketId.SelectedIndexChanged += new System.EventHandler(this.comboBox_TicketId_SelectedIndexChanged);
             // 
             // textBox_TicketEmail
@@ -249,7 +249,7 @@
             this.textBox_TicketEmail.Name = "textBox_TicketEmail";
             this.textBox_TicketEmail.ReadOnly = true;
             this.textBox_TicketEmail.Size = new System.Drawing.Size(352, 34);
-            this.textBox_TicketEmail.TabIndex = 40;
+            this.textBox_TicketEmail.TabIndex = 8;
             // 
             // textBox_TicketName
             // 
@@ -257,7 +257,7 @@
             this.textBox_TicketName.Name = "textBox_TicketName";
             this.textBox_TicketName.ReadOnly = true;
             this.textBox_TicketName.Size = new System.Drawing.Size(352, 34);
-            this.textBox_TicketName.TabIndex = 41;
+            this.textBox_TicketName.TabIndex = 7;
             // 
             // FormTickets
             // 
@@ -289,8 +289,10 @@
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(90, 30);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormTickets";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Vendégház Vadaspark";
             this.Load += new System.EventHandler(this.FormTickets_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

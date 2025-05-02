@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');  // Feltételezve, hogy az adatbázis lekérdezések külön fájlban vannak
+ 
 
 
+   //***** Bejelentkezés *****//
 
-
-//***** Bejelentkezés *****//
-   //**ok**//
    //belépés gomb
 router.post('/login', async (req, res) => {
     const { name, password } = req.body;
@@ -39,230 +38,16 @@ router.post('/login', async (req, res) => {
     }
 });
 
-//***** Szervíz *****//
-   //** ok **//
-   // Összes dolgoző lekérdezése
-router.get('/workers', async (req, res) => {
-    try {
-        const result = await db.query(
-            `SELECT * FROM workers`   
-        );
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
-    }
-});
+   //***** Bejelentkezés *****//
 
-   //**ok**//
-/*router.get('/workers', async (req, res) => {  
-    const w_name = req.params.w_name;
-    const w_password = req.params.w_password;
-    try {
-        const workers = await db.query(
-            `SELECT * FROM workers`, 
-            [w_name,w_password]
-        );
-        res.status(200).json(workers);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a dolgozó lekérésekor!', error });
-    }
-});*/
-   //**ok**//
-   // Szervíz belépés - belépés gomb nem használt
-router.post("/workers", async (req, res) => {
-    const { name, password } = req.body;
-  
-    if (!name || !password) {
-      return res.status(400).json({ success: false, message: "Hiányzó adatok" });
-    }
-  
-    try {
-      const [rows] = await db.query(
-        "SELECT * FROM workers WHERE BINARY w_name = ? AND BINARY w_password = ? AND w_role = 'admin'",
-        [name, password]
-      );
-  
-      if (rows.length === 0) {
-        return res.status(401).json({
-          success: false,
-          message: "Hibás név, jelszó, vagy nincs admin jogosultság!",
-        });
-      }
-  
-      res.status(200).json({
-        success: true,
-        message: "Sikeres admin bejelentkezés!",
-        /*user: {
-          id: rows[0].id, 
-          w_name: rows[0].w_name,
-          w_password: rows[0].w_password,
-          w_role: rows[0].w_role,
-        },
-        */
-      });
-    } catch (err) {
-      console.error("Bejelentkezési hiba:", err);
-      res.status(500).json({ success: false, message: "Szerverhiba" });
-    }
-  });
-// ok //
-// Névellenőrzés felvitelhez 
-router.post("/checkname", async (req, res) => {
-  const { name } = req.body;
+   //***** Choice *****//  
 
-  if (!name) {
-    return res.status(400).json({ success: false, message: "Név hiányzik!" });
-  }
-
-  try {
-    const result = await db.query("SELECT * FROM workers WHERE LOWER(w_name) = LOWER(?)", [name]);
-
-    if (result.length > 0) {
-      return res.status(200).json({ exists: true, message: "A név már létezik az adatbázisban." });
-    } else {
-      return res.status(200).json({ exists: false, message: "A név még nem szerepel az adatbázisban." });
-    }
-  } catch (err) {
-    console.error("Adatbázis hiba:", err);
-    res.status(500).json({ success: false, message: "Szerverhiba!" });
-  }
-});
-  //**   **//
-  // worker felvitel 
-router.post('/services', async (req, res) => {
-    const { w_name, w_password, w_role } = req.body;
-
-    console.log("Bejövő dolgozó:", req.body);
-
-    try {
-        const result = await db.query(
-            `INSERT INTO workers (w_name, w_password, w_role)
-             VALUES (?, ?, ?)`, [w_name, w_password, w_role]
-        );
-        res.status(201).json({ message: 'Dolgozó hozzáadva!', w_id: result.insertId });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a dolgozó hozzáadásakor!', error });
-    }
-});
-   //** **//
-   // worker frissítése
-router.put('/services/:w_name', async (req, res) => {
-    const w_name = req.params.w_name;
-    const {w_password, w_role} = req.body;
-    try {
-        const result = await db.query(
-            `UPDATE workers
-             SET w_password = ?, w_role = ?
-             WHERE w_name = ?`, [ w_password, w_role, w_name]
-        );
-        res.status(200).json({ message: 'Dolgozó adatai frissítve lettek!' });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt dolgozó frissítésekor!', error });
-    }
-});
-   //**  **//
-   // worker törlés
-router.delete('/services/:w_name', async (req, res) => {
-    const w_name = req.params.w_name;
-
-    try {
-        await db.query(`DELETE FROM workers WHERE w_name = ?`, [w_name]);
-
-        res.status(200).json({ message: 'Dolgozó törölve lett!' });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt dolgozó törlése közben!', error });
-    }
-});
-
-
-
-
-
-
-/*M ez jó így*/
-/*
-router.post('/login', async (req, res) => {  
-    
-        const { name, password } = req.body;
-
-        if (!name || !password) {
-            return res.status(400).json({ error: "Név és jelszó megadása kötelező!" });
-        }
-
-        try {
-            const query = 'SELECT * FROM workers WHERE w_name = ? AND w_password = ? LIMIT 1';
-            const result = await db.query(query, [name, password]);
-    
-            if (result.length > 0) {
-                res.json({ success: true, message: 'Sikeres bejelentkezés!', user: result[0] });
-            } else {
-                res.status(401).json({ success: false, message: 'DeskRoutHibás felhasználónév vagy jelszó!' });
-            }
-        } catch (err) {
-            console.error('Hiba a bejelentkezés során:', err);
-            res.status(500).json({ success: false, message: 'Szerverhiba!' });
-        }
-    });
-    */
-
-
-
-
-
-
-
-// gomb szervíz
-router.post('/admin/auth/login', async (req, res) => {
-    const { w_name, w_password, w_role } = req.body;
-    try {
-        // Ellenőrizzük a bejelentkezési adatokat (pl. jelszó ellenőrzése)
-        const admin = await db.query(
-            `SELECT * FROM workers WHERE w_name = ? AND w_password = ? `, [w_name, w_password]
-        );
-        if (admin.length > 0 || w_permission == "admin") {
-            // Bejelentkezés sikeres
-            res.status(200).json({ message: 'Sikeres bejelentkezés a szervíz ágba!' });
-        } else {
-            res.status(401).json({ message: 'Hibás felhasználónév vagy jelszó!' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a bejelentkezés során!', error });
-    }
-});
-//X gomb kijelentkezés ???
-// Adminisztrátor kijelentkezés
-router.post('/admin/auth/logout', async (req, res) => {
-    // A kijelentkezést itt az alkalmazás logikájának megfelelően kell kezelni (pl. token törlés)
-    res.status(200).json({ message: 'Ön kijelentkezet!' });
-});
-//*****Be és kijelentkezés*****//
-
-//*****workers*****//
-/*
-router.get('/workers', async (req, res) => {
-    
-    try {
-        const workers = await db.query(
-            `SELECT * FROM workers `
-        );
-        res.status(200).json(workers);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a dolgozó lekérésekor!', error });
-    }
-});
-*/
-
-
-
-//***** Choice *****//
-
-// Csoport választás kezelése
-// Választott csoport listázása 
+   // Választott csoport listázása
    //nagyvadak
 router.get('/guests/allLarge', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT * FROM guests WHERE g_species IN ('medve','farkas','muflon','őz','gímszarvas')`,   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('medve','farkas','muflon','őz','gím_szarvas','vaddisznó')`,   // ell.!!!!
         );
         res.status(200).json(guests);
     } catch (error) {
@@ -298,7 +83,7 @@ router.get('/guests/allBird', async (req, res) => {
 router.get('/guests/allYard', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT * FROM guests WHERE g_species IN ('ló','szamár','tehén','mangalica','baromfiak')`,   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('ló','szamár','tehén','mangalica','baromfiak')`,  
         );
         res.status(200).json(guests);
     } catch (error) {
@@ -310,17 +95,17 @@ router.get('/guests/allYard', async (req, res) => {
 router.get('/guests/allStoking', async (req, res) => {
     try {
         const guests = await db.query(
-            `SELECT * FROM guests WHERE g_species IN ('dámszarvas','juh','kecske','nyúl','póniló', 'vaddisznó')`,   // ell.!!!!
+            `SELECT * FROM guests WHERE g_species IN ('dám_szarvas','juh','kecske','nyúl','póniló')`,  
         );
         res.status(200).json(guests);
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a simogató listázásakor!', error });
     }
 });
-//***** Choice end *****//
+   //***** Choice *****//
 
-//***** Guest *****//
-   //**ok**//
+   //***** Guest *****// 
+
    // Összes vendég lekérdezése
 router.get('/guests', async (req, res) => {
     try {
@@ -332,7 +117,7 @@ router.get('/guests', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
     }
 });
-   //**ok**//
+  
    // Vendég hozzáadása
 router.post('/guests', async (req, res) => {
     const { g_name, g_species, g_gender, g_birthdate, g_indate, g_inplace, g_other, g_image} = req.body;
@@ -347,7 +132,7 @@ router.post('/guests', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt Vendég hozzáadáskor!', error });
     }
 });
-   //**ok**//
+ 
    // Vendég módosítása
 router.put('/guests/:g_Id', async (req, res) => {
     const g_Id = req.params.g_Id;
@@ -363,7 +148,7 @@ router.put('/guests/:g_Id', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt Vendég adatainak frissítése közben!', error });
     }
 });
-   //**ok**//
+
    // Vendég törlése // 
 router.delete('/guests/:g_Id', async (req, res) => {
     const g_Id = req.params.g_Id;
@@ -375,10 +160,10 @@ router.delete('/guests/:g_Id', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt Vendég törlése közben', error });
     }
 });
-//***** Guest *****//
+   //***** Guest *****//
 
-//***** Adoption *****// 
-   //**ok**//
+   //***** Adoption *****// 
+ 
    // Összes örökbefogadás lekérése
 router.get('/adoption', async (req, res) => {
     
@@ -391,7 +176,7 @@ router.get('/adoption', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a dolgozó lekérésekor!', error });
     }
 });
-   //**ok**//
+ 
    // Összes vendég nevének lekérése comboBoxba
 router.get('/allGuests', async (req, res) => {
     try {
@@ -403,7 +188,7 @@ router.get('/allGuests', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
     }
 });
-   //**ok**//
+   
    // Összes felhasználó nevének lekérése comboBoxba
 router.get('/allUsers', async (req, res) => {
     try {
@@ -414,31 +199,8 @@ router.get('/allUsers', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
     }
-});
-   //**ok** nem kell ide **//
-   // Összes vendég nevének lekérése // nem kell
-router.get('/guests', async (req, res) => {
-    try {
-        const result = await db.query(
-            `SELECT * FROM guests`   
-        );
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
-    }
-//**ok**//
-   // Összes felhasználó nevének lekérése // nem kell
-   router.get('/users', async (req, res) => {
-    try {
-        const result = await db.query(
-            `SELECT * FROM users`   
-        );
-        res.status(200).json(result);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a felhasználók listázásakor!', error });
-    }
-});});
-   //**ok**//
+}); 
+
    // Örökbefogadott adatainak lekérése név alapján
 router.get('/adopted/:guestname', async (req, res) => {  
     const guestname = req.params.guestname;
@@ -453,7 +215,7 @@ router.get('/adopted/:guestname', async (req, res) => {
         res.status(500).json({ message: 'Szerverhiba - Örökbefogadott adatainak letöltése közben!', error });
     }
 });
-   //**ok**//
+ 
    // Örökbefogadó adatainak lekérése név alapján
 router.get('/adoptive/:username', async (req, res) => {
     const u_name = req.params.username;
@@ -480,7 +242,7 @@ router.get('/adoptive/:username', async (req, res) => {
         res.status(500).json({ message: "Szerverhiba" });
     }
 });
-   //**ok**//
+
    // Örökbefogadás felvitel
 router.post('/adoption', async (req, res) => {
     const { g_id, u_id, a_date} = req.body;
@@ -498,10 +260,10 @@ router.post('/adoption', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a támogatói örökbefogadás rögzítésekor!', error });
     }
 });
-//*****Adaption *****//
+   //*****Adoption *****//
 
-//***** Contract *****//
-   //**ok**//
+   //***** Contract *****//
+
    // Oklevél felvitel
 router.get('/contract', (req, res) => {
     const { g_name, u_name, a_date } = req.query;
@@ -538,10 +300,10 @@ router.get('/contract', (req, res) => {
       res.json(results); // csak egy rekordra számítunk
     });
   });
-//***** Contract *****//
+   //***** Contract *****//
 
-//***** Ticket *****//
-   //** **//
+   //***** Ticket *****//  
+
    // Összes jegyrendelés
 router.get('/tickets', async (req, res) => {
     
@@ -554,7 +316,7 @@ router.get('/tickets', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a jegyek lekérésekor!', error });
     }
 });
-   //**ok**//
+ 
    // Összes jegyrendelések id lekérése comboBoxba
 router.get('/allTickets', async (req, res) => {
     try {
@@ -566,19 +328,7 @@ router.get('/allTickets', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a jegy rendelések listázásakor!', error });
     }
 });
-   //**ok**//
-   // Összes felhasználó lekérése jegyrendelésekhez lekérése comboBoxba
-router.get('/allTicketsUser', async (req, res) => {
-    try {
-        const results = await db.query(
-            `SELECT * FROM users`   
-        );
-        res.status(200).json(results);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a jegyrendelők listázása közben!', error });
-    }
-});
-   //**ok**//
+
    // Jegyrendelés adatainak lekérése 
 router.get('/tickets/:ticketid', async (req, res) => {  
     const ticketid = req.params.ticketid;
@@ -595,53 +345,7 @@ router.get('/tickets/:ticketid', async (req, res) => {
         res.status(500).json({ message: 'Szerverhiba - Örökbefogadott adatainak letöltése közben!', error });
     }
 });
-
-
-   //**ok**//
-   // Jegyrendelés felvitel
-/*router.post('/tickets', async (req, res) => {
-    const { t_name, t_email, t_date, t_time, t_piece, t_amount} = req.body;
-    
-    try {
-        const result = await db.query(
-            `INSERT INTO tickets (t_name, t_email, t_date, t_time, t_piece, t_amount)
-             VALUES ( ?, ?, ?, ?, ?, ?)`, [t_name, t_email, t_date, t_time, t_piece, t_amount] 
-        );
-        res.status(201).json({ message: 'Jegyrendelés rögzítve!', g_Id: result.insertId });
-        console.table(result);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a jegyrendelés rögzítésekor!', error });
-    }
-});*/
-router.post('/tickets', async (req, res) => {
-    const { u_name, u_email, u_password, t_date, t_time, t_piece, t_amount } = req.body;
-
-    try {
-        // 1. Meglévő felhasználó u_id lekérdezése
-        const [rows] = await db.query(
-            `SELECT u_id FROM users WHERE u_name = ? AND u_email = ? `,
-            [u_name, u_email]
-        );
-
-        if (rows.length === 0) {
-            return res.status(400).json({ message: 'Nincs ilyen felhasználó!' });
-        }
-
-        const u_id = rows[0].u_id;
-
-        // 2. Jegy beszúrás
-        await db.query(
-            `INSERT INTO tickets (u_id, t_date, t_time, t_piece, t_amount) VALUES (?, ?, ?, ?, ?)`,
-            [u_id, t_date, t_time, t_piece, t_amount]
-        );
-
-        res.status(201).json({ message: 'Jegy sikeresen rögzítve.' });
-    } catch (error) {
-        console.error('Hiba a jegy rögzítésekor:', error);
-        res.status(500).json({ message: 'Hiba a jegy mentésekor', error });
-    }
-});  // lehet nem lesz
-   //**ok**//
+ 
    // Jegyrendelés módosítás
    router.put('/tickets/:t_Id', async (req, res) => {
     const t_Id = req.params.t_Id;
@@ -657,7 +361,7 @@ router.post('/tickets', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt jegyrendelés adatainak frissítése közben!', error });
     }
 });
-   //**ok**//
+ 
    // Jegyrendelés törlése
 router.delete('/tickets/:t_Id', async (req, res) => {
     const t_Id = req.params.t_Id;
@@ -668,6 +372,90 @@ router.delete('/tickets/:t_Id', async (req, res) => {
         res.status(500).json({ message: 'Hiba történt a jegyrendelés törlése közben', error });
     }
 });
-   //***** Ticket *************************************//
+   //***** Ticket *****//
+
+   //***** Service *****//
+
+   // Összes dolgoző lekérdezése
+router.get('/workers', async (req, res) => {
+    try {
+        const result = await db.query(
+            `SELECT * FROM workers`   
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a vendégek listázásakor!', error });
+    }
+});
+ 
+   // Névellenőrzés felvitelhez 
+router.post("/checkname", async (req, res) => {
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ success: false, message: "Név hiányzik!" });
+  }
+
+  try {
+    const result = await db.query("SELECT * FROM workers WHERE LOWER(w_name) = LOWER(?)", [name]);
+
+    if (result.length > 0) {
+      return res.status(200).json({ exists: true, message: "A név már létezik az adatbázisban." });
+    } else {
+      return res.status(200).json({ exists: false, message: "A név még nem szerepel az adatbázisban." });
+    }
+  } catch (err) {
+    console.error("Adatbázis hiba:", err);
+    res.status(500).json({ success: false, message: "Szerverhiba!" });
+  }
+});
+
+  // worker felvitel 
+router.post('/services', async (req, res) => {
+    const { w_name, w_password, w_role } = req.body;
+
+    console.log("Bejövő dolgozó:", req.body);
+
+    try {
+        const result = await db.query(
+            `INSERT INTO workers (w_name, w_password, w_role)
+             VALUES (?, ?, ?)`, [w_name, w_password, w_role]
+        );
+        res.status(201).json({ message: 'Dolgozó hozzáadva!', w_id: result.insertId });
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a dolgozó hozzáadásakor!', error });
+    }
+});
+
+   // worker frissítése
+router.put('/services/:w_name', async (req, res) => {
+    const w_name = req.params.w_name;
+    const {w_password, w_role} = req.body;
+    try {
+        const result = await db.query(
+            `UPDATE workers
+             SET w_password = ?, w_role = ?
+             WHERE w_name = ?`, [ w_password, w_role, w_name]
+        );
+        res.status(200).json({ message: 'Dolgozó adatai frissítve lettek!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt dolgozó frissítésekor!', error });
+    }
+});
+
+   // worker törlés
+router.delete('/services/:w_name', async (req, res) => {
+    const w_name = req.params.w_name;
+
+    try {
+        await db.query(`DELETE FROM workers WHERE w_name = ?`, [w_name]);
+
+        res.status(200).json({ message: 'Dolgozó törölve lett!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt dolgozó törlése közben!', error });
+    }
+});
+   //***** Service *****//
+
 
 module.exports = router;
