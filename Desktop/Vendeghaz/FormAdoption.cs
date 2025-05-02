@@ -52,6 +52,7 @@ namespace Vendeghaz
 
         private void FormAdoption_Load(object sender, EventArgs e)
         {
+            
             placeholderAdoption(); //  "Kérem válasszon!"
         }
 
@@ -232,7 +233,7 @@ namespace Vendeghaz
                 }
                 else
                 {
-                    MessageBox.Show($"LoadGuestData Felhasználó adatai nem találhatóak!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Felhasználó adatai nem találhatóak!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -267,7 +268,7 @@ namespace Vendeghaz
                 }
                 else
                 {
-                    MessageBox.Show($"LoadUserData Felhasználó adatai nem találhatóak!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Felhasználó adatai nem találhatóak!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

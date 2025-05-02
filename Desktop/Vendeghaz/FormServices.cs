@@ -103,7 +103,7 @@ namespace Vendeghaz
             // -- adatellenőrzés: Név
             if (string.IsNullOrWhiteSpace(textBox_ServicesName.Text))
             {
-                MessageBox.Show("Kérjük, adja meg a nevét!", "Hiányzó adatok", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Kérjük, adja meg a nevet!", "Hiányzó adatok", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBox_ServicesName.Focus();
                 return false;
             }
@@ -180,7 +180,7 @@ namespace Vendeghaz
             
             string json = JsonConvert.SerializeObject(workerData);
 
-            MessageBox.Show(json);
+            //MessageBox.Show(json);
 
             var content = new StringContent($"{{\"w_name\":\"{textBox_ServicesName.Text}\",\"w_password\":\"{textBox_ServicesPass.Text}\",\"w_role\":\"{comboBox_ServicesRole.Text}\"}}", Encoding.UTF8, "application/json");
 
@@ -233,7 +233,7 @@ namespace Vendeghaz
                 }
                 else
                 {
-                    MessageBox.Show("SZ-U - Hiba a frissítés során!");
+                    MessageBox.Show("Hiba a frissítés során!");
                 }
             }
             catch (HttpRequestException ex)
@@ -252,14 +252,12 @@ namespace Vendeghaz
 
             if (MessageBox.Show("Biztosan törölni szeretnéd?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                MessageBox.Show($"{servicesURL}/{textBox_ServicesName.Text}");
-
                 try
                 {
                     HttpResponseMessage result = await client.DeleteAsync($"{servicesURL}/{textBox_ServicesName.Text}");
                     if (result.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("SZ-D - Dolgozó sikeresen törölve!");
+                        MessageBox.Show("Dolgozó sikeresen törölve!");
                         emptyFieldsServices();
                     }
                     else
