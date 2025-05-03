@@ -163,7 +163,7 @@ namespace Vendeghaz
             string servicesInsert = textBox_ServicesName.Text;
             if (await chackName(servicesInsert.ToLower()))
             {
-                MessageBox.Show("Van már ilyen nevű dolgozó az adtbázisban!", "Ellenőrizze!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Van már ilyen nevű dolgozó az adatbázisban!", "Ellenőrizze!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textBox_ServicesName.Text = "";
                 this.ActiveControl = textBox_ServicesName;  // fokusz ide!
                 return;
