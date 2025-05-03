@@ -180,8 +180,6 @@ namespace Vendeghaz
             
             string json = JsonConvert.SerializeObject(workerData);
 
-            //MessageBox.Show(json);
-
             var content = new StringContent($"{{\"w_name\":\"{textBox_ServicesName.Text}\",\"w_password\":\"{textBox_ServicesPass.Text}\",\"w_role\":\"{comboBox_ServicesRole.Text}\"}}", Encoding.UTF8, "application/json");
 
             try

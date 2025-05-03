@@ -4,9 +4,6 @@ const cors = require('cors'); // Ha több domainről szeretnél hozzáférni
 const WebRoutes = require('./routes/WebRoutes');  // Webes végpontok
 const DesktopRoutes = require('./routes/DesktopRoutes'); // Asztali alk. végpontok
 
-const LoginRoutes = require('./routes/LoginRoutes'); // A bejelentkezéshez útvonal
-const ServiceRoutes = require('./routes/ServiceRoutes'); // Szervízhez Admin útvonal const kisbetű - req nagybetű
-
 //dotenv.config(); cg
 
 const usersRoutes = require('./routes/users');
@@ -34,14 +31,10 @@ app.get('/', (req, res) => {
     res.send('Vendeghaz API működik!');
 });
 
-// Webes végpontok használata (felhasználói végpontok)
-app.use('/web', WebRoutes);
 
 // Asztali végpontok használata
 app.use('/desktop', DesktopRoutes);
 
-// Bejelentkezés végpont használata
-//app.use('/login', LoginRoutes);
 
 // Szervíz végpont használata
 //app.use('/services', ServiceRoutes); 
