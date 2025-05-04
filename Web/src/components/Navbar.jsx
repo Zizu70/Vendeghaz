@@ -56,7 +56,7 @@ const Navbar = () => {
             <li className="nav-item">
               <NavLink className="nav-link" to="/guests">
                 <FontAwesomeIcon icon={faPaw} className="me-2" />
-                Állatok
+                Vendégeink
               </NavLink>
             </li>
             <li className="nav-item">

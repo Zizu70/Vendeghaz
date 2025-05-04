@@ -79,11 +79,11 @@ const Guests = () => {
 
   return (
     <div>
-      <h2>Állatok</h2>
+      <h2>Vendégeink</h2>
       <AddGuestModal onGuestAdded={fetchGuests} />
 
       <p>Kattintson a "Megnézem" gombra az állat részletes adatainak megtekintéséhez.</p>
-      <p>Az örökbefogadott állatoknál a "Örökbe fogadom" gomb helyett a "Örökbefogadás visszavonása" gomb jelenik meg.</p>
+      
       <table className="table table-striped table-hover">
         <thead>
           <tr>
@@ -153,15 +153,17 @@ const Guests = () => {
             )}
           </ul>
         </Modal.Body>
+        
         <Modal.Footer>
-          <button className="btn btn-secondary" data-bs-dismiss="modal">Visszalépés</button>
+          <button className="btn btn-secondary" data-bs-dismiss="modal"></button>
 
           {!adopted ? (
-            <button className="btn btn-success" onClick={handleAdopt}>Örökbe fogadom</button>
+            <button className="btn btn-success" onClick={handleAdopt}></button>
           ) : (
-            <button className="btn btn-outline-danger" onClick={handleUndo}>Örökbefogadás visszavonása</button>
+            <button className="btn btn-outline-danger" onClick={handleUndo}></button>
           )}
         </Modal.Footer>
+         
       </Modal>
     </div>
     
